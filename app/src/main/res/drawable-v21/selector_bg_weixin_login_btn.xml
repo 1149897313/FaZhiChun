@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/buttonWeixinLoginPressedColor">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/buttonWhiteNormalColor"/>
+            <corners android:radius="@dimen/len_30"/>
+            <stroke android:color="@color/borderLineColor"
+                android:width="@dimen/len_0.5"/>
+        </shape>
+    </item>
+
+</ripple>

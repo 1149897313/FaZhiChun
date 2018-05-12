@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">common</string>
+    
+    
+    <string name="prompt_quantity_view_illegal">你输入的购买数量不合法</string>
+
+    <string name="none_image_url">https://timgsa.baidu.com/timg?image&#038;quality=80&#038;size=b9999_10000&#038;sec=1524714935901&#038;di=052557513540f3d740eeeb2439c585bb&#038;imgtype=0&#038;src=http%3A%2F%2Fwww.gzlco.com%2Fimggzl%2F214%2F1b6e6520ca474fe4bd3ff728817950717651.jpeg</string>
+</resources>

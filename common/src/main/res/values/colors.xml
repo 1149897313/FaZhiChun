@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--基础主色-->
+    <color name="colorPrimary">@color/white</color>
+    <color name="colorPrimaryDark">#90000000</color>
+    <color name="colorAccent">#FD689A</color>
+    <color name="colorLight">@color/white</color>
+    <color name="colorDark">#90000000</color>
+    <color name="colorAccentAlpha">#801572fc</color>
+
+    <!--背景色-->
+    <color name="windowsBackground">#F8F6F6</color>
+    <color name="windowsBackgroundLight">#FDFCFC</color>
+
+    <!--字体颜色-->
+    <color name="textColorPrimary">@color/colorPrimary</color>
+    <color name="textColorFirst">#333333</color>
+    <color name="textColorSecond">#666666</color>
+    <color name="textColorThird">#999999</color>
+    <color name="textColorAccent">#FD689A</color>
+    <color name="textColorLight">@color/colorLight</color>
+    <color name="textColorDark">#202020</color>
+    <color name="textColorPrice">#FD689A</color>
+    <color name="textColorGreen">#64AB23</color>
+    <color name="textColorBlue">#5D9DFF</color>
+    <color name="textColorOrange">#FFA720</color>
+    <color name="textColorPink">#FD689A</color>
+    <color name="textColorRed">#F3094B</color>
+
+
+    <color name="textLaunchBgColor">#F8F6F6</color>
+    <color name="textTabNormalColor">#555555</color>
+
+    <color name="textBuyReduceColor">#FF3535</color>
+    <color name="textBuyVipColor">#FF3535</color>
+    <color name="textBuyVoucherColor">#FF2B2B</color>
+
+
+    <!--按钮颜色的定义-->
+    <color name="buttonPinkNormalColor">#FD689A</color>
+    <color name="buttonPinkPressedColor">#F43978</color>
+    <color name="buttonWhiteNormalColor">@color/white</color>
+    <color name="buttonLightgrayPressedColor">#D9D9D9</color>
+    <color name="buttonRedNormalColor">#F3094B</color>
+    <color name="buttonRedPressedColor">#DC0341</color>
+
+    <color name="buttonWeixinLoginPressedColor">#F5F5F5</color>
+    <color name="buttonLogoutNormalColor">#FF2B2B</color>
+    <color name="buttonLogoutPressedColor">#E80F0F</color>
+
+
+    <color name="labelBackgroundColor">#FFF6E9</color>
+
+    <!--提示色彩-->
+    <color name="alertNormal">#4ce275</color>
+    <color name="alertImportant">#f98d2c</color>
+
+    <!--遮罩颜色-->
+    <color name="maskChatHeader">#30000000</color>
+    <!--导航栏Icon遮罩色-->
+    <color name="navIconTintLight">#f0ffffff</color>
+
+    <color name="navIconNormal">#E4E4E4</color>
+    <color name="navIconChecked">@color/buttonPinkNormalColor</color>
+
+
+    <!--界面分割线的颜色-->
+    <color name="dividerLineColor">#EEEEEE</color>
+    <!--边框线的颜色-->
+    <color name="borderLineColor">#DEDEDE</color>
+
+</resources>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/ToolbarStyle">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_merchant_name"
+            android:textColor="@color/textColorLight"
+            android:textSize="@dimen/textSizeMiddle"
+            android:gravity="center"
+            android:layout_gravity="center"/>
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/len_64"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/len_16"
+            android:paddingTop="@dimen/len_6"
+            android:paddingBottom="@dimen/len_6"
+            android:paddingLeft="@dimen/len_4"
+            android:text="@string/label_merchant_provinces"
+            android:textColor="@color/textColorFirst"
+            android:textSize="@dimen/textSizeBody"
+            android:background="@drawable/selector_bg_merchant_text"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/len_16"
+            android:layout_marginRight="@dimen/len_16"
+            android:paddingTop="@dimen/len_6"
+            android:paddingBottom="@dimen/len_6"
+            android:paddingLeft="@dimen/len_4"
+            android:text="@string/label_merchant_city"
+            android:textColor="@color/textColorFirst"
+            android:textSize="@dimen/textSizeBody"
+            android:background="@drawable/selector_bg_merchant_text"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="@dimen/len_16"
+            android:paddingTop="@dimen/len_6"
+            android:paddingBottom="@dimen/len_6"
+            android:paddingLeft="@dimen/len_4"
+            android:text="@string/label_merchant_county"
+            android:textColor="@color/textColorFirst"
+            android:textSize="@dimen/textSizeBody"
+            android:background="@drawable/selector_bg_merchant_text"/>
+
+    </LinearLayout>
+
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorLight"/>
+
+
+</LinearLayout>

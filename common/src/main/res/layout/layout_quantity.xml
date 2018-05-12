@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+    <!--减号-->
+    <TextView
+        android:id="@+id/minus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="－"
+        android:textColor="@color/textColorFirst"
+        android:textSize="@dimen/textSizeBody"
+        android:gravity="center"
+        android:background="@drawable/selector_bg_quantity_btn"/>
+
+    <!--显示的数量-->
+    <EditText
+        android:id="@+id/quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/textSizeBody"
+        android:textColor="@color/textColorFirst"
+        android:singleLine="true"
+        android:gravity="center"
+        android:background="@drawable/shape_bg_quantity_text"
+        android:inputType="number"/>
+
+
+    <!--加号-->
+    <TextView
+        android:id="@+id/plus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/len_2"
+        android:paddingRight="@dimen/len_2"
+        android:text="＋"
+        android:textColor="@color/textColorFirst"
+        android:textSize="@dimen/textSizeBody"
+        android:gravity="center"
+        android:background="@drawable/selector_bg_quantity_btn"/>
+
+</LinearLayout>

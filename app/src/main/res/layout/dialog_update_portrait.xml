@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="@color/windowsBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:id="@+id/camera"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/len_48"
+            android:background="@drawable/selector_bg_white_item"
+            android:gravity="center"
+            android:text="@string/label_update_portrait_dialog_camera_label"
+            android:textColor="@color/textColorFirst"
+            android:textSize="@dimen/textSizeSubhead" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/len_0.5"
+            android:background="@color/dividerLineColor" />
+
+        <TextView
+            android:id="@+id/gallery"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/len_48"
+            android:background="@drawable/selector_bg_white_item"
+            android:gravity="center"
+            android:text="@string/label_update_portrait_dialog_gallery_label"
+            android:textColor="@color/textColorFirst"
+            android:textSize="@dimen/textSizeSubhead" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/cancel"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/len_48"
+        android:layout_marginTop="@dimen/len_10"
+        android:background="@drawable/selector_bg_white_item"
+        android:gravity="center"
+        android:text="@string/label_update_portrait_dialog_cancel"
+        android:textColor="@color/textColorFirst"
+        android:textSize="@dimen/textSizeSubhead" />
+
+
+</LinearLayout>

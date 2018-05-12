@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--标题栏-->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/ToolbarStyle">
+
+        <com.zgkj.common.widgets.text.ClearTextIconEditText
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/len_32"
+            android:layout_marginRight="@dimen/len_16"
+            android:paddingLeft="@dimen/len_8"
+            android:drawableLeft="@drawable/ic_home_search"
+            android:drawablePadding="@dimen/len_10"
+            android:textColor="@color/textColorFirst"
+            android:textSize="@dimen/textSizeBody"
+            android:gravity="left|center_vertical"
+            android:layout_gravity="center_vertical"
+            android:hint="@string/label_search_find_stores_hint"
+            android:textColorHint="@color/textColorThird"
+            app:clearIconDrawable="@drawable/ic_clear_text"
+            android:background="@drawable/shape_bg_search_title"/>
+
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nested_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/len_10" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"/>
+
+            <!--占位符-->
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/len_40" />
+
+        </LinearLayout>
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+
+
+
+
+</LinearLayout>

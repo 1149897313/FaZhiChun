@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/service_image"
+        android:layout_width="@dimen/len_16"
+        android:layout_height="@dimen/len_16"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_wifi"/>
+
+    <TextView
+        android:id="@+id/service_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/len_10"
+        android:text="WIFI"
+        android:textColor="@color/textColorFirst"
+        android:textSize="@dimen/textSizeCaption"
+        android:gravity="left|center"
+        android:singleLine="true"
+        android:ellipsize="end"/>
+
+
+</LinearLayout>

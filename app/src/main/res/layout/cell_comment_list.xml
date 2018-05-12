@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingTop="@dimen/len_10"
+    android:paddingBottom="@dimen/len_10"
+    android:paddingLeft="@dimen/len_16"
+    android:paddingRight="@dimen/len_16"
+    android:background="@color/colorLight">
+
+    <!--理发店详情评论item的布局-->
+
+    <!--用户头像-->
+    <com.zgkj.common.widgets.CircleImageView
+        android:id="@+id/portrait"
+        android:layout_width="@dimen/len_36"
+        android:layout_height="@dimen/len_36"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_default_portrait"
+        android:scaleType="centerCrop"/>
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/portrait"
+        android:layout_marginLeft="@dimen/len_10"
+        android:layout_alignTop="@id/portrait"
+        android:layout_toLeftOf="@id/time"
+        android:layout_marginRight="@dimen/len_4"
+        android:text="半节树人"
+        android:textSize="@dimen/textSizeBody"
+        android:textColor="@color/textColorFirst"
+        android:gravity="left|center_vertical"
+        android:singleLine="true"
+        android:ellipsize="end"/>
+
+
+    <!--评分控件-->
+    <com.zgkj.common.widgets.StarBarView
+        android:id="@+id/star_bar_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/name"
+        android:layout_alignBottom="@id/portrait"
+        app:integerMark="false"
+        app:isTouch="false"
+        app:starCount="5"
+        app:starEmpty="@drawable/ic_star"
+        app:starFill="@drawable/ic_star_selected"
+        app:starSize="@dimen/len_12"
+        app:starSpacing="0dp" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@id/name"
+        android:text="04月16日"
+        android:textColor="@color/textColorSecond"
+        android:textSize="@dimen/textSizeCaption"
+        android:gravity="right|center_vertical"
+        android:singleLine="true"
+        android:ellipsize="end"/>
+
+
+    <com.zgkj.common.widgets.text.ExpandableTextView
+        android:id="@+id/expand_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/portrait"
+        android:layout_marginTop="@dimen/len_10"
+        android:layout_alignLeft="@id/name"
+        app:animDuration="200"
+        app:contentTextColor="@color/textColorFirst"
+        app:contentTextSize="@dimen/textSizeCaption"
+        app:maxCollapsedLines="3"
+        app:textCollapse="收起"
+        app:textExpand="查看全文"
+        app:collapseExpandTextGrarity="left"
+        app:collapseExpandTextColor="@color/textColorThird"
+        app:collapseExpandTextSize="@dimen/textSizeCaption"/>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/len_10"
+        android:paddingBottom="@dimen/len_10"
+        android:layout_below="@id/expand_text_view"
+        android:layout_alignLeft="@id/name"/>
+
+
+</RelativeLayout>

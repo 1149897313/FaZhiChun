@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/specification"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="· 本商品采用全新高端洗发水，按摩时长长达20分钟"
+    android:textSize="@dimen/textSizeBody"
+    android:textColor="@color/textColorSecond"
+    android:gravity="left|center_vertical">
+
+</TextView>

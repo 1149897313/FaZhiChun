@@ -1,0 +1,621 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--标题栏-->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/ToolbarStyle">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/title_buy_name"
+            android:textColor="@color/textColorFirst"
+            android:textSize="@dimen/textSizeSubhead" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorLight"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/len_16"
+            android:paddingRight="@dimen/len_16">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/len_44">
+
+                <TextView
+                    android:id="@+id/shop_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/len_10"
+                    android:layout_toLeftOf="@id/price"
+                    android:ellipsize="end"
+                    android:gravity="left|center_vertical"
+                    android:singleLine="true"
+                    android:text="洗吹造型"
+                    android:textColor="@color/textColorFirst"
+                    android:textSize="@dimen/textSizeBody" />
+
+                <TextView
+                    android:id="@+id/price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:ellipsize="end"
+                    android:gravity="right|center_vertical"
+                    android:singleLine="true"
+                    android:text="@string/label_price"
+                    android:textColor="@color/textColorFirst"
+                    android:textSize="@dimen/textSizeBody" />
+
+            </RelativeLayout>
+
+            <!--分割线-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/len_0.5"
+                android:background="@color/dividerLineColor" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/len_44">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:ellipsize="end"
+                    android:gravity="left|center_vertical"
+                    android:singleLine="true"
+                    android:text="@string/label_buy_quantity"
+                    android:textColor="@color/textColorFirst"
+                    android:textSize="@dimen/textSizeBody" />
+
+                <!--数量加减显示控件-->
+                <com.zgkj.common.widgets.QuantityView
+                    android:id="@+id/quantity_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    app:buttonHeight="@dimen/len_32"
+                    app:buttonTextSize="@dimen/textSizeSubhead"
+                    app:buttonWidth="@dimen/len_38"
+                    app:editBoxTextSize="@dimen/textSizeBody"
+                    app:editBoxWidth="@dimen/len_98"
+                    app:leftAndRightSpace="@dimen/len_0" />
+
+            </RelativeLayout>
+
+            <!--分割线-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/len_0.5"
+                android:background="@color/dividerLineColor" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/len_44">
+
+                <TextView
+                    android:id="@+id/subtotal_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:ellipsize="end"
+                    android:gravity="left|center_vertical"
+                    android:singleLine="true"
+                    android:text="@string/label_buy_subtotal"
+                    android:textColor="@color/textColorFirst"
+                    android:textSize="@dimen/textSizeBody" />
+
+
+                <TextView
+                    android:id="@+id/subtotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/len_10"
+                    android:layout_toRightOf="@id/subtotal_label"
+                    android:ellipsize="end"
+                    android:gravity="right|center_vertical"
+                    android:singleLine="true"
+                    android:text="@string/label_price"
+                    android:textColor="@color/textColorFirst"
+                    android:textSize="@dimen/textSizeBody" />
+
+            </RelativeLayout>
+            <!--分割线-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/len_0.5"
+                android:background="@color/dividerLineColor" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/len_48"
+                android:background="@color/colorLight">
+
+                <TextView
+                    android:id="@+id/vip_user"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="left|center_vertical"
+                    android:drawableRight="@drawable/ico_vip"
+                    android:text="会员折扣  "
+                    android:textColor="@color/textColorFirst"
+                    android:textSize="@dimen/textSizeBody" />
+
+                <TextView
+                    android:id="@+id/cut_down"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:drawablePadding="@dimen/len_6"
+                    android:drawableRight="@drawable/ic_mine_expand"
+                    android:gravity="right|center_vertical"
+                    android:text="-￥20"
+                    android:textColor="@color/textColorPrice"
+                    android:textSize="@dimen/textSizeBody" />
+
+            </RelativeLayout>
+            <!--分割线-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/len_0.5"
+                android:background="@color/dividerLineColor" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/len_48"
+                android:background="@color/colorLight">
+
+                <TextView
+                    android:id="@+id/general_discount_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="left|center_vertical"
+                    android:text="优惠券  "
+                    android:drawableRight="@drawable/ico_youhuiquan"
+                    android:textColor="@color/textColorFirst"
+                    android:textSize="@dimen/textSizeBody" />
+
+                <TextView
+                    android:id="@+id/coupon_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:drawablePadding="@dimen/len_6"
+                    android:drawableRight="@drawable/ic_mine_expand"
+                    android:gravity="right|center_vertical"
+                    android:text="@string/label_buy_general_temporarily_unavailable_label"
+                    android:textColor="@color/textColorThird"
+                    android:textSize="@dimen/textSizeBody" />
+
+            </RelativeLayout>
+            <!--分割线-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/len_0.5"
+                android:background="@color/dividerLineColor" />
+            <!--订单总价-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/len_12"
+                android:background="@color/colorLight">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="@dimen/len_12"
+                    android:gravity="left|center_vertical"
+                    android:text="@string/label_buy_general_total_money_label"
+                    android:textColor="@color/textColorFirst"
+                    android:textSize="@dimen/textSizeBody" />
+
+                <TextView
+                    android:id="@+id/general_total_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="@dimen/len_12"
+                    android:gravity="right|center_vertical"
+                    android:text="@string/label_price"
+                    android:textColor="@color/textColorFirst"
+                    android:textSize="@dimen/textSizeBody" />
+
+                <TextView
+                    android:id="@+id/general_discount_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/general_total_money"
+                    android:layout_marginTop="@dimen/len_6"
+                    android:gravity="right|center_vertical"
+                    android:text="@string/label_buy_general_vip_discount_price"
+                    android:textColor="@color/textBuyVipColor"
+                    android:textSize="@dimen/textSizeCaption"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+        <!--普通用户-->
+        <RelativeLayout
+            android:id="@+id/user_type"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/len_80"
+            android:layout_marginTop="@dimen/len_10"
+            android:background="@color/colorLight"
+            android:paddingLeft="@dimen/len_16"
+            android:paddingRight="@dimen/len_16">
+
+
+            <ImageView
+                android:id="@+id/vip_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_buy_vip_label" />
+
+            <TextView
+                android:id="@+id/discount_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="@dimen/len_18"
+                android:layout_marginTop="@dimen/len_20"
+                android:layout_toRightOf="@id/vip_icon"
+                android:gravity="left|center_vertical"
+                android:text="@string/label_buy_general_vip_discount_label"
+                android:textColor="@color/textColorFirst"
+                android:textStyle="bold" />
+
+
+            <!--本单减少的金额-->
+            <TextView
+                android:id="@+id/reduce_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/discount_label"
+                android:layout_marginLeft="@dimen/len_10"
+                android:layout_toRightOf="@id/discount_label"
+                android:gravity="left|center_vertical"
+                android:text="@string/label_buy_general_vip_reduce_money"
+                android:textColor="@color/textBuyReduceColor"
+                android:textSize="@dimen/textSizeCaption" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/discount_label"
+                android:layout_below="@id/discount_label"
+                android:layout_marginTop="@dimen/len_6"
+                android:gravity="left|center_vertical"
+                android:text="@string/label_buy_general_voucher_recharge_label"
+                android:textColor="@color/textColorFirst"
+                android:textSize="@dimen/textSizeCaption" />
+
+
+            <!--开通会员-->
+            <TextView
+                android:id="@+id/open_vip"
+                android:layout_width="@dimen/len_64"
+                android:layout_height="@dimen/len_24"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="@dimen/len_28"
+                android:background="@drawable/selector_bg_buy_open_vip_btn"
+                android:gravity="center"
+                android:text="@string/label_buy_general_open_vip_button"
+                android:textColor="@color/textColorLight"
+                android:textSize="@dimen/textSizeCaption" />
+
+        </RelativeLayout>
+
+        <!--VIP用户-->
+        <LinearLayout
+            android:id="@+id/vip_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorLight"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/len_44"
+                android:paddingLeft="@dimen/len_16"
+                android:paddingRight="@dimen/len_16">
+
+                <!--会员价格-->
+                <TextView
+                    android:id="@+id/vip_money_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:ellipsize="end"
+                    android:gravity="left|center_vertical"
+                    android:singleLine="true"
+                    android:text="@string/label_buy_vip_money_label"
+                    android:textColor="@color/textColorFirst"
+                    android:textSize="@dimen/textSizeBody" />
+
+                <TextView
+                    android:id="@+id/vip_asynchronism"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/len_10"
+                    android:layout_toRightOf="@id/vip_money_label"
+                    android:gravity="left|center_vertical"
+                    android:text="@string/label_buy_vip_asynchronism"
+                    android:textColor="@color/textColorFirst"
+                    android:textSize="@dimen/textSizeCaption" />
+
+                <ImageView
+                    android:id="@+id/vip"
+                    android:layout_width="@dimen/len_20"
+                    android:layout_height="@dimen/len_20"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_payment_unchecked" />
+
+                <!--购买代金券-->
+                <TextView
+                    android:id="@+id/vip_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/len_10"
+                    android:layout_marginRight="@dimen/len_10"
+                    android:layout_toLeftOf="@id/vip"
+                    android:layout_toRightOf="@id/vip_asynchronism"
+                    android:ellipsize="end"
+                    android:gravity="right|center_vertical"
+                    android:singleLine="true"
+                    android:text="@string/label_price"
+                    android:textColor="@color/textColorThird"
+                    android:textSize="@dimen/textSizeBody" />
+
+
+            </RelativeLayout>
+
+            <!--分割线-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/len_0.5"
+                android:layout_marginLeft="@dimen/len_16"
+                android:layout_marginRight="@dimen/len_16"
+                android:background="@color/dividerLineColor" />
+
+
+            <!--代金券抵扣-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/len_44"
+                android:paddingLeft="@dimen/len_16"
+                android:paddingRight="@dimen/len_16">
+
+                <TextView
+                    android:id="@+id/vip_deduction_money_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="left|center_vertical"
+                    android:text="@string/label_buy_vip_voucher_deduction"
+                    android:textColor="@color/textColorFirst"
+                    android:textSize="@dimen/textSizeBody" />
+
+                <!--代金券余额-->
+                <TextView
+                    android:id="@+id/vip_voucher_balance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/len_10"
+                    android:layout_marginRight="@dimen/len_10"
+                    android:layout_toLeftOf="@id/vip_voucher_money"
+                    android:layout_toRightOf="@id/vip_deduction_money_label"
+                    android:gravity="left|center_vertical"
+                    android:text="@string/label_buy_vip_voucher_balance"
+                    android:textColor="@color/textColorFirst"
+                    android:textSize="@dimen/textSizeBody" />
+
+
+                <!--代金券支付的金额-->
+                <ImageView
+                    android:id="@+id/vip_voucher"
+                    android:layout_width="@dimen/len_20"
+                    android:layout_height="@dimen/len_20"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_payment_unchecked" />
+
+
+                <TextView
+                    android:id="@+id/vip_voucher_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/len_10"
+                    android:layout_toLeftOf="@id/vip_voucher"
+                    android:gravity="right|center_vertical"
+                    android:text="@string/label_deduction_money_price"
+                    android:textColor="@color/textBuyVoucherColor"
+                    android:textSize="@dimen/textSizeBody" />
+
+            </RelativeLayout>
+
+
+            <!--抵扣规则-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/len_66"
+                android:layout_marginBottom="@dimen/len_20"
+                android:layout_marginLeft="@dimen/len_16"
+                android:layout_marginRight="@dimen/len_16"
+                android:background="@drawable/shape_bg_buy_deduction_rule"
+                android:paddingLeft="@dimen/len_10"
+                android:paddingRight="@dimen/len_10">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="left|center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="left|center_vertical"
+                        android:text="@string/label_buy_vip_deduction_rules_label"
+                        android:textColor="@color/textColorFirst"
+                        android:textSize="@dimen/textSizeCaption" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/len_4"
+                        android:gravity="left|center_vertical"
+                        android:text="@string/label_buy_vip_all_deducted_label"
+                        android:textColor="@color/textColorSecond"
+                        android:textSize="@dimen/textSizeCaption" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="@dimen/len_76"
+                    android:layout_height="@dimen/len_24"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/selector_bg_buy_open_vip_btn"
+                    android:gravity="center"
+                    android:text="@string/label_buy_vip_buy_voucher_button"
+                    android:textColor="@color/textColorLight"
+                    android:textSize="@dimen/textSizeCaption" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <!--占位布局-->
+        <android.support.v4.widget.Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <!--分割线-->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/len_0.5"
+            android:background="@color/dividerLineColor" />
+
+        <!--底部按钮-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/len_44"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="7"
+                android:background="@color/colorLight"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/label_buy_order_total_money_label"
+                    android:textColor="@color/textColorSecond"
+                    android:textSize="@dimen/textSizeCaption" />
+
+                <TextView
+                    android:id="@+id/total_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/len_10"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="@string/label_price"
+                    android:textColor="@color/textColorPrice"
+                    android:textSize="@dimen/textSizeTitle" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/submit"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="8"
+                android:background="@drawable/selector_bg_buy_submit_btn"
+                android:gravity="center"
+                android:text="前往支付"
+                android:textColor="@color/textColorLight"
+                android:textSize="@dimen/textSizeBody" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

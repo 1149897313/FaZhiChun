@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--标题栏-->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/ToolbarStyle">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/title_history_name"
+            android:textColor="@color/textColorLight"
+            android:textSize="@dimen/textSizeMiddle" />
+    </android.support.v7.widget.Toolbar>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/len_0"
+        android:layout_weight="1"
+        android:layout_marginTop="@dimen/len_10"
+        android:layout_marginBottom="@dimen/len_10"
+        android:background="@color/colorLight"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/len_10"
+            android:layout_marginLeft="@dimen/len_16"
+            android:layout_marginRight="@dimen/len_16"
+            android:layout_marginTop="@dimen/len_10"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!--显示标签部分-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/len_10"
+                android:paddingTop="@dimen/len_10">
+
+                <TextView
+                    android:layout_width="@dimen/len_0"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="@string/label_history_money"
+                    android:textColor="@color/textColorLight"
+                    android:textSize="@dimen/textSizeBody" />
+
+                <TextView
+                    android:layout_width="@dimen/len_0"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="@string/label_history_state"
+                    android:textColor="@color/textColorLight"
+                    android:textSize="@dimen/textSizeBody" />
+
+
+                <TextView
+                    android:layout_width="@dimen/len_0"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="@string/label_history_time"
+                    android:textColor="@color/textColorLight"
+                    android:textSize="@dimen/textSizeBody" />
+
+                <TextView
+                    android:layout_width="@dimen/len_0"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="@string/label_history_operation"
+                    android:textColor="@color/textColorLight"
+                    android:textSize="@dimen/textSizeBody" />
+
+            </LinearLayout>
+
+
+            <!--内容部分-->
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="@dimen/len_1"
+                android:layout_marginLeft="@dimen/len_1"
+                android:layout_marginRight="@dimen/len_1"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

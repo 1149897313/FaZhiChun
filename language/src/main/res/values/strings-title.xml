@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+
+
+    <!--LoginFragment-->
+    <string name="title_login_name">登录</string>
+
+    <!--注册RegisterFragment-->
+    <string name="title_register_name">注册</string>
+
+    <!--HomeFragment-->
+    <string name="title_home_name">发芝春</string>
+
+    <!--OrderFragment我的订单-->
+    <string name="title_main_order_name">我的订单</string>
+
+    <!--MineFragment我的-->
+    <string name="title_mine_name">个人中心</string>
+
+
+    <!--MerchantActivity商家列表-->
+    <string name="title_merchant_name">商家列表</string>
+    
+
+
+
+    <!--CommodityActivity理发店商品项目服务详情界面-->
+    <string name="title_commodity_name">服务详情</string>
+
+    <!--BarbersActivity理发师列表-->
+    <string name="title_barber_name">发型师列表</string>
+
+    <!--IntroduceActivity发型师介绍-->
+    <string name="title_introduce_name">发型师介绍</string>
+
+
+    <string name="title_wallet">推广管理</string>
+
+    <string name="title_open_member">开通会员</string>
+
+    <string name="title_coupons">我的优惠券</string>
+
+
+
+    <!--CommentActivity评论列表-->
+    <string name="title_comment_name">评论</string>
+    <string name="title_comment_entire">全部(%s)</string>
+    <string name="title_comment_slide">晒图(%s)</string>
+    <string name="title_comment_negative">差评(%s)</string>
+
+    <!--PurchaseActivity我的团购-->
+    <string name="title_purchase_name">我的团购</string>
+    <!--<string name="title_purchase_whole">全部</string>-->
+    <!--<string name="title_purchase_obligation">待付款</string>-->
+    <!--<string name="title_purchase_name">待使用</string>-->
+    <!--<string name="title_purchase_name">我的团购</string>-->
+
+    <!--SubscribeActivity我的预约-->
+    <string name="title_subscribe_name">我的预约</string>
+
+
+    <!--RechargeActivity代金券充值购买-->
+    <string name="title_recharge_name">购买代金券</string>
+
+    <!--PaymentActivity支付订单-->
+    <string name="title_payment_name">订单支付</string>
+
+    <!--SettingActivity 用户设置界面-->
+    <string name="title_setting_name">设置</string>
+
+    <!--MessageActivity 用户系统消息显示界面-->
+    <string name="title_message_name">系统消息</string>
+
+
+    <!--EnterActivity商家入驻界面-->
+    <string name="title_enter_name">商家入驻</string>
+
+
+    <!--VouchersActivity我的代金券显示界面-->
+    <string name="title_voucher_name">我的代金券</string>
+
+
+    <!--CollectActivity我的收藏显示界面-->
+    <string name="title_collect_name">我的收藏</string>
+
+
+    <!--PersonalActivity个人信息显示界面-->
+    <string name="title_personal_name">个人信息</string>
+
+
+    <!--HistoryActivity代金券历史显示界面-->
+    <string name="title_history_name">代金券历史</string>
+
+
+    <!--BuyActivity购买提交订单的显示界面-->
+    <string name="title_buy_name">提交订单</string>
+
+    <!--ConsumptionActivity 使用抵用券显示界面-->
+    <string name="title_consumption_name">使用抵用券</string>
+
+
+    <!--OrderActivity支付订单的显示界面-->
+    <string name="title_order_name">支付订单</string>
+
+
+
+
+
+
+
+
+    
+</resources>

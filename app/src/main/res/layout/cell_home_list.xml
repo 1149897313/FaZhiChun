@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorLight"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/shop_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/len_10"
+        android:paddingBottom="@dimen/len_10"
+        android:paddingLeft="@dimen/len_16"
+        android:paddingRight="@dimen/len_16"
+        android:background="@drawable/selector_bg_white_item">
+
+        <ImageView
+            android:id="@+id/shop_image"
+            android:layout_width="@dimen/len_78"
+            android:layout_height="@dimen/len_70"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_barbershop_bg"/>
+
+        <TextView
+            android:id="@+id/shop_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="@dimen/len_10"
+            android:layout_toRightOf="@id/shop_image"
+            android:layout_toLeftOf="@id/distance"
+            android:layout_marginRight="@dimen/len_10"
+            android:ellipsize="end"
+            android:gravity="left|center_vertical"
+            android:singleLine="true"
+            android:text="园区美发工作室"
+            android:textColor="@color/textColorFirst"
+            android:textSize="@dimen/textSizeBody" />
+
+        <!--距离-->
+        <TextView
+            android:id="@+id/distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:ellipsize="end"
+            android:gravity="right|center_vertical"
+            android:singleLine="true"
+            android:text="@string/label_distance"
+            android:textColor="@color/textColorThird"
+            android:textSize="@dimen/textSizeCaption" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/shop_name"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal"
+            android:gravity="left|center_vertical">
+
+            <com.zgkj.common.widgets.StarBarView
+                android:id="@+id/star_bar_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:starCount="5"
+                app:starEmpty="@drawable/ic_star"
+                app:starFill="@drawable/ic_star_selected"
+                app:starSize="@dimen/len_12"
+                app:starSpacing="0dp"
+                app:isTouch="false"
+                app:integerMark="false"/>
+
+            <TextView
+                android:id="@+id/score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/len_8"
+                android:text="@string/label_star_score"
+                android:textColor="@color/textColorThird"
+                android:textSize="@dimen/textSizeCaption" />
+
+
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/shop_image"
+            android:layout_alignLeft="@id/shop_name">
+
+            <TextView
+                android:id="@+id/type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="美发"
+                android:textColor="@color/textColorThird"
+                android:textSize="@dimen/textSizeCaption"
+                android:gravity="center"/>
+
+            <!--推荐-->
+            <ImageView
+                android:id="@+id/recommend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/type"
+                android:layout_marginLeft="@dimen/len_10"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_home_recommend"
+                android:scaleType="centerInside"/>
+
+            <TextView
+                android:id="@+id/address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@id/recommend"
+                android:layout_marginLeft="@dimen/len_10"
+                android:layout_centerVertical="true"
+                android:text="文汇路150号"
+                android:textColor="@color/textColorThird"
+                android:textSize="@dimen/textSizeCaption"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:gravity="right|center_vertical"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <!--分割线-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/len_0.5"
+        android:layout_marginLeft="@dimen/len_16"
+        android:layout_marginRight="@dimen/len_16"
+        android:background="@color/dividerLineColor" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!--查看其他商品服务-->
+    <com.zgkj.common.widgets.text.DrawableCenterTextView
+        android:id="@+id/other_commodity"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/len_44"
+        app:drawableRightIcon="@drawable/ic_location_expand"
+        android:drawablePadding="@dimen/len_4"
+        android:gravity="center"
+        android:text="@string/label_other_service"
+        android:textColor="@color/textColorThird"
+        android:textSize="@dimen/textSizeBody"
+        android:background="@drawable/selector_bg_white_item"/>
+
+</LinearLayout>

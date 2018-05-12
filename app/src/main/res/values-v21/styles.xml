@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!--标题栏样式-->
+    <style name="ToolbarStyle" parent="Widget.AppCompat.Toolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/actionBarWithStatusBarSize</item>
+        <item name="android:paddingTop">@dimen/statusBarSize</item>
+        <item name="contentInsetStart">0dp</item>
+        <item name="android:contentInsetStart" tools:ignore="NewApi">0dp</item>
+        <item name="contentInsetEnd">0dp</item>
+        <item name="android:contentInsetEnd" tools:ignore="NewApi">0dp</item>
+        <item name="contentInsetStartWithNavigation">0dp</item>
+        <item name="android:contentInsetStartWithNavigation" tools:ignore="NewApi">0dp</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:layout_gravity">top|center_horizontal</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:outlineProvider" tools:ignore="NewApi">bounds</item>
+        <item name="android:elevation" tools:ignore="NewApi">0.5dp</item>
+        <item name="elevation">0.5dp</item>
+    </style>
+
+
+</resources>

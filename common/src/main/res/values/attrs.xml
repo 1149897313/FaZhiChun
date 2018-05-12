@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--定义ToolBar的相关属性-->
+    <attr name="toolbarTitleColor" format="color" />
+    <attr name="toolbarMenuIconColor" format="color" />
+    <attr name="toolbarTitleSize" format="dimension" />
+
+
+    <!--自定义带清清除按钮ClearTextIconEditText控件的icon属性-->
+    <declare-styleable name="ClearTextIconEditText">
+        <attr name="clearIconDrawable" format="reference"/>
+    </declare-styleable>
+
+
+    <!--绘制居中的Drawable-->
+    <declare-styleable name="DrawableCenterTextView">
+        <attr name="drawableLeftIcon" format="reference|color"/>
+        <attr name="drawableTopIcon" format="reference|color"/>
+        <attr name="drawableRightIcon" format="reference|color"/>
+        <attr name="drawableBottomIcon" format="reference|color"/>
+
+        <attr name="drawableLeftIconWidth" format="dimension"/>
+        <attr name="drawableLeftIconHeight" format="dimension"/>
+        <attr name="drawableTopIconWidth" format="dimension"/>
+        <attr name="drawableTopIconHegiht" format="dimension"/>
+        <attr name="drawableRightIconWidth" format="dimension"/>
+        <attr name="drawableRightIconHeight" format="dimension"/>
+        <attr name="drawableBottomIconWidth" format="dimension"/>
+        <attr name="drawableBottomIconHeight" format="dimension"/>
+    </declare-styleable>
+
+    <!--自定义收起展开可收缩的TextView显示控件-->
+    <declare-styleable name="ExpandableTextView">
+        <attr name="maxCollapsedLines" format="integer"/>
+        <attr name="animDuration" format="integer"/>
+        <attr name="contentTextColor" format="color" />
+        <attr name="contentTextSize" format="dimension" />
+        <attr name="collapseExpandTextColor" format="color" />
+        <attr name="collapseExpandTextSize" format="dimension" />
+        <attr name="textCollapse" format="string" />
+        <attr name="textExpand" format="string" />
+        <attr name="collapseExpandTextGrarity" >
+            <flag name="left" value="3"/>
+            <flag name="right" value="5"/>
+        </attr>
+    </declare-styleable>
+
+
+
+
+    <declare-styleable name="TextDrawable">
+        <attr name="leftDrawable" format="reference"/>
+        <attr name="leftDrawableWidth" format="dimension"/>
+        <attr name="leftDrawableHeight" format="dimension"/>
+        <attr name="rightDrawable" format="reference"/>
+        <attr name="rightDrawableWidth"   format="dimension"/>
+        <attr name="rightDrawableHeight" format="dimension"/>
+        <attr name="topDrawable" format="reference"/>
+        <attr name="topDrawableWidth" format="dimension"/>
+        <attr name="topDrawableHeight" format="dimension"/>
+    </declare-styleable>
+
+
+    <!--自定义星星评分控件属性的定义-->
+    <declare-styleable name="StarBarView">
+        <attr name="starSpacing" format="dimension"/>
+        <attr name="starSize" format="dimension"/>
+        <attr name="starCount" format="integer"/>
+        <attr name="starEmpty" format="reference"/>
+        <attr name="starFill" format="reference"/>
+        <attr name="isTouch" format="boolean"/>
+        <attr name="integerMark" format="boolean"/>
+    </declare-styleable>
+
+
+    <!--自定义数量加减的显示控件-->
+    <declare-styleable name="QuantityView">
+        <!--按钮的宽度-->
+        <attr name="buttonWidth" format="dimension"/>
+        <!--按钮的高度-->
+        <attr name="buttonHeight" format="dimension"/>
+        <!--文本编辑输入框的宽度-->
+        <attr name="editBoxWidth" format="dimension"/>
+        <!--按钮的字体大小-->
+        <attr name="buttonTextSize" format="dimension"/>
+        <!--文本编辑输入框的字体大小-->
+        <attr name="editBoxTextSize" format="dimension"/>
+        <!--控件间的间距-->
+        <attr name="leftAndRightSpace" format="dimension"/>
+    </declare-styleable>
+
+    <!--城市选择器侧边栏字母索引自定义控件-->
+    <declare-styleable name="SideIndexBar">
+        <attr name="pressBackground" format="color"/>
+        <attr name="indexTextColor" format="color"/>
+        <attr name="indexTouchTextColor" format="color"/>
+        <attr name="indexTextSize" format="dimension"/>
+    </declare-styleable>
+
+
+    <!--自定义标签展示控件-->
+    <declare-styleable name="LabelsView">
+        <attr name="labelBackgroundColor" format="reference"/>
+        <attr name="labelTextColor" format="reference"/>
+        <attr name="labelTextSize" format="dimension"/>
+        <attr name="labelTextPaddingLeft" format="dimension"/>
+        <attr name="labelTextPaddingTop" format="dimension"/>
+        <attr name="labelTextPaddingRight" format="dimension"/>
+        <attr name="labelTextPaddingBottom" format="dimension"/>
+        <attr name="labelVerticalSpace" format="dimension"/>
+        <attr name="labelHorizontalSpace" format="dimension"/>
+    </declare-styleable>
+
+
+
+
+</resources>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/len_10"
+    android:paddingBottom="@dimen/len_10"
+    android:background="@drawable/selector_bg_white_item"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_price"
+            android:textSize="@dimen/textSizeSubhead"
+            android:textColor="@color/textColorPrimary"
+            android:gravity="center"
+            android:singleLine="true"
+            android:ellipsize="end"/>
+
+        <!--门市价-->
+        <TextView
+            android:id="@+id/original_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/len_10"
+            android:text="@string/label_original_price"
+            android:textColor="@color/textColorThird"
+            android:textSize="@dimen/textSizeCaption"
+            android:gravity="center"
+            android:singleLine="true"
+            android:ellipsize="end"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:orientation="vertical"
+        android:gravity="left|center_vertical">
+
+        <TextView
+            android:id="@+id/type_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="洗剪吹套餐"
+            android:textColor="@color/textColorFirst"
+            android:textSize="@dimen/textSizeSubhead"
+            android:gravity="left|center_vertical"
+            android:singleLine="true"
+            android:ellipsize="end"/>
+
+
+        <TextView
+            android:id="@+id/sell_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/len_10"
+            android:text="@string/label_sell_number"
+            android:textSize="@dimen/textSizeCaption"
+            android:textColor="@color/textColorThird"
+            android:gravity="left|center_vertical"
+            android:singleLine="true"
+            android:ellipsize="end"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

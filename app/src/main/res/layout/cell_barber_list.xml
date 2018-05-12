@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/selector_bg_barber_item"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="@dimen/len_172"
+        android:layout_height="@dimen/len_194"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+        <ImageView
+            android:id="@+id/barber_image"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/len_138"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_barber_bg"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/barber_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="李民勇"
+                android:textColor="@color/textColorFirst"
+                android:textSize="@dimen/textSizeSubhead" />
+
+            <TextView
+                android:id="@+id/barber_job"
+                android:layout_width="@dimen/len_68"
+                android:layout_height="@dimen/len_24"
+                android:layout_marginLeft="@dimen/len_16"
+                android:text="首席设计"
+                android:textColor="@color/textColorPink"
+                android:textSize="@dimen/textSizeCaption"
+                android:gravity="center"
+                android:background="@drawable/shape_bg_barber_label"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+</FrameLayout>

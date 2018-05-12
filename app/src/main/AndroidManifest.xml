@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.zgkj.fazhichun">
+
+    <!--网络访问权限-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!--读取手机通讯录的相关权限的定义-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.WRITE_CONTACTS"/>
+    <!--拍照-->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!--读取存储权限-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--用于进行网络定位-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <!--用于访问GPS定位-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <!--用于获取运营商信息，用于支持提供运营商信息相关的接口-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <!--用于访问wifi网络信息，wifi信息会用于进行网络定位-->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <!--用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <!--用于读取手机当前的状态-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <!--用于申请调用A-GPS模块-->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
+    <!--用于申请获取蓝牙信息进行室内定位-->
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+
+
+
+    <!--LaunchActivity-->
+    <application
+        android:name=".App"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".LaunchActivity"
+            android:theme="@style/AppTheme.Launch">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.zgkj.fazhichun.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"/>
+        </provider>
+
+        <!--高德地图的meta-data-->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="a59b96a56da4a0c73677a61329e7f39d"/>
+
+        <!--高德地图的定位服务-->
+        <service android:name="com.amap.api.location.APSService"/>
+
+
+        <!--第三方图片裁剪框架的回调Activity-->
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait" />
+
+        <!--程序主界面-->
+        <activity
+            android:name=".activities.MainActivity"
+            android:screenOrientation="portrait" />
+
+        <!--登录注册显示界面-->
+        <activity android:name=".activities.AccountActivity"
+            android:screenOrientation="portrait"/>
+
+        <!--全部订单显示界面-->
+        <activity android:name=".activities.ExistActivity"
+            android:screenOrientation="portrait"/>
+
+        <!--商家列表-->
+        <activity
+            android:name=".activities.MerchantActivity"
+            android:screenOrientation="portrait" />
+
+        <!--理发店详情显示界面-->
+        <activity
+            android:name=".activities.BarberShopActivity"
+            android:screenOrientation="portrait" />
+
+        <!--理发店商品项目服务详情界面-->
+        <activity
+            android:name=".activities.CommodityActivity"
+            android:screenOrientation="portrait" />
+
+        <!--理发师列表界面-->
+        <activity
+            android:name=".activities.BarberActivity"
+            android:screenOrientation="portrait" />
+
+        <!--发型师介绍界面-->
+        <activity android:name=".activities.IntroduceActivity"
+            android:screenOrientation="portrait"/>
+
+        <!--用户评价界面-->
+        <activity
+            android:name=".activities.CommentActivity"
+            android:screenOrientation="portrait" />
+
+        <!--我的优惠券-->
+        <activity android:name=".activities.OpenMemberActivity"
+            android:screenOrientation="portrait"/>
+
+        <!--我的钱包-->
+        <activity android:name=".activities.WalletActivity"
+            android:screenOrientation="portrait"/>
+
+        <!--我的优惠券-->
+        <activity android:name=".activities.CouponsActivity"
+            android:screenOrientation="portrait"/>
+
+        <!--搜索附近门店-->
+        <activity
+            android:name=".activities.SearchActivity"
+            android:screenOrientation="portrait" />
+
+        <!--用户设置界面-->
+        <activity android:name=".activities.SettingActivity"
+            android:screenOrientation="portrait"/>
+
+        <!--用户系统消息显示界面-->
+        <activity android:name=".activities.MessageActivity"/>
+
+        <!--我的团购界面-->
+        <activity
+            android:name=".activities.PurchaseActivity"
+            android:screenOrientation="portrait" />
+
+        <!--发型师预约界面-->
+        <activity android:name=".activities.SubscribeActivity"
+            android:screenOrientation="portrait"/>
+
+        <!--显示具体的理发类型项目的详细信息界面-->
+        <activity
+            android:name=".activities.TypeActivity"
+            android:screenOrientation="portrait" />
+
+        <!--购买代金券界面-->
+        <activity
+            android:name=".activities.RechargeActivity"
+            android:screenOrientation="portrait" />
+
+        <!--商家入驻显示界面-->
+        <activity
+            android:name=".activities.EnterActivity"
+            android:screenOrientation="portrait" />
+
+        <!--支付结果显示界面-->
+        <activity android:name=".activities.PaymentActivity"
+            android:screenOrientation="portrait"/>
+
+        <!--个人信息显示界面-->
+        <activity
+            android:name=".activities.PersonalActivity"
+            android:screenOrientation="portrait" />
+
+        <!--我的代金券显示界面-->
+        <activity
+            android:name=".activities.VoucherActivity"
+            android:screenOrientation="portrait" />
+
+        <!--我的收藏界面-->
+        <activity
+            android:name=".activities.CollectActivity"
+            android:screenOrientation="portrait" />
+
+        <!--代金券历史界面-->
+        <activity android:name=".activities.HistoryActivity"
+            android:screenOrientation="portrait"/>
+
+        <!--购买提交订单的显示界面-->
+        <activity android:name=".activities.BuyActivity"
+            android:screenOrientation="portrait"/>
+
+        <!--使用抵用券的显示界面-->
+        <activity android:name=".activities.ConsumptionActivity"
+            android:screenOrientation="portrait"/>
+
+        <!--支付订单显示界面-->
+        <activity android:name=".activities.OrderActivity"
+            android:screenOrientation="portrait"/>
+
+
+    </application>
+
+</manifest>

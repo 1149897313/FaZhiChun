@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nested_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/colorLight">
+
+                <!--评论标签-->
+                <com.zgkj.common.widgets.LabelsView
+                    android:id="@+id/labels_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/len_20"
+                    android:paddingBottom="@dimen/len_20"
+                    android:paddingLeft="@dimen/len_16"
+                    android:paddingRight="@dimen/len_16"
+                    app:labelBackgroundColor="@drawable/shape_bg_comment_label"
+                    app:labelTextColor="@color/textColorFirst"
+                    app:labelTextSize="@dimen/textSizeCaption"
+                    app:labelTextPaddingLeft="@dimen/len_10"
+                    app:labelTextPaddingRight="@dimen/len_10"
+                    app:labelTextPaddingTop="@dimen/len_6"
+                    app:labelTextPaddingBottom="@dimen/len_6"
+                    app:labelHorizontalSpace="@dimen/len_10"
+                    app:labelVerticalSpace="@dimen/len_10"
+                    android:background="@color/colorLight"/>
+
+                <!--分割线-->
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/len_0.5"
+                    android:background="@color/dividerLineColor"
+                    android:layout_marginLeft="@dimen/len_16"
+                    android:layout_marginRight="@dimen/len_16" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false" />
+
+            </LinearLayout>
+
+
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/len_40" />
+
+        </LinearLayout>
+
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+
+
+</LinearLayout>

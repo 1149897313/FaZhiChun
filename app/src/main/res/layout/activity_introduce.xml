@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--标题栏-->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/ToolbarStyle">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/title_introduce_name"
+            android:textColor="@color/textColorFirst"
+            android:textSize="@dimen/textSizeSubhead" />
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <FrameLayout
+        android:id="@+id/content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorLight"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/len_16"
+                    android:paddingRight="@dimen/len_16">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="@dimen/len_10"
+                        android:paddingTop="@dimen/len_10">
+
+                        <com.zgkj.common.widgets.CircleImageView
+                            android:id="@+id/barber_image"
+                            android:layout_width="@dimen/len_78"
+                            android:layout_height="@dimen/len_78"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_introduce_barber_portrait"
+                            android:scaleType="centerCrop" />
+
+                        <TextView
+                            android:id="@+id/barber_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignTop="@id/barber_image"
+                            android:layout_marginLeft="@dimen/len_16"
+                            android:layout_toRightOf="@id/barber_image"
+                            android:ellipsize="end"
+                            android:gravity="left|center_vertical"
+                            android:singleLine="true"
+                            android:text="李民勇"
+                            android:textColor="@color/textColorFirst"
+                            android:textSize="@dimen/textSizeSubhead" />
+
+                        <TextView
+                            android:id="@+id/barber_job"
+                            android:layout_width="@dimen/len_64"
+                            android:layout_height="@dimen/len_22"
+                            android:layout_alignLeft="@id/barber_name"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/shape_bg_introduce_label"
+                            android:ellipsize="end"
+                            android:gravity="center"
+                            android:singleLine="true"
+                            android:text="首席设计"
+                            android:textColor="@color/textColorPink"
+                            android:textSize="@dimen/textSizeCaption" />
+
+                        <TextView
+                            android:id="@+id/advantage_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBottom="@id/barber_image"
+                            android:layout_alignLeft="@id/barber_name"
+                            android:ellipsize="end"
+                            android:gravity="left|center_vertical"
+                            android:singleLine="true"
+                            android:text="擅长:"
+                            android:textColor="@color/textColorFirst"
+                            android:textSize="@dimen/textSizeCaption" />
+
+                        <TextView
+                            android:id="@+id/advantage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBottom="@id/advantage_label"
+                            android:layout_marginLeft="@dimen/len_10"
+                            android:layout_toRightOf="@id/advantage_label"
+                            android:ellipsize="end"
+                            android:gravity="left|center_vertical"
+                            android:singleLine="true"
+                            android:text="韩式烫染、卷发护理、造型设计"
+                            android:textColor="@color/textColorSecond"
+                            android:textSize="@dimen/textSizeCaption" />
+
+                    </RelativeLayout>
+
+                    <!--分割线-->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/len_0.5"
+                        android:background="@color/dividerLineColor" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="@dimen/len_10"
+                        android:paddingTop="@dimen/len_10">
+
+                        <TextView
+                            android:id="@+id/introduce_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentTop="true"
+                            android:ellipsize="end"
+                            android:gravity="left|end"
+                            android:singleLine="true"
+                            android:text="@string/label_introduce_introduce_label"
+                            android:textColor="@color/textColorFirst"
+                            android:textSize="@dimen/textSizeCaption" />
+
+                        <!--简介-->
+                        <TextView
+                            android:id="@+id/introduce"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginLeft="@dimen/len_10"
+                            android:layout_toRightOf="@id/introduce_label"
+                            android:gravity="left|center_vertical"
+                            android:text="理发师是指经历过拜师学艺，跟随师傅刻苦学习技术被师傅认可后出师"
+                            android:textColor="@color/textColorSecond"
+                            android:textSize="@dimen/textSizeCaption" />
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+
+                <!--商家地址-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/len_10"
+                    android:background="@color/colorLight"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/len_16"
+                    android:paddingRight="@dimen/len_16">
+
+                    <TextView
+                        android:id="@+id/shop_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:gravity="left|center_vertical"
+                        android:paddingBottom="@dimen/len_10"
+                        android:paddingTop="@dimen/len_10"
+                        android:singleLine="true"
+                        android:text="时尚造型"
+                        android:textColor="@color/textColorFirst"
+                        android:textSize="@dimen/textSizeSubhead" />
+
+
+                    <!--商家信息-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingBottom="@dimen/len_10"
+                        android:paddingTop="@dimen/len_10">
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <ImageView
+                                android:id="@+id/address_icon"
+                                android:layout_width="@dimen/len_12"
+                                android:layout_height="@dimen/len_18"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true"
+                                android:scaleType="centerInside"
+                                android:src="@drawable/ic_merchant_address" />
+
+                            <TextView
+                                android:id="@+id/address"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentTop="true"
+                                android:layout_marginLeft="@dimen/len_10"
+                                android:layout_toRightOf="@id/address_icon"
+                                android:gravity="left|center_vertical"
+                                android:text="渝北区嘉州路中渝恒大广场75号"
+                                android:maxLines="1"
+                                android:ellipsize="end"
+                                android:textColor="@color/textColorFirst"
+                                android:textSize="@dimen/textSizeBody" />
+
+
+                            <TextView
+                                android:id="@+id/distance"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignLeft="@id/address"
+                                android:layout_below="@id/address"
+                                android:layout_marginTop="@dimen/len_10"
+                                android:ellipsize="end"
+                                android:gravity="left|center_vertical"
+                                android:singleLine="true"
+                                android:text="@string/label_distance"
+                                android:textColor="@color/textColorSecond"
+                                android:textSize="@dimen/textSizeCaption" />
+
+
+                        </RelativeLayout>
+
+                        <!--分割线-->
+                        <View
+                            android:layout_width="@dimen/len_0.5"
+                            android:layout_height="@dimen/len_20"
+                            android:layout_marginLeft="@dimen/len_4"
+                            android:layout_marginRight="@dimen/len_14"
+                            android:background="@color/dividerLineColor" />
+
+
+                        <ImageView
+                            android:id="@+id/phone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/len_24"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/ic_merchant_phone" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <!--服务详情-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/len_10"
+                    android:background="@color/colorLight"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/len_16"
+                    android:paddingRight="@dimen/len_16">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="left|center_vertical"
+                        android:paddingBottom="@dimen/len_10"
+                        android:paddingTop="@dimen/len_10"
+                        android:text="@string/label_introduce_service_details"
+                        android:textColor="@color/textColorFirst"
+                        android:textSize="@dimen/textSizeSubhead" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="@dimen/len_10" />
+
+                </LinearLayout>
+
+
+                <!--占位-->
+                <android.support.v4.widget.Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/len_84" />
+
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
+
+        <!--电话预约按钮-->
+        <TextView
+            android:id="@+id/subscribe"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/len_44"
+            android:text="@string/label_introduce_subscribe_button"
+            android:textColor="@color/textColorLight"
+            android:textSize="@dimen/textSizeBody"
+            android:gravity="center"
+            android:layout_gravity="bottom|center_horizontal"
+            android:background="@drawable/selector_bg_introduce_subscribe_btn"/>
+
+    </FrameLayout>
+
+
+</LinearLayout>

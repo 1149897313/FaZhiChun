@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/selector_bg_white_item"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/len_10"
+    android:paddingLeft="@dimen/len_16"
+    android:paddingRight="@dimen/len_16"
+    android:paddingTop="@dimen/len_10">
+
+    <!--理发店详情界面商品项目适配器的item布局-->
+    <ImageView
+        android:id="@+id/type_image"
+        android:layout_width="@dimen/len_78"
+        android:layout_height="@dimen/len_70"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_shop_bg"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/type_image"
+        android:layout_marginLeft="@dimen/len_10"
+        android:layout_toRightOf="@id/type_image"
+        android:gravity="left|center_vertical"
+        android:text="[洗吹]"
+        android:textColor="@color/textColorOrange"
+        android:textSize="@dimen/textSizeBody"
+        android:singleLine="true"
+        android:ellipsize="end"/>
+
+    <TextView
+        android:id="@+id/type_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/type_image"
+        android:layout_marginLeft="@dimen/len_8"
+        android:layout_toRightOf="@id/type"
+        android:gravity="left|center_vertical"
+        android:text="鸡公头艺术华丽造型"
+        android:textColor="@color/textColorFirst"
+        android:textSize="@dimen/textSizeBody"
+        android:singleLine="true"
+        android:ellipsize="end"/>
+
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/type_image"
+        android:layout_alignLeft="@id/type"
+        android:gravity="left|center_vertical"
+        android:text="@string/label_price"
+        android:textColor="@color/textColorPrice"
+        android:textSize="@dimen/textSizeTitle"
+        android:singleLine="true"
+        android:ellipsize="end"/>
+
+
+    <TextView
+        android:id="@+id/original_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/type_image"
+        android:layout_marginLeft="@dimen/len_8"
+        android:layout_toRightOf="@id/price"
+        android:gravity="left|center_vertical"
+        android:text="@string/label_original_price"
+        android:textColor="@color/textColorSecond"
+        android:layout_alignBaseline="@id/price"
+        android:textSize="@dimen/textSizeCaption"
+        android:singleLine="true"
+        android:ellipsize="end"/>
+
+    <TextView
+        android:id="@+id/sell_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:drawablePadding="@dimen/len_10"
+        android:drawableRight="@drawable/ic_barbershop_commodity_info"
+        android:gravity="right|center_vertical"
+        android:text="@string/label_sell_number"
+        android:textColor="@color/textColorSecond"
+        android:textSize="@dimen/textSizeCaption"
+        android:singleLine="true"
+        android:ellipsize="end"/>
+
+
+</RelativeLayout>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--标题栏-->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/ToolbarStyle">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/title_open_member"
+            android:textColor="@color/textColorFirst"
+            android:textSize="@dimen/textSizeSubhead" />
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nested_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/open_member_bg" />
+
+            <ImageView
+                android:id="@+id/bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/len_20"
+                android:src="@drawable/open_member_pic_huangguan" />
+
+            <TextView
+                android:id="@+id/is_show"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/bg"
+                android:layout_marginBottom="@dimen/font_20"
+                android:layout_marginTop="@dimen/len_8"
+                android:gravity="center"
+                android:text="开通平台会员·尊享多重特权"
+                android:textColor="@color/textColorOrange"
+                android:textSize="@dimen/font_18" />
+
+            <LinearLayout
+                android:id="@+id/function"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:orientation="vertical"
+                android:layout_below="@id/is_show"
+                android:layout_margin="@dimen/len_8"
+                android:background="@drawable/shape_bg_mine_personal_card">
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/reckon"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_below="@id/function"
+                android:orientation="vertical"
+                android:background="@color/labelBackgroundColor"
+                android:layout_margin="@dimen/len_8">
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/open_button"
+                android:layout_below="@id/reckon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="@dimen/len_8"
+                android:background="@drawable/btn_kaitonghuiyuan"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_14"
+                    android:text="开通平台尊享会员" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_12"
+                    android:text="会员迎新特惠 ￥68/年  ￥68/年" />
+            </LinearLayout>
+        </RelativeLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:background="@color/windowsBackground">
+
+    <!--拨打电话的dialog-->
+    <TextView
+        android:id="@+id/phone"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/len_48"
+        android:text="@string/label_phone_dialog_call_phone"
+        android:textColor="@color/textColorFirst"
+        android:textSize="@dimen/textSizeSubhead"
+        android:gravity="center"
+        android:background="@drawable/selector_bg_white_item"/>
+
+    <TextView
+        android:id="@+id/cancel"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/len_48"
+        android:layout_marginTop="@dimen/len_10"
+        android:text="@string/label_phone_dialog_cancel"
+        android:textColor="@color/textColorFirst"
+        android:textSize="@dimen/textSizeSubhead"
+        android:gravity="center"
+        android:background="@drawable/selector_bg_white_item"/>
+
+
+
+</LinearLayout>

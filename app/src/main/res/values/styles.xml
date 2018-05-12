@@ -1,0 +1,97 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="AppTheme.Base">
+
+        <!-- 左上角返回Icon -->
+        <item name="homeAsUpIndicator">@drawable/ic_back</item>
+
+    </style>
+
+    <!--全屏的主题样式-->
+    <style name="AppTheme.Launch" parent="AppTheme">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <!--是否有遮盖-->
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+
+
+    <!--标题栏样式-->
+    <style name="ToolbarStyle" parent="Widget.AppCompat.Toolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/actionBarWithStatusBarSize</item>
+        <item name="android:paddingTop">@dimen/statusBarSize</item>
+        <item name="contentInsetStart">0dp</item>
+        <item name="android:contentInsetStart" tools:ignore="NewApi">0dp</item>
+        <item name="contentInsetEnd">0dp</item>
+        <item name="android:contentInsetEnd" tools:ignore="NewApi">0dp</item>
+        <item name="contentInsetStartWithNavigation">0dp</item>
+        <item name="android:contentInsetStartWithNavigation" tools:ignore="NewApi">0dp</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:layout_gravity">top|center_horizontal</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:outlineProvider" tools:ignore="NewApi">bounds</item>
+        <item name="android:elevation" tools:ignore="NewApi">0.5dp</item>
+        <item name="elevation">0.5dp</item>
+    </style>
+
+
+    <!--轮播图控件显示样式的定义-->
+    <style name="BannerDefaultStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/len_172</item>
+        <!--<item name="android:layout_marginTop">@dimen/len_4</item>-->
+        <!-- 自定义属性在styles.xml中不需要命名空间,直接用属性名就可以了 -->
+        <!-- 开启自动轮播 -->
+        <item name="banner_pointAutoPlayAble">true</item>
+        <!-- 自动轮播的时间间隔 -->
+        <item name="banner_pointAutoPlayInterval">3000</item>
+        <!-- 指示点容器背景 -->
+        <!--<item name="banner_pointContainerBackground">#44aaaaaa</item>-->
+        <!-- 指示点背景 -->
+        <item name="banner_pointDrawable">@drawable/selector_banner_point</item>
+        <!-- 指示点容器左右内间距 -->
+        <item name="banner_pointContainerLeftRightPadding">10dp</item>
+        <!-- 指示点上下外间距 -->
+        <item name="banner_pointTopBottomMargin">6dp</item>
+        <!-- 指示点左右外间距 -->
+        <item name="banner_pointLeftRightMargin">3dp</item>
+        <!-- 指示器的位置 -->
+        <item name="banner_indicatorGravity">bottom|center_horizontal</item>
+        <!-- 页码切换过程的时间长度 -->
+        <item name="banner_pageChangeDuration">1000</item>
+        <!--页面切换的效果-->
+        <item name="banner_transitionEffect">rotate</item>
+        <!-- 提示文案的文字大小 -->
+        <item name="banner_tipTextSize">10sp</item>
+        <!-- 提示文案的文字颜色 -->
+        <item name="banner_tipTextColor">@color/textColorLight</item>
+        <!-- 加载网络数据时覆盖在BGABanner最上层的占位图 -->
+        <!--<item name="banner_placeholderDrawable">@drawable/holder</item>-->
+    </style>
+
+    <!--<style name="TabLayoutTextStyle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">-->
+        <!--<item name="android:textSize">@dimen/textSizeBody</item>-->
+    <!--</style>-->
+    <style name="TabLayoutTextStyle" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">true</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">@dimen/textSizeBody</item>
+        <item name="android:typeface">normal</item>
+    </style>
+
+    
+
+    <style name="CityPickerDialogFragmentAnimStyle">
+        <item name="android:windowEnterAnimation">@anim/anim_dialog_city_in</item>
+        <item name="android:windowExitAnimation">@anim/anim_dialog_city_out</item>
+    </style>
+    
+
+
+
+
+</resources>

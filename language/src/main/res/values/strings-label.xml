@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--common-->
+    <string name="label_price">¥%s</string>
+    <string name="label_price_rmb">%s元</string>
+    <string name="label_original_price">门市价:¥%s</string>
+    <string name="label_deduction_money_price">¥－%s</string>
+
+    <string name="label_distance">%skm</string>
+    <string name="label_sell_number">已售：%s</string>
+    <string name="label_comment">%s条评论</string>
+    <string name="label_more_comment">查看全部评论</string>
+    <string name="label_problem">有什么问题，问问去过的人吧</string>
+    <string name="label_other_service">查看其它%s个服务</string>
+    <string name="label_star_score">%分</string>
+
+
+    <!--LaunchActivity 程序启动页-->
+    <string name="label_launch_title">发 / 芝 / 春</string>
+    <string name="label_launch_content">与您一起开启</string>
+    <string name="label_launch_location_permission_prompt">获取位置信息需要获取手机定位相关权限</string>
+    <string name="label_launch_location_failure_prompt_title">提示</string>
+    <string name="label_launch_location_failure_prompt_content">获取位置信息需要以下权限:%s 是否打开设置界面进行授权?</string>
+    <string name="label_launch_location_open_setting">是</string>
+    <string name="label_launch_location_exit_app">否</string>
+
+
+
+
+    <!--LoginFragment-->
+    <string name="label_login_register">注册</string>
+
+
+    <!--HomeFragment-->
+    <string name="label_home_is_located">正在定位...</string>
+    <string name="label_home_title_search">输入商家名称</string>
+    <string name="label_home_type_haircut">剪发</string>
+    <string name="label_home_type_blow">洗吹</string>
+    <string name="label_home_type_hair_dye">染发</string>
+    <string name="label_home_type_perm">烫发</string>
+    <string name="label_home_register_vip_promat">立即注册平台VIP,冲多少送多少</string>
+    <string name="label_home_nearby_hot">附近热门</string>
+    <string name="label_home_see_more_store">查看更多店铺</string>
+
+    <!--CityPickerDialogFragment城市定位的dialog-->
+    <string name="label_dialog_city_picker_title">切换城市</string>
+    <string name="label_dialog_city_picker_location_city">定位城市</string>
+    <string name="label_dialog_city_picker_all_cities">所有城市</string>
+
+    <!--OrderFragment-->
+    <string name="label_main_order_title_all">全部</string>
+    <string name="label_main_order_type_obligation">待付款</string>
+    <string name="label_main_order_type_used">待使用</string>
+    <string name="label_main_order_type_evaluate">待评价</string>
+    <string name="label_main_order_type_refund">退款</string>
+    <string name="label_main_order_recent_order">最近订单</string>
+    <string name="label_main_order_payment_button">付款</string>
+
+    <!--MineFragment我的界面-->
+    <string name="label_mine_open_vip">立即成为VIP</string>
+    <string name="label_mine_personal_info">个人信息</string>
+    <string name="label_mine_domestic_consumer">普通用户</string>
+    <string name="label_mine_voucher_label">代金券</string>
+    <string name="label_mine_buy_voucher">购买</string>
+    <string name="label_mine_collect">我的收藏</string>
+    <string name="label_mine_comment">我的评论</string>
+    <string name="label_mine_wallet">我的钱包</string>
+    <string name="label_mine_wallet_right">参与推广有奖活动</string>
+    <string name="label_mine_coupons">我的优惠券</string>
+
+
+    <!--MerchantActivity商家列表-->
+    <string name="label_merchant_provinces">请选择省份</string>
+    <string name="label_merchant_city">请选择城市</string>
+    <string name="label_merchant_county">请选择区县</string>
+
+
+    <!--BarberShopActivity-->
+    <string name="label_barbershop_subscribe_button">立即预约</string>
+    <string name="label_barbershop_shop_service_label">店内服务(%s)</string>
+    <string name="label_barbershop_barber_label">发型师</string>
+    <string name="label_barbershop_other_barber">其他%s位发型师</string>
+    <string name="label_barbershop_merchant_service">商家服务</string>
+    <string name="label_barbershop_comment_count">%s条评论</string>
+    <string name="label_barbershop_see_all_comment">查看所有评论</string>
+    <string name="label_barbershop_more_discounts">查看更多优惠</string>
+
+    <!--CommodityActivity-->
+    <string name="label_commodity_time_label">支持随时退</string>
+    <string name="label_commodity_auto_label">过期自动退</string>
+    <string name="label_commodity_comment">%s条评论</string>
+    <string name="label_commodity_merchant_service">商家服务</string>
+    <string name="label_commodity_service_description">服务说明</string>
+    <string name="label_commodity_purchase_note">购买须知</string>
+    <string name="label_commodity_relative_information">预约信息</string>
+    <string name="label_commodity_advance_reservation">· 请您提前2小时预约</string>
+    <string name="label_commodity_of_operator">适用人数</string>
+    <string name="label_commodity_group_purchase_information">· 每张团购券最多一人使用</string>
+    <string name="label_commodity_rules_to_remind">规则提醒</string>
+    <string name="label_commodity_group_purchase_invoice">· 如需团购券发票，请您在消费时向商家咨询</string>
+    <string name="label_commodity_share_button">分享</string>
+    <string name="label_commodity_buy_button">立即抢购</string>
+
+    <!--IntroduceActivity发型师介绍-->
+    <string name="label_introduce_introduce_label">简介:</string>
+    <string name="label_introduce_service_details">服务详情</string>
+    <string name="label_introduce_subscribe_button">立即电话预约</string>
+
+    <!--RechargeActivity代金券充值购买-->
+
+
+
+
+
+    <!--HairstylistFragment-->
+    <string name="label_hairstylist_comment">%s好评</string>
+    <string name="label_hairstylist_subscribe">预约</string>
+
+
+    <!--CommodityActivity-->
+    <string name="label_commodity_whole_filter">全部</string>
+    <string name="label_commodity_price_filter">按价格</string>
+    <string name="label_commodity_score_filter">按评分</string>
+
+
+    <!--TypeActivity-->
+    <string name="label_type_buy_now">立即抢购</string>
+    <string name="label_type_auto_refund_prompt">随时退</string>
+    <string name="label_type_overdue_refund_prompt">过期自动退</string>
+    <string name="label_type_business_information">商家信息</string>
+    <string name="label_type_set_meal">套餐</string>
+    <string name="label_type_original_price">门市价</string>
+    <string name="label_type_discount_price">优惠价</string>
+    <string name="label_type_vip_price">VIP会员折扣价</string>
+    <string name="label_type_see_graphic_details">查看图文详情</string>
+    <string name="label_type_purchase_notice">购买须知</string>
+    <string name="label_type_latest_notice">最新通知</string>
+    <string name="label_type_latest_notice_content">充多少送多少，VIP折上折，享受优惠价结算</string>
+    <string name="label_type_merchant_services">商家服务</string>
+
+
+    <!--SearchActivity门店搜索界面-->
+    <string name="label_search_find_stores_hint">输入商家名称</string>
+    <string name="label_search_shop_name_prompt">点击搜索框输入店铺名字开始搜索</string>
+    <string name="label_search_recommend_prompt">为你推荐与“美发”相关的其他信息</string>
+    <string name="label_search_more_discount">更多优惠</string>
+
+
+    <!--CollectActivity我的收藏显示界面-->
+    <string name="label_collect_merchant">店铺</string>
+    <string name="label_collect_product">产品</string>
+
+
+    <!--PersonalActivity个人信息显示界面-->
+    <string name="label_personal_portrait">头像</string>
+    <string name="label_personal_nickname">昵称</string>
+    <string name="label_personal_phone">我的手机号</string>
+
+
+    <!--我的代金券界面VouchersActivity-->
+    <string name="label_voucher_have_money">当前还有代金券</string>
+    <string name="label_voucher_buy">购买代金券</string>
+    <string name="label_voucher_see_history">查看代金券历史</string>
+
+
+
+
+
+    <!--HistoryActivity历史代金券界面-->
+    <string name="label_history_money">金额</string>
+    <string name="label_history_state">状态</string>
+    <string name="label_history_time">时间</string>
+    <string name="label_history_operation">操作</string>
+    <string name="label_history_see">查看</string>
+
+
+    <!--PhoneDialogFragment显示电话弹出框的dialog碎片-->
+    <string name="label_phone_dialog_call_phone">拨打电话</string>
+    <string name="label_phone_dialog_cancel">取消</string>
+
+    <!--UpdatePortraitDialogFragment更新头像显示的dialog-->
+    <string name="label_update_portrait_dialog_camera_label">拍一张</string>
+    <string name="label_update_portrait_dialog_gallery_label">从手机相册选择</string>
+    <string name="label_update_portrait_dialog_cancel">取消</string>
+
+
+    <!--PaymentResultDialogFragment显示支付结果的dialog-->
+    <string name="label_payment_result_dialog_title_name">支付成功</string>
+    <string name="label_payment_result_dialog_promat">订单支付成功</string>
+    <string name="label_payment_result_see_order_button">查看订单详情</string>
+    <string name="label_payment_result_back_home">返回首页</string>
+
+
+
+    <!--BuyActivity购买提交订单的显示界面-->
+    <string name="label_buy_quantity">数量</string>
+    <string name="label_buy_subtotal">小计</string>
+    <string name="label_buy_general_vip_discount_label">会员专享折扣优惠</string>
+    <string name="label_buy_general_vip_reduce_money">(本单立减%s元)</string>
+    <string name="label_buy_general_voucher_recharge_label">更享代金券充多少送多少</string>
+    <string name="label_buy_general_open_vip_button">开通会员</string>
+    <string name="label_buy_general_total_money_label">订单总价</string>
+    <string name="label_buy_general_vip_discount_price">会员折扣价 ¥%s</string>
+    <string name="label_buy_general_voucher_discount_label">代金券抵扣</string>
+    <string name="label_buy_general_original_price_discount_label">(原价全额抵扣)</string>
+    <string name="label_buy_general_temporarily_unavailable_label">暂不可用</string>
+
+    <string name="label_buy_vip_money_label">会员价</string>
+    <string name="label_buy_vip_asynchronism">(不与代金券同时使用)</string>
+    <string name="label_buy_vip_voucher_deduction">代金券抵扣</string>
+    <string name="label_buy_vip_voucher_balance">(余额%s元)</string>
+    <string name="label_buy_vip_deduction_rules_label">折扣规则</string>
+    <string name="label_buy_vip_all_deducted_label">以商品原价全额抵扣</string>
+    <string name="label_buy_vip_buy_voucher_button">购买代金券</string>
+    <string name="label_buy_order_total_money_label">订单总价</string>
+    <string name="label_buy_submit_button">提交订单</string>
+
+    <!--PaymentActivity订单支付界面-->
+    <string name="label_payment_order_price">订单总价</string>
+    <string name="label_payment_payment_time">支付剩余时间: %s</string>
+    <string name="label_payment_wechat_payment_label">微信支付</string>
+    <string name="label_payment_alipay_payment_label">支付宝支付</string>
+    <string name="label_payment_confirm_payment_button">确认支付</string>
+
+
+    <!--RechargeActivity购买代金券充值界面-->
+    <string name="label_recharge_tag">第三方支付 资金安全 消费放心</string>
+    <string name="label_recharge_price_and_buy">¥%s  立即购买</string>
+    <string name="label_recharge_voucher">代金券</string>
+    <string name="label_recharge_vip">VIP</string>
+    <string name="label_recharge_discount">特价优惠</string>
+    <string name="label_recharge_permanent">永久有效</string>
+
+</resources>

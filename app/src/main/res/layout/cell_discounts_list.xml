@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/len_10"
+    android:paddingBottom="@dimen/len_10"
+    android:paddingLeft="@dimen/len_16"
+    android:paddingRight="@dimen/len_16"
+    android:background="@drawable/selector_bg_white_item">
+
+    <ImageView
+        android:id="@+id/shop_image"
+        android:layout_width="@dimen/len_80"
+        android:layout_height="@dimen/len_80"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/shop_image"
+        android:layout_marginLeft="@dimen/len_16"
+        android:layout_alignTop="@id/shop_image"
+        android:layout_alignBottom="@id/shop_image">
+
+        <TextView
+            android:id="@+id/type_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:text="美发工作室"
+            android:textColor="@color/textColorFirst"
+            android:textSize="@dimen/textSizeBody"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:gravity="left|center_vertical"/>
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="@string/label_price"
+            android:textColor="@color/textColorPrice"
+            android:textSize="@dimen/textSizeSubhead"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:gravity="left|center_vertical"/>
+
+
+        <!--门市价-->
+        <TextView
+            android:id="@+id/original_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/price"
+            android:layout_marginLeft="@dimen/len_20"
+            android:text="@string/label_original_price"
+            android:textColor="@color/textColorThird"
+            android:textSize="@dimen/textSizeBody"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:gravity="left|center_vertical"/>
+
+
+        <!--销售的数量-->
+        <TextView
+            android:id="@+id/sell_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:text="@string/label_sell_number"
+            android:textColor="@color/textColorThird"
+            android:textSize="@dimen/textSizeBody"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:gravity="left|center_vertical"/>
+
+
+    </RelativeLayout>
+
+
+
+
+
+
+</RelativeLayout>

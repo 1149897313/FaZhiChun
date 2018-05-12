@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <!--提交订单界面抵扣规则背景的定义-->
+
+    <solid android:color="@color/windowsBackground"/>
+    <corners android:radius="@dimen/len_2"/>
+    <stroke android:color="@color/dividerLineColor"
+        android:width="@dimen/len_0.5"/>
+
+</shape>

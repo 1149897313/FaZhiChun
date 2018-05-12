@@ -1,0 +1,68 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.2'
+        
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        jcenter()
+        maven { url "https://jitpack.io" }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+
+
+ext {
+    // 版本号相关
+    versionCode = 1
+    versionName = '1.0.0'
+
+    // 相关依赖库版本
+    supportVersion = '27.0.2'
+
+    // 沉浸式状态栏
+    statusBarVersion = '2.3.0'
+
+    // 图片加载框架
+    glideVersion = '4.6.1'
+
+    // 圆形头像
+    circleimageviewVersion = '2.2.0'
+
+    // 图片裁剪框架
+    uCropVersion = '2.2.1'
+
+    // 权限检查
+    easyPMVersion = '1.1.3'
+
+    // Gson框架
+    gsonVersion = '2.8.2'
+
+    // retrofit网络请求框架
+    retrofitVersion = '2.3.0'
+
+    // 轮播控件
+    bgaBannerVersion = '2.2.4@aar'
+
+
+
+}
+

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/len_10"
+    android:paddingBottom="@dimen/len_10"
+    android:paddingLeft="@dimen/len_16"
+    android:paddingRight="@dimen/len_16"
+    android:background="@drawable/selector_bg_white_item">
+
+    <ImageView
+        android:id="@+id/shop_image"
+        android:layout_width="@dimen/len_78"
+        android:layout_height="@dimen/len_70"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_shop_bg"
+        android:scaleType="centerCrop"/>
+
+    <TextView
+        android:id="@+id/shop_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/shop_image"
+        android:layout_marginLeft="@dimen/len_10"
+        android:layout_toLeftOf="@id/distance"
+        android:layout_marginRight="@dimen/len_4"
+        android:layout_alignTop="@id/shop_image"
+        android:text="私人订制"
+        android:textSize="@dimen/textSizeBody"
+        android:textColor="@color/textColorFirst"
+        android:gravity="left|center_vertical"
+        android:singleLine="true"
+        android:ellipsize="end"/>
+
+    <TextView
+        android:id="@+id/type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/shop_name"
+        android:layout_centerVertical="true"
+        android:text="[剪发]"
+        android:textColor="@color/textColorOrange"
+        android:textSize="@dimen/textSizeCaption"
+        android:gravity="left|center_vertical"
+        android:singleLine="true"
+        android:ellipsize="end"/>
+
+    <TextView
+        android:id="@+id/type_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/type"
+        android:layout_marginLeft="@dimen/len_4"
+        android:layout_centerVertical="true"
+        android:text="总监剪发"
+        android:textSize="@dimen/textSizeCaption"
+        android:textColor="@color/textColorSecond"
+        android:gravity="left|center_vertical"
+        android:singleLine="true"
+        android:ellipsize="end"/>
+
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/shop_image"
+        android:layout_alignLeft="@id/shop_name"
+        android:text="@string/label_price"
+        android:textSize="@dimen/textSizeSubhead"
+        android:textColor="@color/textColorPrice"
+        android:gravity="left|center_vertical"
+        android:singleLine="true"
+        android:ellipsize="end"/>
+
+
+    <TextView
+        android:id="@+id/original_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/price"
+        android:layout_marginLeft="@dimen/len_8"
+        android:layout_alignBottom="@id/price"
+        android:text="@string/label_original_price"
+        android:textSize="@dimen/textSizeCaption"
+        android:textColor="@color/textColorSecond"
+        android:gravity="left|center_vertical"
+        android:singleLine="true"
+        android:ellipsize="end"/>
+
+
+    <TextView
+        android:id="@+id/distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@id/shop_name"
+        android:text="@string/label_distance"
+        android:textColor="@color/textColorSecond"
+        android:textSize="@dimen/textSizeCaption"
+        android:gravity="right|center_vertical"
+        android:singleLine="true"
+        android:ellipsize="end"/>
+
+
+
+
+
+
+
+
+</RelativeLayout>

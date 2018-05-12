@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="网络异常"
+        android:textColor="@color/textColorThird"
+        android:textSize="@dimen/textSizeSubhead"/>
+
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/len_32"
+        android:paddingTop="@dimen/len_8"
+        android:paddingBottom="@dimen/len_8"
+        android:paddingLeft="@dimen/len_24"
+        android:paddingRight="@dimen/len_24"
+        android:text="重新加载"
+        android:textColor="@color/textColorLight"
+        android:textSize="@dimen/textSizeSubhead"
+        android:background="@drawable/selector_bg_primary_0dp_btn"/>
+
+
+
+</LinearLayout>

@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/ToolbarStyle">
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/textColorFirst"
+            android:textSize="@dimen/textSizeSubhead" />
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nested_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/shop_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorLight"
+                android:ellipsize="end"
+                android:gravity="left|center_vertical"
+                android:padding="@dimen/len_16"
+                android:singleLine="true"
+                android:text="木一.时尚造型"
+                android:textColor="@color/textColorFirst"
+                android:textSize="@dimen/textSizeMiddle" />
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/shop_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/len_10"
+                android:paddingBottom="@dimen/len_10"
+                android:paddingLeft="@dimen/len_16"
+                android:background="@color/colorLight"
+                android:nestedScrollingEnabled="false"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorLight"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/len_16"
+                android:paddingRight="@dimen/len_16">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/len_10"
+                    android:paddingTop="@dimen/len_10">
+
+                    <LinearLayout
+                        android:id="@+id/star_bar_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:gravity="left|center_vertical"
+                        android:orientation="horizontal">
+
+                        <com.zgkj.common.widgets.StarBarView
+                            android:id="@+id/shop_star_bar_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:integerMark="false"
+                            app:isTouch="false"
+                            app:starCount="5"
+                            app:starEmpty="@drawable/ic_star"
+                            app:starFill="@drawable/ic_star_selected"
+                            app:starSize="@dimen/len_12"
+                            app:starSpacing="0dp" />
+
+                        <TextView
+                            android:id="@+id/shop_score"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/len_10"
+                            android:gravity="center"
+                            android:text="@string/label_star_score"
+                            android:textColor="@color/textColorSecond"
+                            android:textSize="@dimen/textSizeCaption" />
+
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:id="@+id/business_hours"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@id/star_bar_layout"
+                        android:layout_below="@id/star_bar_layout"
+                        android:layout_marginTop="@dimen/len_10"
+                        android:text="营业至22:00"
+                        android:textColor="@color/textColorSecond" />
+
+                    <!--立即预约按钮-->
+                    <TextView
+                        android:id="@+id/subscribe"
+                        android:layout_width="@dimen/len_98"
+                        android:layout_height="@dimen/len_36"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/selector_bg_barbershop_subscribe_btn"
+                        android:gravity="center"
+                        android:text="@string/label_barbershop_subscribe_button"
+                        android:textColor="@color/textColorLight"
+                        android:textSize="@dimen/textSizeBody" />
+
+                </RelativeLayout>
+
+                <!--分割线-->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/len_0.5"
+                    android:background="@color/dividerLineColor" />
+
+                <!--商家地址信息-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/len_10"
+                    android:paddingTop="@dimen/len_10">
+
+                    <RelativeLayout
+                        android:layout_width="@dimen/len_0"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/address_icon"
+                            android:layout_width="@dimen/len_12"
+                            android:layout_height="@dimen/len_18"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/ic_merchant_address" />
+
+                        <TextView
+                            android:id="@+id/address"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginLeft="@dimen/len_10"
+                            android:layout_toRightOf="@id/address_icon"
+                            android:ellipsize="end"
+                            android:gravity="left|center_vertical"
+                            android:maxLines="1"
+                            android:text="渝北区嘉州路中渝恒大广场"
+                            android:textColor="@color/textColorFirst"
+                            android:textSize="@dimen/textSizeBody" />
+
+                        <TextView
+                            android:id="@+id/distance"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@id/address"
+                            android:layout_below="@id/address"
+                            android:layout_marginTop="@dimen/len_8"
+                            android:ellipsize="end"
+                            android:gravity="left|center_vertical"
+                            android:singleLine="true"
+                            android:text="@string/label_distance"
+                            android:textColor="@color/textColorSecond"
+                            android:textSize="@dimen/textSizeCaption" />
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="@dimen/len_0.5"
+                        android:layout_height="@dimen/len_20"
+                        android:layout_marginLeft="@dimen/len_4"
+                        android:layout_marginRight="@dimen/len_10"
+                        android:background="@color/dividerLineColor" />
+
+                    <ImageView
+                        android:id="@+id/phone"
+                        android:layout_width="@dimen/len_20"
+                        android:layout_height="@dimen/len_20"
+                        android:layout_marginRight="@dimen/len_20"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/ic_merchant_phone" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <!--店内服务列表-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/len_10"
+                android:background="@color/colorLight"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/commodity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_barbershop_recommend"
+                    android:drawablePadding="@dimen/len_10"
+                    android:gravity="left|center_vertical"
+                    android:paddingBottom="@dimen/len_10"
+                    android:paddingLeft="@dimen/len_16"
+                    android:paddingRight="@dimen/len_16"
+                    android:paddingTop="@dimen/len_10"
+                    android:text="@string/label_barbershop_shop_service_label"
+                    android:textColor="@color/textColorFirst"
+                    android:textSize="@dimen/textSizeSubhead" />
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/commodity_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"/>
+
+                <FrameLayout
+                    android:id="@+id/other_commodity_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/len_44"
+                    android:background="@drawable/selector_bg_white_item">
+
+                    <TextView
+                        android:id="@+id/other_commodity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:drawablePadding="@dimen/len_8"
+                        android:drawableRight="@drawable/ic_location_expand"
+                        android:gravity="center"
+                        android:text="@string/label_other_service"
+                        android:textColor="@color/textColorThird"
+                        android:textSize="@dimen/textSizeBody" />
+
+                </FrameLayout>
+
+
+            </LinearLayout>
+
+
+            <!--理发师列表-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/len_10"
+                android:background="@color/colorLight"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/len_10"
+                    android:paddingTop="@dimen/len_10">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/len_16"
+                        android:paddingRight="@dimen/len_16"
+                        android:layout_gravity="left|center_vertical"
+                        android:drawableLeft="@drawable/ic_barbershop_barber"
+                        android:drawablePadding="@dimen/len_10"
+                        android:gravity="left|center_vertical"
+                        android:text="@string/label_barbershop_barber_label"
+                        android:textColor="@color/textColorFirst"
+                        android:textSize="@dimen/textSizeSubhead" />
+
+                    <TextView
+                        android:id="@+id/other_barber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/len_6"
+                        android:paddingLeft="@dimen/len_10"
+                        android:paddingRight="@dimen/len_10"
+                        android:paddingTop="@dimen/len_10"
+                        android:paddingBottom="@dimen/len_10"
+                        android:layout_gravity="right|center_vertical"
+                        android:drawablePadding="@dimen/len_4"
+                        android:drawableRight="@drawable/ic_barbershop_other_barber"
+                        android:gravity="right|center_vertical"
+                        android:text="@string/label_barbershop_other_barber"
+                        android:textColor="@color/textColorSecond"
+                        android:textSize="@dimen/textSizeCaption"
+                        android:background="@drawable/selector_bg_white_item"/>
+
+                </FrameLayout>
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/barber_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/len_16"
+                    android:paddingBottom="@dimen/len_10"
+                    android:nestedScrollingEnabled="false"/>
+
+
+            </LinearLayout>
+
+
+            <!--服务列表-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/len_10"
+                android:background="@color/colorLight"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_barbershop_service"
+                    android:drawablePadding="@dimen/len_10"
+                    android:gravity="left|center_vertical"
+                    android:paddingBottom="@dimen/len_10"
+                    android:paddingLeft="@dimen/len_16"
+                    android:paddingRight="@dimen/len_16"
+                    android:paddingTop="@dimen/len_10"
+                    android:text="@string/label_barbershop_merchant_service"
+                    android:textColor="@color/textColorFirst"
+                    android:textSize="@dimen/textSizeSubhead" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/service_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/len_16"
+                    android:paddingRight="@dimen/len_16"
+                    android:paddingBottom="@dimen/len_10"
+                    android:nestedScrollingEnabled="false"/>
+
+            </LinearLayout>
+
+
+            <!--评论列表-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/len_10"
+                android:background="@color/colorLight"
+                android:orientation="vertical">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/len_10"
+                    android:paddingLeft="@dimen/len_16"
+                    android:paddingRight="@dimen/len_16"
+                    android:paddingTop="@dimen/len_10">
+
+                    <com.zgkj.common.widgets.StarBarView
+                        android:id="@+id/comment_star_bar_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        app:integerMark="false"
+                        app:isTouch="false"
+                        app:starCount="5"
+                        app:starEmpty="@drawable/ic_star"
+                        app:starFill="@drawable/ic_star_selected"
+                        app:starSize="@dimen/len_12"
+                        app:starSpacing="0dp" />
+
+                    <TextView
+                        android:id="@+id/comment_score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/len_10"
+                        android:layout_toRightOf="@id/comment_star_bar_view"
+                        android:gravity="left|center_vertical"
+                        android:text="@string/label_star_score"
+                        android:textColor="@color/textColorSecond"
+                        android:textSize="@dimen/textSizeCaption" />
+
+                    <TextView
+                        android:id="@+id/comment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/len_10"
+                        android:layout_toRightOf="@id/comment_score"
+                        android:ellipsize="end"
+                        android:gravity="right|center_vertical"
+                        android:singleLine="true"
+                        android:text="@string/label_barbershop_comment_count"
+                        android:textColor="@color/textColorSecond"
+                        android:textSize="@dimen/textSizeCaption" />
+
+                </RelativeLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/comment_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"/>
+
+
+                <!--查看所有评论-->
+                <FrameLayout
+                    android:id="@+id/comment_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/len_44"
+                    android:background="@drawable/selector_bg_white_item">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:drawablePadding="@dimen/len_10"
+                        android:drawableRight="@drawable/ic_barbershop_other_barber"
+                        android:gravity="center"
+                        android:text="@string/label_barbershop_see_all_comment"
+                        android:textColor="@color/textColorThird"
+                        android:textSize="@dimen/textSizeBody" />
+
+                </FrameLayout>
+
+            </LinearLayout>
+            
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/len_40" />
+
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+
+</LinearLayout>

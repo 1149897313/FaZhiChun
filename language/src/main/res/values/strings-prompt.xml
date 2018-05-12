@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <!--PhoneHandleDialogFragment点击电话号码进行相关操作的dialog碎片-->
+    <string name="prompt_handle_dialog_copy_succeed">复制成功</string>
+    <string name="prompt_handle_dialog_copy_failed">复制失败</string>
+
+
+
+
+</resources>

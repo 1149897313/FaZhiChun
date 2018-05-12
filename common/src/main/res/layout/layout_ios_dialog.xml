@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+
+    <LinearLayout
+        android:layout_width="@dimen/len_156"
+        android:layout_height="@dimen/len_128"
+        android:paddingTop="@dimen/len_10"
+        android:paddingBottom="@dimen/len_10"
+        android:paddingLeft="@dimen/len_20"
+        android:paddingRight="@dimen/len_20"
+        android:background="@drawable/loading_dialog_bg"
+        android:orientation="vertical"
+        android:gravity="center">
+
+
+        <!--android:indeterminateBehavior: 定义当进度达到最大时，不确定模式的表现；
+            该值必须为repeat或者cycle，repeat表示进度从0重新开始；cycle表示进度保持当前值，并且回到0。
+            android:indeterminateOnly: 限制为不定模式。
+            -->
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="@dimen/len_36"
+            android:layout_height="@dimen/len_36"
+            android:layout_gravity="center_horizontal"
+            android:indeterminateBehavior="repeat"
+            android:indeterminateDrawable="@drawable/loading_dialog"
+            android:indeterminateOnly="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/len_10"
+            android:text="加载中....."
+            android:textColor="#f0f0f0"
+            android:textSize="@dimen/textSizeBody"/>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

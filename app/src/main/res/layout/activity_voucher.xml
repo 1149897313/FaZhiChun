@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--标题栏-->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/ToolbarStyle">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/title_voucher_name"
+            android:textColor="@color/textColorLight"
+            android:textSize="@dimen/textSizeMiddle" />
+    </android.support.v7.widget.Toolbar>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/len_20"
+        android:paddingBottom="@dimen/len_20"
+        android:orientation="vertical"
+        android:background="@color/colorLight"
+        android:gravity="center">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/len_20"
+            android:text="@string/label_voucher_have_money"
+            android:textColor="@color/textColorFirst"
+            android:textSize="@dimen/textSizeHeadline"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:gravity="center"/>
+
+
+        <TextView
+            android:id="@+id/voucher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/len_10"
+            android:text="00.00"
+            android:textColor="@color/textColorPrice"
+            android:textSize="@dimen/textSizeDisplay"/>
+
+
+        <TextView
+            android:id="@+id/buy"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/len_44"
+            android:layout_marginLeft="@dimen/len_16"
+            android:layout_marginRight="@dimen/len_16"
+            android:layout_marginTop="@dimen/len_40"
+            android:text="@string/label_voucher_buy"
+            android:textColor="@color/textColorLight"
+            android:textSize="@dimen/textSizeBody"
+            android:gravity="center"
+            android:background="@drawable/selector_bg_primary_8dp_btn"/>
+
+
+        <!--查看代金券历史-->
+        <TextView
+            android:id="@+id/history"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/len_20"
+            android:text="@string/label_voucher_see_history"
+            android:textColor="@color/textColorFirst"
+            android:textSize="@dimen/textSizeBody"
+            android:gravity="center"/>
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+</LinearLayout>

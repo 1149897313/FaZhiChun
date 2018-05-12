@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--主页底部菜单-->
+    <string name="action_home">首页</string>
+    <string name="action_order">订单</string>
+    <string name="action_mine">我的</string>
+
+    <!--收藏界面菜单-->
+    <string name="action_edit">编辑</string>
+    <string name="action_cancel">取消</string>
+
+
+
+</resources>

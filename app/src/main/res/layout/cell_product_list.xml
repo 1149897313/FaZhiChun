@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/len_10"
+    android:paddingBottom="@dimen/len_10"
+    android:paddingLeft="@dimen/len_16"
+    android:paddingRight="@dimen/len_16"
+    android:background="@drawable/selector_bg_white_item"
+    android:gravity="center">
+
+
+    <ImageView
+        android:id="@+id/select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/len_8"
+        android:visibility="gone"/>
+
+
+    <RelativeLayout
+        android:layout_width="@dimen/len_0"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+
+        <ImageView
+            android:id="@+id/shop_image"
+            android:layout_width="@dimen/len_78"
+            android:layout_height="@dimen/len_70"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_shop_bg"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:id="@+id/shop_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@id/shop_image"
+            android:layout_marginLeft="@dimen/len_16"
+            android:layout_toLeftOf="@id/distance"
+            android:layout_marginRight="@dimen/len_8"
+            android:text="美发工作室"
+            android:textColor="@color/textColorFirst"
+            android:textSize="@dimen/textSizeBody"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:gravity="left|center_vertical"/>
+
+
+        <TextView
+            android:id="@+id/type_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/shop_name"
+            android:layout_centerVertical="true"
+            android:text="美发造型"
+            android:textColor="@color/textColorSecond"
+            android:textSize="@dimen/textSizeCaption"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:gravity="center"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/shop_image"
+            android:layout_toRightOf="@id/shop_image"
+            android:layout_marginLeft="@dimen/len_16"
+            android:orientation="horizontal"
+            android:gravity="left|center_vertical">
+
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_price"
+                android:textColor="@color/textColorPrice"
+                android:textSize="@dimen/textSizeSubhead"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:gravity="left|center_vertical"/>
+
+            <!--门市价-->
+            <TextView
+                android:id="@+id/original_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/len_16"
+                android:text="@string/label_original_price"
+                android:textColor="@color/textColorSecond"
+                android:textSize="@dimen/textSizeBody"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:gravity="left|center_vertical"/>
+
+        </LinearLayout>
+
+
+        <!--距离-->
+        <TextView
+            android:id="@+id/distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/shop_image"
+            android:layout_alignParentRight="true"
+            android:text="@string/label_distance"
+            android:textSize="@dimen/textSizeCaption"
+            android:textColor="@color/textColorThird"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:gravity="right|center_vertical"/>
+
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>
