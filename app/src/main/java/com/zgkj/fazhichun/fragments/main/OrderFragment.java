@@ -39,9 +39,6 @@ public class OrderFragment extends Fragment implements View.OnClickListener {
 
 
 
-    /**
-     * DATA
-     */
     private OrderAdapter mLatelyOrderAdapter;
 
     /**
