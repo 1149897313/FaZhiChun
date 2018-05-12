@@ -59,11 +59,6 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     private RelativeLayout mCommentLayout;      // 我的评论
     private RelativeLayout wallet_layout, coupons_layout;
 
-
-    /**
-     * DATA
-     */
-
     /**
      * 显示我的碎片
      *

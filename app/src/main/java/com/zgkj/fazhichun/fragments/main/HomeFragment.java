@@ -302,7 +302,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
         });
     }
 
-
     /**
      * 获取分类列表列表
      */
