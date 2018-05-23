@@ -14,11 +14,11 @@ public class StoreListAndProductList {
     private String virtual_shop_id;
     private String shop_name;//店铺名称
     private String  shop_image;//店铺头像
-    private String distance;//店铺距离
+    private int distance;//店铺距离
     private float  shop_service_score;//		商家星级评分(共5星 5.00)
     private int  score_quantity;//	int	商家评分人数
     private String  address;//	商家详细地址
-    private String  shopcategory;//店铺类型
+    private Shopcategory  shopcategory;//店铺类型
     private List<Hairdresser> hairdresser;
 
     public String getShop_id() {
@@ -53,11 +53,11 @@ public class StoreListAndProductList {
         this.shop_image = shop_image;
     }
 
-    public String getDistance() {
+    public int getDistance() {
         return distance;
     }
 
-    public void setDistance(String distance) {
+    public void setDistance(int distance) {
         this.distance = distance;
     }
 
@@ -85,11 +85,11 @@ public class StoreListAndProductList {
         this.address = address;
     }
 
-    public String getShopcategory() {
+    public Shopcategory getShopcategory() {
         return shopcategory;
     }
 
-    public void setShopcategory(String shopcategory) {
+    public void setShopcategory(Shopcategory shopcategory) {
         this.shopcategory = shopcategory;
     }
 
@@ -115,5 +115,25 @@ public class StoreListAndProductList {
                 ", shopcategory='" + shopcategory + '\'' +
                 ", hairdresser=" + hairdresser +
                 '}';
+    }
+
+    class Shopcategory{
+
+        private String category_name;
+
+        public String getCategory_name() {
+            return category_name;
+        }
+
+        public void setCategory_name(String category_name) {
+            this.category_name = category_name;
+        }
+
+        @Override
+        public String toString() {
+            return "Shopcategory{" +
+                    "category_name='" + category_name + '\'' +
+                    '}';
+        }
     }
 }

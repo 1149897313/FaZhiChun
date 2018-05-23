@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zgkj.common.app.ToolbarActivity;
+import com.zgkj.common.utils.AccountManagers;
 import com.zgkj.common.utils.AppUtil;
 import com.zgkj.common.widgets.load.LoadFactory;
 import com.zgkj.common.widgets.load.core.LoadManager;
@@ -133,7 +134,9 @@ public class SettingActivity extends ToolbarActivity implements View.OnClickList
                 break;
             case R.id.logout:// 退出登录
                 // 退出应用程序
-                AppUtil.finishAll();
+//                AppUtil.finishAll();
+                AccountManagers.logOut();
+                AccountActivity.show(mContext,false);
                 break;
             default:
                 break;

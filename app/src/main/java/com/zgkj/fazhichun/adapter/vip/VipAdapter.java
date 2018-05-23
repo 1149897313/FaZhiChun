@@ -37,7 +37,7 @@ public class VipAdapter extends RecyclerViewAdapter<String> {
         }
 
         @Override
-        protected void onBind(String data) {
+        protected void onBind(String data,int position) {
 
         }
 

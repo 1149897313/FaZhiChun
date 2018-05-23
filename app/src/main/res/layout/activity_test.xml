@@ -14,7 +14,7 @@
         android:listSelector="@android:color/transparent"
         android:scrollbars="none" />
 
-    <com.zgkj.fazhichun.LetterListView
+    <com.zgkj.common.widgets.LetterListView
         android:id="@+id/letter_container"
         android:layout_width="22dp"
         android:layout_height="match_parent"

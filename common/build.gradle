@@ -35,7 +35,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     api project(':language')
-
     api "com.android.support:support-v4:$rootProject.ext.supportVersion"
     api "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"
     api "com.android.support:recyclerview-v7:$rootProject.ext.supportVersion"
@@ -67,6 +66,7 @@ dependencies {
 
     // 高德地图定位
     api 'com.amap.api:location:latest.integration'
+
     // 高德地图3D地图
     api 'com.amap.api:map2d:latest.integration'
 
@@ -78,5 +78,6 @@ dependencies {
 
     // FlycoTabLayout
     api 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
-
+    implementation files('libs/pinyin4android1.0.jar')
+    implementation files('libs/pinyin4j-2.5.0.jar')
 }

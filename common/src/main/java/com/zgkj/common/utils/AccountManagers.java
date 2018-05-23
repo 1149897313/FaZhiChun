@@ -1,6 +1,7 @@
 package com.zgkj.common.utils;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -50,6 +51,7 @@ public class AccountManagers {
      */
     public static String getToken(){
         token = (String) SPUtil.get(KEY_TOKEN, "");
+        Log.e("sign", "token："+token);
         return token;
     }
 
@@ -81,17 +83,14 @@ public class AccountManagers {
      */
     public static boolean isLogin() {
         // 用户账号和Token不能为空
-        return !TextUtils.isEmpty(getToken())
-                && !TextUtils.isEmpty(getAccount());
+        return !TextUtils.isEmpty(getToken());
     }
 
     /**
      * 实现退出登录的方法
      */
     public static void logOut(){
-        if (isLogin()){
             SPUtil.remove(KEY_TOKEN);
             SPUtil.remove(KEY_ACCOUNT);
-        }
     }
 }

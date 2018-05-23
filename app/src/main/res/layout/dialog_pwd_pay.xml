@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/len_12"
+    android:layout_marginRight="@dimen/len_12"
+    android:background="@color/colorPrimary"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/len_48"
+        android:gravity="center"
+        android:text="确认提现"
+        android:textColor="@color/textColorFirst"
+        android:textSize="@dimen/textSizeSubhead" />
+
+
+    <!--分割线-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/len_0.5"
+        android:layout_marginLeft="@dimen/len_16"
+        android:layout_marginRight="@dimen/len_16"
+        android:background="@color/dividerLineColor" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/len_38"
+        android:gravity="center"
+        android:text="提现金额"
+        android:textColor="@color/textColorFirst"
+        android:textSize="@dimen/font_12" />
+
+    <TextView
+        android:id="@+id/amount"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/len_42"
+        android:gravity="center"
+        android:text="￥300"
+        android:textColor="@color/textColorFirst"
+        android:textSize="@dimen/font_22" />
+
+    <!--分割线-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/len_0.5"
+        android:layout_marginLeft="@dimen/len_16"
+        android:layout_marginRight="@dimen/len_16"
+        android:background="@color/dividerLineColor" />
+
+    <com.zgkj.common.widgets.PayPsdInputView
+        android:id="@+id/pwd_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/len_16"
+        android:digits="1234567890"
+        android:inputType="number" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/len_38"
+        android:background="@drawable/selector_bg_white_item"
+        android:gravity="center_horizontal"
+        android:text="请输入支付密码"
+        android:textColor="@color/textColorSecond"
+        android:textSize="@dimen/textSizeSubhead" />
+
+
+</LinearLayout>

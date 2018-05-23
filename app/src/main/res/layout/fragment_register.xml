@@ -65,11 +65,12 @@
             android:background="@null"
             android:hint="手机号"
             android:inputType="number"
+            android:singleLine="true"
             android:maxLength="11"
             android:digits="1234567890"
             android:paddingBottom="@dimen/len_4"
             android:paddingTop="@dimen/len_4"
-            app:clearIconDrawable="@drawable/ic_agreement_normal"
+            app:clearIconDrawable="@drawable/ic_clear_text"
             android:textColor="@color/textColorFirst"
             android:textSize="@dimen/textSizeBody" />
 
@@ -104,12 +105,14 @@
                 android:layout_weight="1"
                 android:background="@null"
                 android:inputType="number"
+                android:singleLine="true"
                 android:hint="验证码"
+                android:maxLength="6"
                 android:digits="1234567890"
                 android:paddingBottom="@dimen/len_4"
                 android:paddingTop="@dimen/len_4"
                 android:textColorHint="@color/textColorThird"
-                app:clearIconDrawable="@drawable/ic_agreement_normal"
+                app:clearIconDrawable="@drawable/ic_clear_text"
                 android:textSize="@dimen/textSizeBody" />
 
             <TextView
@@ -156,8 +159,9 @@
             android:maxLength="11"
             android:digits="1234567890"
             android:paddingTop="@dimen/len_4"
+            android:singleLine="true"
             android:layout_weight="1"
-            app:clearIconDrawable="@drawable/ic_agreement_normal"
+            app:clearIconDrawable="@drawable/ic_clear_text"
             android:textColor="@color/textColorFirst"
             android:textSize="@dimen/textSizeBody" />
 

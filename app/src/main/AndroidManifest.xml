@@ -31,8 +31,6 @@
     <uses-permission android:name="android.permission.BLUETOOTH"/>
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
 
-
-
     <!--LaunchActivity-->
     <application
         android:name=".App"
@@ -89,9 +87,9 @@
         <activity android:name=".activities.ExistActivity"
             android:screenOrientation="portrait"/>
 
-        <!--商家列表-->
+        <!--消费验证-->
         <activity
-            android:name=".activities.MerchantActivity"
+            android:name=".activities.ValidationActivity"
             android:screenOrientation="portrait" />
 
         <!--理发店详情显示界面-->
@@ -118,12 +116,25 @@
             android:name=".activities.CommentActivity"
             android:screenOrientation="portrait" />
 
+        <!--写入评价-->
+        <activity
+            android:name=".activities.CommentWriteActivity"
+            android:screenOrientation="portrait" />
+
         <!--我的优惠券-->
         <activity android:name=".activities.OpenMemberActivity"
             android:screenOrientation="portrait"/>
 
+        <!--设置支付密码-->
+        <activity android:name=".activities.mywallet.SettingPaymentCodeActivity"
+            android:screenOrientation="portrait"/>
+
         <!--我的钱包-->
-        <activity android:name=".activities.WalletActivity"
+        <activity android:name=".activities.mywallet.MyWalletActivity"
+            android:screenOrientation="portrait"/>
+
+        <!--提现-->
+        <activity android:name=".activities.mywallet.WithdrawDepositActivity"
             android:screenOrientation="portrait"/>
 
         <!--我的优惠券-->
@@ -142,9 +153,19 @@
         <!--用户系统消息显示界面-->
         <activity android:name=".activities.MessageActivity"/>
 
-        <!--我的团购界面-->
+        <!--订单详情-->
         <activity
             android:name=".activities.PurchaseActivity"
+            android:screenOrientation="portrait" />
+
+        <!--订单退款-->
+        <activity
+            android:name=".activities.OrderRefundActivity"
+            android:screenOrientation="portrait" />
+
+        <!--我的团购界面-->
+        <activity
+            android:name=".activities.OrderDetailActivity"
             android:screenOrientation="portrait" />
 
         <!--发型师预约界面-->
@@ -175,6 +196,57 @@
             android:name=".activities.PersonalActivity"
             android:screenOrientation="portrait" />
 
+        <!--提现支付输入支付密码-->
+        <activity
+            android:name=".activities.dialog.PwdPayDialogActivity"
+            android:theme="@style/AlertNoActionBar"
+            android:screenOrientation="portrait" />
+
+        <!--支付管理-->
+        <activity
+            android:name=".activities.mywallet.PwdSettingActivity"
+            android:screenOrientation="portrait" />
+
+        <!--修改支付密码-->
+        <activity
+            android:name=".activities.mywallet.UpdatePaymentCodeActivity"
+            android:screenOrientation="portrait" />
+
+        <!--忘记支付密码-->
+        <activity
+            android:name=".activities.mywallet.ResetPaymentCodeActivity"
+            android:screenOrientation="portrait" />
+
+        <!--提现成功-->
+        <activity
+            android:name=".activities.mywallet.SuccessWithdrawDepositActivity"
+            android:screenOrientation="portrait" />
+
+        <!--推广规则-->
+        <activity
+            android:name=".activities.mywallet.GeneralizeActivity"
+            android:screenOrientation="portrait" />
+
+        <!--推荐名片-->
+        <activity
+            android:name=".activities.mywallet.CallingCardActivity"
+            android:screenOrientation="portrait" />
+
+        <!--推广统计-->
+        <activity
+            android:name=".activities.mywallet.GeneralizeRecordActivity"
+            android:screenOrientation="portrait" />
+        <!--提现记录-->
+        <activity
+            android:name=".activities.mywallet.WithdrawalRecordActivity"
+            android:screenOrientation="portrait" />
+
+        <!--佣金明细-->
+        <activity
+            android:name=".activities.mywallet.BrokerageRecordActivity"
+            android:screenOrientation="portrait" />
+
+
         <!--我的代金券显示界面-->
         <activity
             android:name=".activities.VoucherActivity"
@@ -193,8 +265,8 @@
         <activity android:name=".activities.BuyActivity"
             android:screenOrientation="portrait"/>
 
-        <!--使用抵用券的显示界面-->
-        <activity android:name=".activities.ConsumptionActivity"
+        <!--使用优惠券的显示界面-->
+        <activity android:name=".activities.CouponsOrderActivity"
             android:screenOrientation="portrait"/>
 
         <!--支付订单显示界面-->

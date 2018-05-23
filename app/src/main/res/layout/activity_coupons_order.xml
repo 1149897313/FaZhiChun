@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--标题栏-->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/ToolbarStyle">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/title_coupons_order"
+            android:textColor="@color/textColorFirst"
+            android:textSize="@dimen/textSizeSubhead" />
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nested_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/len_10" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="@drawable/selector_bg_white_title_text"
+                android:layout_margin="@dimen/len_8"
+                android:orientation="horizontal"
+                android:layout_height="match_parent">
+                <CheckBox
+                    android:id="@+id/not_to_use_select"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:button="@null"
+                    android:drawableRight="@drawable/rb_nobtn_selector"
+                    android:paddingLeft="@dimen/len_10"
+                    android:paddingTop="@dimen/len_10"
+                    android:paddingBottom="@dimen/len_10"
+                    android:paddingRight="@dimen/len_20"
+                    android:textColor="@color/textColorFirst"
+                    android:text="暂不使用优惠券"
+                    android:textSize="@dimen/font_14" />
+            </LinearLayout>
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/len_8"
+                android:nestedScrollingEnabled="false" />
+
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/len_40" />
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>

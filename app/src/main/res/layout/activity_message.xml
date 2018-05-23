@@ -16,12 +16,10 @@
             android:text="@string/title_message_name"
             android:textColor="@color/textColorFirst"
             android:textSize="@dimen/textSizeSubhead" />
-
     </android.support.v7.widget.Toolbar>
 
-
-    <android.support.v4.widget.NestedScrollView
-        android:id="@+id/nested_scroll_view"
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -37,15 +35,7 @@
                 android:layout_height="wrap_content"
                 android:nestedScrollingEnabled="false" />
 
-
-            <android.support.v4.widget.Space
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/len_40" />
-
-
         </LinearLayout>
-
-
-    </android.support.v4.widget.NestedScrollView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 </LinearLayout>

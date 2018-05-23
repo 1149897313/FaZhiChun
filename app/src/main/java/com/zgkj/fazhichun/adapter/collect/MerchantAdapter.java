@@ -88,7 +88,7 @@ public class MerchantAdapter extends RecyclerViewAdapter<Collection> {
         }
 
         @Override
-        protected void onBind(Collection data) {
+        protected void onBind(Collection data,int position) {
             // 如果为true则显示用于选择Item删除条目的View，否则则隐藏
             if (mEditMode != MODE_UNCHECK) {
                 mSelectView.setVisibility(View.VISIBLE);

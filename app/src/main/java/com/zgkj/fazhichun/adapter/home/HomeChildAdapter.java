@@ -62,7 +62,7 @@ public class HomeChildAdapter extends RecyclerViewAdapter<Hairdresser> {
 
         @SuppressLint("StringFormatMatches")
         @Override
-        protected void onBind(Hairdresser data) {
+        protected void onBind(Hairdresser data,int position) {
             mPriceView.setText(mContext.getResources().getString(R.string.label_price, data.getFavorable_Price()));
             mOriginalPriceView.setText(mContext.getResources().getString(R.string.label_price, data.getSale_price()));
             mTypeNameView.setText(data.getHairdresser_name());

@@ -22,8 +22,9 @@ public class Shop {
     private int shop_status;//商家状态(0未启用，1启用，2停用)
     private String aproval_memo;//审核状况
     private String opening_hour;//营业时间
-    private float shop_lng;//经度
-    private float shop_lat;//纬度
+    private int distance;//距离
+    private double shop_lng;//经度
+    private double shop_lat;//纬度
     private String address;//店铺详细地址
     private String shop_image;//商家形象图
     private String shop_photo;//店铺头像
@@ -118,19 +119,19 @@ public class Shop {
         this.opening_hour = opening_hour;
     }
 
-    public float getShop_lng() {
+    public double getShop_lng() {
         return shop_lng;
     }
 
-    public void setShop_lng(float shop_lng) {
+    public void setShop_lng(double shop_lng) {
         this.shop_lng = shop_lng;
     }
 
-    public float getShop_lat() {
+    public double getShop_lat() {
         return shop_lat;
     }
 
-    public void setShop_lat(float shop_lat) {
+    public void setShop_lat(double shop_lat) {
         this.shop_lat = shop_lat;
     }
 
@@ -166,6 +167,14 @@ public class Shop {
         this.shop_detail = shop_detail;
     }
 
+    public int getDistance() {
+        return distance;
+    }
+
+    public void setDistance(int distance) {
+        this.distance = distance;
+    }
+
     @Override
     public String toString() {
         return "Shop{" +
@@ -179,6 +188,7 @@ public class Shop {
                 ", shop_status=" + shop_status +
                 ", aproval_memo='" + aproval_memo + '\'' +
                 ", opening_hour='" + opening_hour + '\'' +
+                ", distance=" + distance +
                 ", shop_lng=" + shop_lng +
                 ", shop_lat=" + shop_lat +
                 ", address='" + address + '\'' +

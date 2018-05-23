@@ -61,7 +61,7 @@ public class ShopCommodityAdapter extends RecyclerViewAdapter<Hairdresser> {
         }
 
         @Override
-        protected void onBind(Hairdresser data) {
+        protected void onBind(Hairdresser data,int position) {
 
             Picasso.get().load(data.getPic_url()).placeholder(R.drawable.none_img)
                     .into(mTypeImage);

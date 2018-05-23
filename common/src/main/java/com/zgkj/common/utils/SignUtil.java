@@ -113,8 +113,8 @@ public class SignUtil {
             sbkey=sbkey.deleteCharAt(sbkey.length() - 1).append(key);
         }
         //MD5加密,结果转换为小写字符
-        String sign = MD5Util.encode(String.valueOf(sbkey).toLowerCase());
-        Log.e("sign", "createSign: 参数："+sbkey+"sign"+sign);
+        String sign = MD5Util.encode(String.valueOf(sbkey));
+        Log.e("sign", "createSign: 参数："+sbkey+"：sign："+sign);
         return sign;
     }
 }

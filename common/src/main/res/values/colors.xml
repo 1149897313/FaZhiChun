@@ -48,6 +48,7 @@
     <color name="buttonWeixinLoginPressedColor">#F5F5F5</color>
     <color name="buttonLogoutNormalColor">#FF2B2B</color>
     <color name="buttonLogoutPressedColor">#E80F0F</color>
+    <color name="button_wallet">#f77a23</color>
 
 
     <color name="labelBackgroundColor">#FFF6E9</color>

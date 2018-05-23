@@ -2,6 +2,7 @@ package com.zgkj.fazhichun.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 
 import com.zgkj.common.app.Activity;
 import com.zgkj.common.app.Fragment;
@@ -25,6 +26,7 @@ public class AccountActivity extends Activity implements AccountTrigger {
     private Fragment mCurrentFragment;
     private Fragment mLoginFragment;
     private Fragment mRegisterFragment;
+    private boolean binding;
 
 
     /**
@@ -32,10 +34,17 @@ public class AccountActivity extends Activity implements AccountTrigger {
      *
      * @param context
      */
-    public static void show(Context context) {
-        context.startActivity(new Intent(context, AccountActivity.class));
+    public static void show(Context context,boolean binding) {
+        Intent intent=new Intent(context, AccountActivity.class);
+        intent.putExtra("STATUS",binding);
+        context.startActivity(intent);
     }
 
+    @Override
+    protected boolean initArgs(Bundle bundle) {
+        binding=bundle.getBoolean("STATUS");
+        return super.initArgs(bundle);
+    }
 
     @Override
     protected int getLayoutSourceId() {
@@ -47,14 +56,14 @@ public class AccountActivity extends Activity implements AccountTrigger {
     protected void initDatas() {
         super.initDatas();
 
-        mCurrentFragment = mLoginFragment = LoginFragment.newInstance(this);
+        mCurrentFragment = mLoginFragment = LoginFragment.newInstance(this,binding);
 
         getSupportFragmentManager().beginTransaction()
 //                .setCustomAnimations(R.anim.anim_right_in, R.anim.anim_right_out)
                 .replace(R.id.container_layout, mCurrentFragment)
                 .commit();
 
-    }
+}
 
     @Override
     public void onTriggerView() {

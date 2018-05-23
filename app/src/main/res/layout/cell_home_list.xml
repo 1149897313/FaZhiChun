@@ -23,6 +23,7 @@
             android:layout_height="@dimen/len_70"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
+            android:scaleType="fitXY"
             android:layout_centerVertical="true"
             android:src="@drawable/ic_barbershop_bg"/>
 

@@ -1,1 +1,1 @@
-include ':app', ':common', ':language', ':factory', ':lib'
+include ':app', ':common', ':language', ':factory', ':lib', ':lib-zxing'

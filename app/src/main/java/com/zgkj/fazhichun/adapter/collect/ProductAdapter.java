@@ -65,7 +65,7 @@ public class ProductAdapter extends RecyclerViewAdapter<Collection> {
         private ImageView mSelectView;
         private ImageView mShopImageView;
         private TextView mShopNameView;
-        private TextView mTypeNameView;
+        private TextView mTypeNameView,goods_name;
         private TextView mPriceView;
         private TextView mOriginalPriceView;
         private TextView mDistanceView;
@@ -81,6 +81,7 @@ public class ProductAdapter extends RecyclerViewAdapter<Collection> {
             mSelectView = itemView.findViewById(R.id.select);
             mShopImageView = itemView.findViewById(R.id.shop_image);
             mShopNameView = itemView.findViewById(R.id.shop_name);
+            goods_name=itemView.findViewById(R.id.goods_name);
             mTypeNameView = itemView.findViewById(R.id.type_name);
             mPriceView = itemView.findViewById(R.id.price);
             mOriginalPriceView = itemView.findViewById(R.id.original_price);
@@ -89,7 +90,7 @@ public class ProductAdapter extends RecyclerViewAdapter<Collection> {
 
 
         @Override
-        protected void onBind(Collection data) {
+        protected void onBind(Collection data,int position) {
 
             if (mEditMode != MODE_UNCHECK) {
                 // 显示是否选中的View
@@ -106,8 +107,9 @@ public class ProductAdapter extends RecyclerViewAdapter<Collection> {
                 mSelectView.setVisibility(View.GONE);
             }
 
-            mTypeNameView.setText(data.getHairdresser_name());
-            mTypeNameView.setText(data.getCategory_name());
+            mShopNameView.setText(data.getShop_name());
+            mTypeNameView.setText("["+data.getCategory_name()+"]");
+            goods_name.setText(data.getHairdresser_name());
             mPriceView.setText("￥"+data.getFavorable_Price());
             mOriginalPriceView.setText("门市价："+data.getSale_price());
 

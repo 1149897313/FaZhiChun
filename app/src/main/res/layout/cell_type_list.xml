@@ -15,7 +15,7 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:src="@drawable/ic_shop_bg"
-        android:scaleType="centerCrop"/>
+        android:scaleType="fitXY"/>
 
     <TextView
         android:id="@+id/shop_name"
@@ -74,20 +74,36 @@
         android:singleLine="true"
         android:ellipsize="end"/>
 
-
-    <TextView
-        android:id="@+id/original_price"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:background="@drawable/shape_bg_introduce_label"
         android:layout_toRightOf="@id/price"
         android:layout_marginLeft="@dimen/len_8"
-        android:layout_alignBottom="@id/price"
-        android:text="@string/label_original_price"
-        android:textSize="@dimen/textSizeCaption"
-        android:textColor="@color/textColorSecond"
-        android:gravity="left|center_vertical"
-        android:singleLine="true"
-        android:ellipsize="end"/>
+        android:layout_alignBottom="@id/shop_image"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="@dimen/len_30"
+            android:layout_height="wrap_content"
+            android:text="VIP"
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/len_0.5"
+            android:textSize="@dimen/font_10"
+            android:textColor="@color/textColorPrimary"
+            android:background="@color/colorAccent"/>
+        <TextView
+            android:id="@+id/original_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_price"
+            android:textColor="@color/colorAccent"
+            android:paddingLeft="@dimen/len_4"
+            android:paddingRight="@dimen/len_6"
+            android:textSize="@dimen/font_10"
+            android:gravity="center"
+            android:singleLine="true"
+            android:ellipsize="end"/>
+    </LinearLayout>
 
 
     <TextView

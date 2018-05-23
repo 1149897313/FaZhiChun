@@ -3,20 +3,21 @@
     android:orientation="horizontal"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/len_10"
     android:gravity="center">
 
-    <ImageView
-        android:id="@+id/service_image"
-        android:layout_width="@dimen/len_16"
-        android:layout_height="@dimen/len_16"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_wifi"/>
+    <com.zgkj.common.widgets.CircleImageView
+        android:id="@+id/service_climage"
+        android:layout_height="@dimen/len_14"
+        android:layout_width="@dimen/len_14"
+        android:src="@drawable/ic_wifi"
+        android:scaleType="centerCrop"/>
 
     <TextView
         android:id="@+id/service_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/len_10"
+        android:layout_marginLeft="@dimen/len_8"
         android:text="WIFI"
         android:textColor="@color/textColorFirst"
         android:textSize="@dimen/textSizeCaption"

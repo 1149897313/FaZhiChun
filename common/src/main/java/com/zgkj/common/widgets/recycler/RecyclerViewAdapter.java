@@ -130,7 +130,7 @@ public abstract class RecyclerViewAdapter<T> extends RecyclerView.Adapter<Recycl
         // 得到需要绑定的数据
         T data = mDataList.get(position);
         // 触发ViewHolder对象绑定数据的方法，进行数据绑定
-        holder.bind(data);
+        holder.bind(data,position);
     }
 
     /**
@@ -381,11 +381,11 @@ public abstract class RecyclerViewAdapter<T> extends RecyclerView.Adapter<Recycl
          *
          * @param data 被绑定的数据对象
          */
-        void bind(T data) {
+        void bind(T data,int position) {
             mData = data;
 
             // 调用触发绑定事件的方法
-            onBind(data);
+            onBind(data,position);
 
         }
 
@@ -395,9 +395,7 @@ public abstract class RecyclerViewAdapter<T> extends RecyclerView.Adapter<Recycl
          *
          * @param data 被绑定的数据对象
          */
-        protected abstract void onBind(T data);
-
-
+        protected abstract void onBind(T data,int position);
         /**
          * 更新数据（ViewHolder自己对自己的数据进行更新操作）
          *

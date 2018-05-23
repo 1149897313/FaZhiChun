@@ -28,16 +28,16 @@ import com.zgkj.common.widgets.load.view.AbsView;
 import com.zgkj.factory.model.api.RspModel;
 import com.zgkj.fazhichun.App;
 import com.zgkj.fazhichun.R;
-import com.zgkj.fazhichun.entity.order.Oder;
+import com.zgkj.fazhichun.entity.order.Order;
 import com.zgkj.fazhichun.entity.order.ReadyOrder;
-import com.zgkj.fazhichun.entity.shop.Hairdresser;
 import com.zgkj.fazhichun.view.EmptyView;
+import com.zgkj.fazhichun.view.LoadingView;
 import com.zgkj.fazhichun.view.NetErrorView;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
-import java.util.List;
+import java.text.DecimalFormat;
 
 /**
  * Author:  bozaixing.
@@ -55,6 +55,8 @@ public class BuyActivity extends ToolbarActivity implements View.OnClickListener
     private TextView mShopNameView;     // 理发店名
     private TextView mPriceView;        // 单价
     private TextView mSubtotalView;     // 小计
+    private TextView cut_down;
+    private RelativeLayout vip_show;//会员折扣
     private TextView coupon_number;//可用优惠券
     private TextView mTotalView;        // 总计
     private QuantityView mQuantityView; // 数量
@@ -65,6 +67,7 @@ public class BuyActivity extends ToolbarActivity implements View.OnClickListener
     private ImageView mDeductionMoneyImageView;
     private TextView open_vip;
     private RelativeLayout user_type;//普通用户
+    private TextView reduce_money;//
     private TextView total_money;
     private TextView mSubmitView; // 提交订单
     private String hId;
@@ -90,7 +93,7 @@ public class BuyActivity extends ToolbarActivity implements View.OnClickListener
     @Override
     protected boolean initArgs(Bundle bundle) {
         hId = bundle.getString("ID");
-        return "".equals(hId) || hId == null ? false : true;
+        return !TextUtils.isEmpty(hId);
     }
 
     @Override
@@ -98,13 +101,10 @@ public class BuyActivity extends ToolbarActivity implements View.OnClickListener
         return R.layout.activity_buy;
     }
 
-
-    private BigDecimal bigDecimal;
-
     //控件赋值
     private void showView(ReadyOrder readyOrder) {
         mShopNameView.setText(readyOrder.getHairdresser_name());
-        mPriceView.setText("￥"+String.valueOf(readyOrder.getFavorable_Price()));
+        mPriceView.setText("￥" + String.valueOf(readyOrder.getFavorable_Price()));
         bigDecimal = readyOrder.getFavorable_Price();
         if (TextUtils.isEmpty(readyOrder.getUser_coupon_count()) || "0".equals(readyOrder.getUser_coupon_count())) {
             coupon_number.setText("暂无可用");
@@ -112,27 +112,51 @@ public class BuyActivity extends ToolbarActivity implements View.OnClickListener
         } else {
             coupon_number.setText(readyOrder.getUser_coupon_count() + "个优惠券可用");
             coupon_number.setTextColor(getResources().getColor(R.color.textColorAccent));
+            coupon_number.setOnClickListener(this);
         }
         if ("2".equals(readyOrder.getMember_level())) {
+            vip_show.setVisibility(View.VISIBLE);
             user_type.setVisibility(View.GONE);
         } else {
+            vip_show.setVisibility(View.GONE);
             user_type.setVisibility(View.VISIBLE);
+            reduce_money.setText(String.format(getResources().getString(R.string.label_buy_general_vip_reduce_money),"20"));
         }
+        userCommission = readyOrder.getUser_commission();
         onCompute(1);
     }
 
-    //商品价格
-    BigDecimal money;
+    private BigDecimal bigDecimal;//单价
+    private BigDecimal userCommission;//折扣
+    private String copuonPrice = "0";//优惠券金额
+    private String copuonId;//优惠券ID
+    private BigDecimal money;//订单总价-未减去优惠券
+    private BigDecimal toTalmoney;//订单总价
+
+
+    DecimalFormat df= new DecimalFormat("0.00");
     /**
      * 费用计算
      *
      * @param quantity 数量
      */
     private void onCompute(int quantity) {
-       money = bigDecimal.multiply(new BigDecimal(String.valueOf(quantity)));//原价
-        mSubtotalView.setText("￥" + money);
-        general_total_money.setText("￥" + money);
-        total_money.setText("￥" + money);
+        money = bigDecimal.multiply(new BigDecimal(String.valueOf(quantity)));//原价
+        mSubtotalView.setText("￥" + money);//小计
+        //会员折扣
+        BigDecimal decimal=new BigDecimal("1").subtract(userCommission);
+        cut_down.setText("-￥" +df.format(money.multiply(decimal)));
+        money = money.multiply(userCommission);// 总价X折扣
+        toTalMoney();
+    }
+
+    /**
+     * 订单总价显示
+     */
+    private void toTalMoney() {
+        toTalmoney = money.subtract(new BigDecimal(copuonPrice));//减去优惠券
+        general_total_money.setText("￥" + df.format(toTalmoney));//订单总价
+        total_money.setText("￥" + df.format(toTalmoney));//订单总价
     }
 
     @Override
@@ -144,9 +168,12 @@ public class BuyActivity extends ToolbarActivity implements View.OnClickListener
         mPriceView = findViewById(R.id.price);
         mSubtotalView = findViewById(R.id.subtotal);
         mQuantityView = findViewById(R.id.quantity_view);
+        cut_down = findViewById(R.id.cut_down);
         coupon_number = findViewById(R.id.coupon_number);
+        vip_show = findViewById(R.id.vip_show);
         user_type = findViewById(R.id.user_type);
-        open_vip=findViewById(R.id.open_vip);
+        reduce_money=findViewById(R.id.reduce_money);
+        open_vip = findViewById(R.id.open_vip);
         general_total_money = findViewById(R.id.general_total_money);
         total_money = findViewById(R.id.total_money);
         mSubmitView = findViewById(R.id.submit);
@@ -162,7 +189,7 @@ public class BuyActivity extends ToolbarActivity implements View.OnClickListener
         mLoadManager = LoadFactory.getInstance().register(mContentLayout, new AbsView.OnReloadListener() {
             @Override
             public void onReload(View view) {
-
+                mLoadManager.showStateView(LoadingView.class);
             }
         });
     }
@@ -171,8 +198,7 @@ public class BuyActivity extends ToolbarActivity implements View.OnClickListener
     @Override
     protected void initDatas() {
         super.initDatas();
-        mQuantityView.setInventory(12);
-
+        mQuantityView.setInventory(9999);
         getReadyOrder(hId);
     }
 
@@ -196,11 +222,15 @@ public class BuyActivity extends ToolbarActivity implements View.OnClickListener
 
             @Override
             public void onSuccess(AsyncHttpResponse response) {
-                Log.i(TAG, "onSuccess:getReadyOrder" + response.toString());
+                Log.i(TAG, "onSuccess:提交订单" + response.toString());
                 Type type = new TypeToken<RspModel<ReadyOrder>>() {
                 }.getType();
-                ReadyOrder readyOrder=getAnalysis(response,type,"getReadyOrder");
-                showView(readyOrder);
+                ReadyOrder readyOrder = getAnalysis(response, type, "提交订单");
+                if (readyOrder != null) {
+                    showView(readyOrder);
+                } else {
+                    mLoadManager.showStateView(EmptyView.class);
+                }
             }
         });
     }
@@ -208,12 +238,13 @@ public class BuyActivity extends ToolbarActivity implements View.OnClickListener
 
     /**
      * 获取订单
+     *
      * @param hId
      * @param pay_money
      * @param number
      * @param copuonId
      */
-    private void geOrder(String hId,String pay_money,String number,String copuonId) {
+    private void geOrder(String hId,final String pay_money, String number,String copuonId) {
 
         AsyncOkHttpClient okHttpClient = new AsyncOkHttpClient();
         AsyncHttpPostFormData AsyncHttpPostFormData = new AsyncHttpPostFormData();
@@ -221,18 +252,26 @@ public class BuyActivity extends ToolbarActivity implements View.OnClickListener
         AsyncHttpPostFormData.addFormData("pay_money", pay_money);//pay_money	int	是		商品的唯一标识	商品
         AsyncHttpPostFormData.addFormData("number", number);//number	int	是		数量	商品数量
         AsyncHttpPostFormData.addFormData("coupon_list_id", copuonId);//coupon_list_id	int	否		无	用户代金券id
+        AsyncHttpPostFormData.addFormData("pay_type","2");//pay_type	int	是		1代金券--2微信(可加优惠券)
         okHttpClient.post("/v1/checkout/sure-pay", AsyncHttpPostFormData, new AsyncResponseHandler() {
             @Override
             public void onFailure(IOException e) {
                 mLoadManager.showStateView(NetErrorView.class);
                 e.printStackTrace();
             }
+
             @Override
             public void onSuccess(AsyncHttpResponse response) {
                 Log.i(TAG, "onSuccess:geOrder" + response.toString());
-                Type type = new TypeToken<RspModel<Oder>>() {
+                Type type = new TypeToken<RspModel<Order>>() {
                 }.getType();
-                Oder oder=getAnalysis(response,type,"geOrder");
+                Order order = getAnalysis(response, type, "geOrder");
+                if (order != null) {
+                    // 跳转到支付订单界面
+                    PaymentActivity.show(mContext, order.getOrder_id(),pay_money);
+                } else {
+                    mLoadManager.showStateView(EmptyView.class);
+                }
             }
         });
     }
@@ -242,28 +281,32 @@ public class BuyActivity extends ToolbarActivity implements View.OnClickListener
      *
      * @param response
      */
-    private <T> T getAnalysis(AsyncHttpResponse response,Type type,String log) {
+    private <T> T getAnalysis(AsyncHttpResponse response, Type type, String log) {
         switch (response.getCode()) {
             case 200:
                 try {
                     Gson gson = new Gson();
                     RspModel<T> rspModel = gson.fromJson(response.getBody(), type);
-                    Log.i(TAG, "onSuccess: "+log + rspModel.toString());
+                    Log.i(TAG, "onSuccess: " + log + rspModel.toString());
                     switch (rspModel.getCode()) {
                         case 1:
                             mLoadManager.showStateView(EmptyView.class);
                             break;
                         case 200:
                             mLoadManager.showSuccessView();
-                            Log.i(TAG, log+": " + rspModel.getData());
+                            Log.i(TAG, log + ": " + rspModel.getData());
                             return rspModel.getData();
                         default:
-                            App.showMessage("data:code"+rspModel.getCode());
+                            App.showMessage("data:code" + rspModel.getCode());
+                            mLoadManager.showStateView(EmptyView.class);
                             break;
                     }
                 } catch (JsonSyntaxException e) {
                     e.printStackTrace();
                 }
+                break;
+            default:
+                mLoadManager.showStateView(EmptyView.class);
                 break;
         }
         return null;
@@ -281,20 +324,32 @@ public class BuyActivity extends ToolbarActivity implements View.OnClickListener
 //                // 跳转到购买代金券界面
 //                RechargeActivity.show(mContext);
 //                break;
-            case R.id.open_vip:
+            case R.id.open_vip://开通VIP
                 OpenMemberActivity.show(mContext);
                 break;
-            case R.id.submit:       // 提交订单
-                // 跳转到支付订单界面
-//                PaymentActivity.show(mContext);
-                geOrder(hId,money.toString(),String.valueOf(mQuantityView.getValue()),"");
+            case R.id.coupon_number://使用优惠券
+                Intent intent = new Intent(mContext, CouponsOrderActivity.class);
+                intent.putExtra("ID", hId);
+                startActivityForResult(intent, 1000);
+                break;
+            case R.id.submit:// 提交订单
+                geOrder(hId, money.toString(), String.valueOf(mQuantityView.getValue()), "");
                 break;
             default:
                 break;
         }
     }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1000 && resultCode == 1001 && data != null) {
+            copuonId = data.getStringExtra("copuonId");
+            copuonPrice = data.getStringExtra("copuonPrice");
+            coupon_number.setText("使用优惠券立减" + copuonPrice + "元");
+            toTalMoney();
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 
     @Override
     public void onQuantityChanged(int quantity) {

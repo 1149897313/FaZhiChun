@@ -18,8 +18,8 @@
         android:id="@+id/title_layout"
         android:layout_width="0dp"
         android:layout_height="@dimen/actionBarWithStatusBarSize"
-        android:paddingTop="@dimen/statusBarSize"
         android:background="@color/colorPrimary"
+        android:paddingTop="@dimen/statusBarSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -30,11 +30,12 @@
             android:layout_height="@dimen/len_40"
             android:layout_gravity="left|center_vertical"
             android:layout_margin="@dimen/len_4"
+            android:background="@drawable/selector_bg_toolbar_circle_btn"
             android:scaleType="centerInside"
-            android:src="@drawable/ic_back"
-            android:background="@drawable/selector_bg_toolbar_circle_btn"/>
+            android:src="@drawable/ic_back" />
 
         <TextView
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -49,11 +50,11 @@
             android:layout_height="@dimen/len_40"
             android:layout_gravity="right|center_vertical"
             android:layout_margin="@dimen/len_4"
+            android:background="@drawable/selector_bg_toolbar_circle_btn"
             android:gravity="center"
             android:text="注册"
             android:textColor="@color/textColorThird"
-            android:textSize="@dimen/textSizeBody"
-            android:background="@drawable/selector_bg_toolbar_circle_btn"/>
+            android:textSize="@dimen/textSizeBody" />
 
     </FrameLayout>
 
@@ -64,10 +65,10 @@
         android:layout_marginLeft="32dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="40dp"
+        android:gravity="center"
         android:text="免密登录"
         android:textColor="@color/textColorFirst"
         android:textSize="@dimen/textSizeMiddle"
-        android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_layout" />
 
@@ -90,15 +91,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
+            android:digits="1234567890"
             android:hint="手机号"
             android:inputType="number"
+            android:maxLines="11"
             android:paddingBottom="@dimen/len_4"
-            android:text="13629778081"
-            app:clearIconDrawable="@drawable/ic_agreement_normal"
-            android:digits="1234567890"
             android:paddingTop="@dimen/len_4"
+            android:singleLine="true"
+            android:text="13629778081"
             android:textColor="@color/textColorFirst"
-            android:textSize="@dimen/textSizeBody" />
+            android:textSize="@dimen/textSizeBody"
+            app:clearIconDrawable="@drawable/ic_clear_text" />
 
         <View
             android:layout_width="match_parent"
@@ -136,14 +139,16 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@null"
-                android:hint="验证码"
                 android:digits="1234567890"
+                android:hint="验证码"
                 android:inputType="number"
+                android:maxLength="6"
                 android:paddingBottom="@dimen/len_4"
-                app:clearIconDrawable="@drawable/ic_agreement_normal"
                 android:paddingTop="@dimen/len_4"
+                android:singleLine="true"
                 android:textColorHint="@color/textColorThird"
-                android:textSize="@dimen/textSizeBody" />
+                android:textSize="@dimen/textSizeBody"
+                app:clearIconDrawable="@drawable/ic_clear_text" />
 
             <TextView
                 android:id="@+id/get_code"
@@ -215,8 +220,8 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_agreement_pressed"
-            android:scaleType="centerInside"/>
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_agreement_pressed" />
 
         <TextView
             android:layout_width="wrap_content"

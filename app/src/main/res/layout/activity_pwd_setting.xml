@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <!--标题栏-->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/ToolbarStyle">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="支付密码管理"
+            android:textColor="@color/textColorFirst"
+            android:textSize="@dimen/textSizeSubhead" />
+
+    </android.support.v7.widget.Toolbar>
+
+
+
+    <!--修改支付密码-->
+    <RelativeLayout
+        android:id="@+id/update_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/len_50"
+        android:layout_marginTop="@dimen/len_10"
+        android:onClick="onAction"
+        android:background="@drawable/selector_bg_white_item"
+        android:paddingLeft="@dimen/len_16"
+        android:paddingRight="@dimen/len_16">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/len_12"
+            android:layout_toRightOf="@id/collect_icon"
+            android:gravity="left|center_vertical"
+            android:text="修改支付密码"
+            android:textColor="@color/textColorFirst"
+            android:textSize="@dimen/textSizeBody" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_mine_expand" />
+    </RelativeLayout>
+
+    <!--分割线-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/len_0.5"
+        android:layout_marginLeft="@dimen/len_16"
+        android:layout_marginRight="@dimen/len_16"
+        android:background="@color/dividerLineColor" />
+
+    <!--忘记支付密码-->
+    <RelativeLayout
+        android:id="@+id/reset_layout"
+        android:layout_width="match_parent"
+        android:onClick="onAction"
+        android:layout_height="@dimen/len_50"
+        android:background="@drawable/selector_bg_white_item"
+        android:paddingLeft="@dimen/len_16"
+        android:paddingRight="@dimen/len_16">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/len_12"
+            android:layout_toRightOf="@id/collect_icon"
+            android:gravity="left|center_vertical"
+            android:text="忘记支付密码"
+            android:textColor="@color/textColorFirst"
+            android:textSize="@dimen/textSizeBody" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_mine_expand" />
+    </RelativeLayout>
+
+    <!--分割线-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/len_0.5"
+        android:layout_marginLeft="@dimen/len_16"
+        android:layout_marginRight="@dimen/len_16"
+        android:background="@color/dividerLineColor" />
+
+</LinearLayout>

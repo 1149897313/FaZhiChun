@@ -22,11 +22,13 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
+import com.zgkj.common.Common;
 import com.zgkj.common.app.ToolbarActivity;
 import com.zgkj.common.http.AsyncHttpPostFormData;
 import com.zgkj.common.http.AsyncHttpResponse;
 import com.zgkj.common.http.AsyncOkHttpClient;
 import com.zgkj.common.http.AsyncResponseHandler;
+import com.zgkj.common.utils.SPUtil;
 import com.zgkj.common.utils.ToastUtil;
 import com.zgkj.common.widgets.LabelsView;
 import com.zgkj.common.widgets.StarBarView;
@@ -35,13 +37,15 @@ import com.zgkj.common.widgets.load.core.LoadManager;
 import com.zgkj.common.widgets.load.view.AbsView;
 import com.zgkj.common.widgets.recycler.decoration.SpaceItemDecoration;
 import com.zgkj.factory.model.api.RspModel;
+import com.zgkj.fazhichun.App;
 import com.zgkj.fazhichun.R;
-import com.zgkj.fazhichun.adapter.commodity.CommodityServiceAdapter;
+import com.zgkj.fazhichun.adapter.barbershop.ShopServiceAdapter;
 import com.zgkj.fazhichun.adapter.commodity.CommoditySpecificationAdapter;
 import com.zgkj.fazhichun.entity.collection.CollectionBack;
 import com.zgkj.fazhichun.entity.shop.HairdresserInfo;
 import com.zgkj.fazhichun.entity.tag.Lable;
 import com.zgkj.fazhichun.fragments.dialog.phone.CallPhoneDialogFragment;
+import com.zgkj.fazhichun.view.EmptyView;
 import com.zgkj.fazhichun.view.LoadingView;
 
 import java.io.IOException;
@@ -92,7 +96,7 @@ public class CommodityActivity extends ToolbarActivity implements View.OnClickLi
     private LoadManager mLoadManager;
 
     // 商家服务的适配器对象
-    private CommodityServiceAdapter mCommodityServiceAdapter;
+    private ShopServiceAdapter mShopServiceAdapter;
 
 
     // 服务说明适配器对象
@@ -149,14 +153,12 @@ public class CommodityActivity extends ToolbarActivity implements View.OnClickLi
         mLabelsView.setLabels(list);
         mAddressView.setText(info.getHairdresser().getAddress());
         phone = String.valueOf(info.getHairdresser().getShop_telphone());
-        float distance = AMapUtils.calculateLineDistance(new LatLng(info.getHairdresser().getShop_lat(), info.getHairdresser().getShop_lng()), new LatLng(info.getHairdresser().getShop_lat(), info.getHairdresser().getShop_lng()));
-        mDistanceView.setText(String.valueOf("距您"+distance+"米"));//---距离
-
+        float distance = AMapUtils.calculateLineDistance(new LatLng(info.getHairdresser().getShop_lat(), info.getHairdresser().getShop_lng()), SPUtil.getLatLng());
+        mDistanceView.setText("距您约" + Math.round(distance) + "米");//距离
         mServiceRecyclerView.setLayoutManager(new GridLayoutManager(mContext, 4));
-        mServiceRecyclerView.addItemDecoration(new SpaceItemDecoration(mContext, 6));
 
-        mCommodityServiceAdapter = new CommodityServiceAdapter();
-        mServiceRecyclerView.setAdapter(mCommodityServiceAdapter);
+        mShopServiceAdapter = new ShopServiceAdapter();
+        mServiceRecyclerView.setAdapter(mShopServiceAdapter);
 
 
         mSpecificationRecyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
@@ -165,7 +167,7 @@ public class CommodityActivity extends ToolbarActivity implements View.OnClickLi
         mSpecificationRecyclerView.setAdapter(mCommoditySpecificationAdapter);
 
 
-        mCommodityServiceAdapter.replace(info.getShop_service());
+        mShopServiceAdapter.replace(info.getShop_service());
         buy_know.setText(info.getHairdresser().getBuy_know());
     }
 
@@ -202,12 +204,47 @@ public class CommodityActivity extends ToolbarActivity implements View.OnClickLi
 
         // 为立即抢购按钮注册点击事件
         mBuyView.setOnClickListener(this);
-
+        onGetCollection(hId);
         onGetInfo(hId);
+    }
+
+    private void onGetCollection(String id) {
+        AsyncOkHttpClient okHttpClient = new AsyncOkHttpClient();
+        AsyncHttpPostFormData AsyncHttpPostFormData = new AsyncHttpPostFormData();
+        AsyncHttpPostFormData.addFormData("id", id);
+        AsyncHttpPostFormData.addFormData("type", "hairdresser");
+        okHttpClient.post("/v1/collection/user-collection", AsyncHttpPostFormData, new AsyncResponseHandler() {
+            @Override
+            public void onFailure(IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onSuccess(AsyncHttpResponse response) {
+                Log.i(TAG, "onSuccess:onGetCollection " + response.toString());
+                if (response.getCode() == 200) {
+                    try {
+                        Gson gson = new Gson();
+                        Type type = new TypeToken<RspModel<String>>() {
+                        }.getType();
+                        RspModel<String> rspModel = gson.fromJson(response.getBody(), type);
+                        Log.i(TAG, "onGetCollection: " + rspModel.toString());
+                        if ("1".equals(rspModel.getData())) {//1或0---1为收藏和0为没收藏
+                            menuItem.setIcon(R.drawable.ic_menu_collect_pressed);
+                        } else {
+                            menuItem.setIcon(R.drawable.ic_menu_collect_normal);
+                        }
+                    } catch (JsonSyntaxException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
     }
 
     /**
      * 添加收藏
+     *
      * @param id
      */
     private void onAddCollection(String id) {
@@ -265,23 +302,55 @@ public class CommodityActivity extends ToolbarActivity implements View.OnClickLi
 
             @Override
             public void onSuccess(AsyncHttpResponse response) {
-                Log.i(TAG, "onSuccess:onGetInfo " + response.toString());
-                if (response.getCode() == 200) {
-                    try {
-                        Gson gson = new Gson();
-                        Type type = new TypeToken<RspModel<HairdresserInfo>>() {
-                        }.getType();
-                        Log.i(TAG, "onGetInfo: " + response.getBody());
-                        RspModel<HairdresserInfo> rspModel = gson.fromJson(response.getBody(), type);
-                        Log.i(TAG, "onGetInfo: " + rspModel.toString());
-                        valueShow(rspModel.getData());
-
-                    } catch (JsonSyntaxException e) {
-                        e.printStackTrace();
-                    }
+                Log.i(TAG, "onSuccess:商品详情 " + response.toString());
+                Type type = new TypeToken<RspModel<HairdresserInfo>>() {
+                }.getType();
+                HairdresserInfo hairdresserInfo = getAnalysis(response, type, "商品详情");
+                if (hairdresserInfo != null) {
+                    valueShow(hairdresserInfo);
                 }
             }
         });
+    }
+
+    /**
+     * 数据解析
+     *
+     * @param response
+     * @param type
+     * @param log
+     * @param <T>
+     * @return
+     */
+    private <T> T getAnalysis(AsyncHttpResponse response, Type type, String log) {
+        switch (response.getCode()) {
+            case 200:
+                try {
+                    Gson gson = new Gson();
+                    RspModel<T> rspModel = gson.fromJson(response.getBody(), type);
+                    Log.i(TAG, "onSuccess: " + log + rspModel.toString());
+                    switch (rspModel.getCode()) {
+                        case 1:
+                            mLoadManager.showStateView(EmptyView.class);
+                            break;
+                        case 200:
+                            mLoadManager.showSuccessView();
+                            Log.i(TAG, log + ": " + rspModel.getData());
+                            return rspModel.getData();
+                        default:
+                            App.showMessage("data:code" + rspModel.getCode());
+                            mLoadManager.showStateView(EmptyView.class);
+                            break;
+                    }
+                } catch (JsonSyntaxException e) {
+                    e.printStackTrace();
+                }
+                break;
+            default:
+                mLoadManager.showStateView(EmptyView.class);
+                break;
+        }
+        return null;
     }
 
 
@@ -338,7 +407,6 @@ public class CommodityActivity extends ToolbarActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.address:      // 地址
-
                 break;
             case R.id.phone:
                 showCallPhoneDialogFragment();
@@ -348,7 +416,7 @@ public class CommodityActivity extends ToolbarActivity implements View.OnClickLi
                 break;
             case R.id.buy:          // 立即抢购
                 // 跳转到购买界面
-                BuyActivity.show(mContext,hId);
+                BuyActivity.show(mContext, hId);
                 break;
             default:
                 break;

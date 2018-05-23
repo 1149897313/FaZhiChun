@@ -1,21 +1,38 @@
 package com.zgkj.fazhichun.fragments.comment.entire;
 
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 import com.zgkj.common.app.Fragment;
+import com.zgkj.common.http.AsyncHttpPostFormData;
+import com.zgkj.common.http.AsyncHttpResponse;
+import com.zgkj.common.http.AsyncOkHttpClient;
+import com.zgkj.common.http.AsyncResponseHandler;
 import com.zgkj.common.widgets.LabelsView;
 import com.zgkj.common.widgets.load.LoadFactory;
 import com.zgkj.common.widgets.load.core.LoadManager;
 import com.zgkj.common.widgets.load.view.AbsView;
 import com.zgkj.common.widgets.recycler.decoration.DividerItemDecoration;
+import com.zgkj.factory.model.api.RspModel;
+import com.zgkj.fazhichun.App;
 import com.zgkj.fazhichun.R;
 import com.zgkj.fazhichun.adapter.comment.CommentAdapter;
+import com.zgkj.fazhichun.entity.comment.Comment;
+import com.zgkj.fazhichun.entity.comment.EvaluateLabel;
 import com.zgkj.fazhichun.fragments.comment.IRefreshTabTitleText;
+import com.zgkj.fazhichun.view.EmptyView;
+import com.zgkj.fazhichun.view.NetErrorView;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +63,13 @@ public class EntireCommentFragment extends Fragment {
 
     // 创建适配器对象
     private CommentAdapter mCommentAdapter;
+    private String shopId;
 
+    @Override
+    protected void initArgs(Bundle bundle) {
+        shopId = bundle.getString("ID");
+        super.initArgs(bundle);
+    }
 
     /**
      * 显示全部评论的碎片对象
@@ -54,7 +77,7 @@ public class EntireCommentFragment extends Fragment {
      * @param refreshTabTitleText
      * @return
      */
-    public static EntireCommentFragment newInstance(IRefreshTabTitleText refreshTabTitleText){
+    public static EntireCommentFragment newInstance(IRefreshTabTitleText refreshTabTitleText) {
         EntireCommentFragment entireCommentFragment = new EntireCommentFragment();
         entireCommentFragment.setIRefreshTabTitleText(refreshTabTitleText);
 
@@ -66,10 +89,9 @@ public class EntireCommentFragment extends Fragment {
      *
      * @param refreshTabTitleText
      */
-    public void setIRefreshTabTitleText(IRefreshTabTitleText refreshTabTitleText){
+    public void setIRefreshTabTitleText(IRefreshTabTitleText refreshTabTitleText) {
         mIRefreshTabTitleText = refreshTabTitleText;
     }
-
 
 
     @Override
@@ -85,8 +107,6 @@ public class EntireCommentFragment extends Fragment {
         mNestedScrollView = rootView.findViewById(R.id.nested_scroll_view);
         mLabelsView = rootView.findViewById(R.id.labels_view);
         mRecyclerView = rootView.findViewById(R.id.recycler_view);
-
-
     }
 
     @Override
@@ -126,28 +146,126 @@ public class EntireCommentFragment extends Fragment {
 
         mRecyclerView.setAdapter(mCommentAdapter);
 
-        loadData();
+        getEvaluateLabel(shopId,"all");
+    }
 
+    /**
+     * 获取评论标签
+     * @param id
+     * @param type all全部-is_img有图-is_low低分-new最新
+     */
+    private void getEvaluateLabel(String id,String type) {
+
+        AsyncOkHttpClient okHttpClient = new AsyncOkHttpClient();
+        AsyncHttpPostFormData AsyncHttpPostFormData = new AsyncHttpPostFormData();
+        AsyncHttpPostFormData.addFormData("shop_id", id);
+        AsyncHttpPostFormData.addFormData("type", type);
+        okHttpClient.post("/v1/order-evaluate/evaluate-label", AsyncHttpPostFormData, new AsyncResponseHandler() {
+            @Override
+            public void onFailure(IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onSuccess(AsyncHttpResponse response) {
+                Log.i(TAG, "onSuccess:评论标签：" + response.toString());
+                Type type = new TypeToken<RspModel<EvaluateLabel>>() {
+                }.getType();
+                EvaluateLabel evaluateCount = getAnalysis(response, type, "评论标签");
+                if (evaluateCount != null) {
+                } else {
+                }
+            }
+        });
     }
 
 
-    private void loadData(){
+    private void getCommentList(String page,String shop_id,String type) {
+
+        AsyncOkHttpClient okHttpClient = new AsyncOkHttpClient();
+        AsyncHttpPostFormData AsyncHttpPostFormData = new AsyncHttpPostFormData();
+        AsyncHttpPostFormData.addFormData("page", page);
+        AsyncHttpPostFormData.addFormData("shop_id", shop_id);
+        AsyncHttpPostFormData.addFormData("type", type);
+        okHttpClient.post("/v1/order-evaluate/my-evaluate-list", AsyncHttpPostFormData, new AsyncResponseHandler() {
+            @Override
+            public void onFailure(IOException e) {
+                mLoadManager.showStateView(NetErrorView.class);
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onSuccess(AsyncHttpResponse response) {
+                Log.i(TAG, "onSuccess:我的评论列表" + response.toString());
+                Type type = new TypeToken<RspModel<Comment>>() {
+                }.getType();
+                Comment evaluateCount = getAnalysis(response, type, "我的评论列表");
+                if (evaluateCount != null) {
+                } else {
+                    mLoadManager.showStateView(EmptyView.class);
+                }
+            }
+        });
+    }
+
+
+    /**
+     * 数据解析
+     *
+     * @param response
+     * @param type
+     * @param log
+     * @param <T>
+     * @return
+     */
+    private <T> T getAnalysis(AsyncHttpResponse response, Type type, String log) {
+        switch (response.getCode()) {
+            case 200:
+                try {
+                    Gson gson = new Gson();
+                    RspModel<T> rspModel = gson.fromJson(response.getBody(), type);
+                    Log.i(TAG, "onSuccess: " + log + rspModel.toString());
+                    switch (rspModel.getCode()) {
+                        case 1:
+                            mLoadManager.showStateView(EmptyView.class);
+                            break;
+                        case 200:
+                            mLoadManager.showSuccessView();
+                            Log.i(TAG, log + ": " + rspModel.getData());
+                            return rspModel.getData();
+                        default:
+                            App.showMessage("data:code" + rspModel.getCode());
+                            mLoadManager.showStateView(EmptyView.class);
+                            break;
+                    }
+                } catch (JsonSyntaxException e) {
+                    e.printStackTrace();
+                }
+                break;
+            default:
+                mLoadManager.showStateView(EmptyView.class);
+                break;
+        }
+        return null;
+    }
+
+
+
+    private void loadData() {
         List<String> list = new ArrayList<>();
 
-        for (int i = 0; i < 15; i++){
+        for (int i = 0; i < 15; i++) {
 
             list.add("a");
         }
 
 //        mCommentAdapter.replace(list);
-        if (mIRefreshTabTitleText != null){
+        if (mIRefreshTabTitleText != null) {
             mIRefreshTabTitleText.RefreshTabTitleText(this, list.size());
         }
 
 
     }
-
-
 
 
 }

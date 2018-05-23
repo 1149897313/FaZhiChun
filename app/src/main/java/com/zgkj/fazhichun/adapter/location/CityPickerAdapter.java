@@ -47,7 +47,7 @@ public class CityPickerAdapter extends RecyclerViewAdapter<String> {
         }
 
         @Override
-        protected void onBind(String data) {
+        protected void onBind(String data,int position) {
             mCityView.setText(data);
         }
 

@@ -2,8 +2,6 @@ package com.zgkj.fazhichun.fragments.dialog.location;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.ColorDrawable;
@@ -12,8 +10,6 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -24,42 +20,42 @@ import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.gyf.barlibrary.ImmersionBar;
-import com.zgkj.common.widgets.recycler.RecyclerViewAdapter;
-import com.zgkj.common.widgets.recycler.decoration.SpaceItemDecoration;
+import com.zgkj.common.http.AsyncHttpPostFormData;
+import com.zgkj.common.http.AsyncHttpResponse;
+import com.zgkj.common.http.AsyncOkHttpClient;
+import com.zgkj.common.http.AsyncResponseHandler;
+import com.zgkj.common.utils.DensityUtil;
+import com.zgkj.common.utils.PingYinUtil;
+import com.zgkj.common.widgets.load.LoadFactory;
+import com.zgkj.common.widgets.load.core.LoadManager;
+import com.zgkj.common.widgets.load.view.AbsView;
 import com.zgkj.common.widgets.text.DrawableCenterTextView;
 import com.zgkj.factory.model.api.RspModel;
-import com.zgkj.factory.net.NewOkHttpClient;
-import com.zgkj.fazhichun.City;
-import com.zgkj.fazhichun.CityListAdapter;
-import com.zgkj.fazhichun.DBHelper;
-import com.zgkj.fazhichun.DatabaseHelper;
-import com.zgkj.fazhichun.DensityUtil;
-import com.zgkj.fazhichun.LetterListView;
-import com.zgkj.fazhichun.PingYinUtil;
+import com.zgkj.fazhichun.App;
+import com.zgkj.common.widgets.LetterListView;
 import com.zgkj.fazhichun.R;
-import com.zgkj.fazhichun.TestActivity;
-import com.zgkj.fazhichun.adapter.location.CityPickerAdapter;
-import com.zgkj.fazhichun.entity.CityInfo;
+import com.zgkj.fazhichun.adapter.city.CityListAdapter;
+import com.zgkj.fazhichun.entity.city.City;
+import com.zgkj.fazhichun.entity.city.CityInfo;
+import com.zgkj.fazhichun.view.EmptyView;
+import com.zgkj.fazhichun.view.LoadingView;
+import com.zgkj.fazhichun.view.NetErrorView;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
-
-import okhttp3.Callback;
-import okhttp3.FormBody;
 
 /**
  * Author:  bozaixing.
@@ -67,7 +63,7 @@ import okhttp3.FormBody;
  * Descr:  选择城市
  */
 
-public class SelectCityListFragment extends DialogFragment implements LetterListView.OnTouchingLetterChangedListener, AbsListView.OnScrollListener,View.OnClickListener{
+public class SelectCityListFragment extends DialogFragment implements LetterListView.OnTouchingLetterChangedListener, AbsListView.OnScrollListener, View.OnClickListener {
 
     /**
      * UI
@@ -80,28 +76,24 @@ public class SelectCityListFragment extends DialogFragment implements LetterList
      */
     // 沉浸式状态栏
     private ImmersionBar mImmersionBar;
-
-
+    // 创建一个加载管理对象
+    private LoadManager mLoadManager;
 
 
     private ListView city_container;
     private LetterListView letter_container;
+    private RelativeLayout city_content;
 
-    private List<City> allCities = new ArrayList<>();
-    private List<City> hotCities = new ArrayList<>();
-    private List<String> historyCities = new ArrayList<>();
-    private List<City> citiesData;
+    private List<CityInfo> allCities = new ArrayList<>();
     private Map<String, Integer> letterIndex = new HashMap<>();
     private CityListAdapter cityListAdapter;
 
 
     private TextView letterOverlay; // 对话框首字母textview
     private OverlayThread overlayThread; // 显示首字母对话框
-    private DatabaseHelper databaseHelper;
 
     private boolean isScroll;
     private boolean isOverlayReady;
-    private Handler handler;
 
     /**
      * 显示城市选择的碎片
@@ -150,7 +142,7 @@ public class SelectCityListFragment extends DialogFragment implements LetterList
                 .statusBarColor(R.color.colorPrimary)
                 .statusBarDarkFont(true);
         mImmersionBar.init();
-
+        handler = new Handler();
         // 初始化显示控件
         initWidgets(view);
         // 初始化数据
@@ -160,155 +152,122 @@ public class SelectCityListFragment extends DialogFragment implements LetterList
 
     }
 
-    private void getCity(){
-
-        FormBody.Builder formBody = new FormBody.Builder();//创建表单请求体
-        new NewOkHttpClient().init(formBody,"/v1/city/city-list").enqueue(new Callback() {
+    /**
+     * 城市获取
+     */
+    private void getCity() {
+        AsyncOkHttpClient okHttpClient = new AsyncOkHttpClient();
+        AsyncHttpPostFormData AsyncHttpPostFormData = new AsyncHttpPostFormData();
+        okHttpClient.post("/v1/city/city-list", AsyncHttpPostFormData, new AsyncResponseHandler() {
             @Override
-            public void onFailure(okhttp3.Call call, IOException e) {
+            public void onFailure(IOException e) {
+                mLoadManager.showStateView(NetErrorView.class);
                 e.printStackTrace();
             }
 
             @Override
-            public void onResponse(okhttp3.Call call, okhttp3.Response response) throws IOException {
-
-                if(response.code()==200){
-                    try {
-                        Gson gson = new Gson();
-                        Type type = new TypeToken<RspModel<List<CityInfo>>>() {
-                        }.getType();
-                        String data=response.body().string();
-                        String value="\\],\"[a-zA-Z]\":\\[";
-                        data= data.replaceAll(value,",").replace("{\"A\":","").replace("]}","]");
-//                        for (int i = 0; i < data.length(); i += 4000) {
-//                            //当前截取的长度<总长度则继续截取最大的长度来打印
-//                            if (i + 4000 < data.length()) {
-//                                Log.i("msg" + i, data.substring(i, i + 4000));
-//                            } else {
-//                                //当前截取的长度已经超过了总长度，则打印出剩下的全部信息
-//                                Log.i("msg" + i, data.substring(i, data.length()));
-//                            }
-//                        }
-                        RspModel<List<City>> rspModel=gson.fromJson(data,type);
-                        System.out.println(rspModel.toString());
-                    } catch (JsonSyntaxException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+            public void onSuccess(AsyncHttpResponse response) {
+                Log.i("CITY", "onSuccess:城市获取" + response.toString());
+                Type type = new TypeToken<RspModel<List<CityInfo>>>() {
+                }.getType();
+                List<CityInfo> value = getAnalysis(response, type, "城市获取");
+                for(int i=0;i<value.size();i++){
+                    value.get(i).setRegion_pinyin(PingYinUtil.getPingYin(value.get(i).getRegion_name()));
+                }
+                allCities.addAll(value);
+                if (value != null && !"[]".equals(value.toString())) {
+                    cityListAdapter = new CityListAdapter(getContext(), allCities, letterIndex);
+                    city_container.setAdapter(cityListAdapter);
+                } else {
+                    mLoadManager.showStateView(EmptyView.class);
                 }
             }
         });
+    }
+
+    /**
+     * 数据解析
+     *
+     * @param response
+     * @param type
+     * @param log
+     * @param <T>
+     * @return
+     */
+    private <T> T getAnalysis(AsyncHttpResponse response, Type type, String log) {
+        switch (response.getCode()) {
+            case 200:
+                try {
+                    Gson gson = new Gson();
+                    String data = response.getBody();
+                    String value = "\\],\"[a-zA-Z]\":\\[";
+                    data = data.replaceAll(value, ",").replace("{\"A\":", "").replace("]}", "]");
+                    for (int i = 0; i < data.length(); i += 4000) {
+                        //当前截取的长度<总长度则继续截取最大的长度来打印
+                        if (i + 4000 < data.length()) {
+                            Log.i("msg" + i, data.substring(i, i + 4000));
+                        } else {
+                            //当前截取的长度已经超过了总长度，则打印出剩下的全部信息
+                            Log.i("msg" + i, data.substring(i, data.length()));
+                        }
+                    }
+                    RspModel<T> rspModel = gson.fromJson(data, type);
+                    Log.i("CITY", "onSuccess: " + log + rspModel.toString());
+                    switch (rspModel.getCode()) {
+                        case 1:
+                            mLoadManager.showStateView(EmptyView.class);
+                            break;
+                        case 200:
+                            mLoadManager.showSuccessView();
+                            return rspModel.getData();
+                        default:
+                            App.showMessage("错误码：" + rspModel.getCode());
+                            mLoadManager.showStateView(EmptyView.class);
+                            break;
+                    }
+                } catch (JsonSyntaxException e) {
+                    e.printStackTrace();
+                }
+                break;
+        }
+        return null;
     }
 
 
     private void initWidgets(View view) {
         mBackView = view.findViewById(R.id.back);
         mLocationCity = view.findViewById(R.id.location_city);
+        city_content=view.findViewById(R.id.city_content);
         city_container = (ListView) view.findViewById(R.id.city_container);
         letter_container = (LetterListView) view.findViewById(R.id.letter_container);
-
-
         mBackView.setOnClickListener(this);
+
+        // 初始化页面加载管理器
+        mLoadManager = LoadFactory.getInstance().register(city_content, new AbsView.OnViewChildClickListener() {
+            @Override
+            public void onChildClick(View view) {
+                // 显示加载中
+                mLoadManager.showStateView(LoadingView.class);
+            }
+        });
     }
 
     /**
      * 初始化数据
      */
     private void initDatas() {
-        databaseHelper = new DatabaseHelper(getActivity());
-        handler = new Handler();
         initCity();
-        initHotCity();
-        initHistoryCity();
         setupView();
         initOverlay();
     }
 
 
     private void initCity() {
-        City city = new City("定位", "0"); // 当前定位城市
+        CityInfo city = new CityInfo("定位", "0"); // 当前定位城市
         allCities.add(city);
-        city = new City("最近", "1"); // 最近访问的城市
+        city = new CityInfo("全部", "1"); // 全部城市
         allCities.add(city);
-        city = new City("热门", "2"); // 热门城市
-        allCities.add(city);
-        city = new City("全部", "3"); // 全部城市
-        allCities.add(city);
-        citiesData = getCityList();
-        allCities.addAll(citiesData);
     }
-
-    /**
-     * 热门城市
-     */
-    public void initHotCity() {
-        City city = new City("北京", "2");
-        hotCities.add(city);
-        city = new City("上海", "2");
-        hotCities.add(city);
-        city = new City("广州", "2");
-        hotCities.add(city);
-        city = new City("深圳", "2");
-        hotCities.add(city);
-        city = new City("武汉", "2");
-        hotCities.add(city);
-        city = new City("天津", "2");
-        hotCities.add(city);
-        city = new City("西安", "2");
-        hotCities.add(city);
-        city = new City("南京", "2");
-        hotCities.add(city);
-        city = new City("杭州", "2");
-        hotCities.add(city);
-        city = new City("成都", "2");
-        hotCities.add(city);
-        city = new City("重庆", "2");
-        hotCities.add(city);
-    }
-
-    private void initHistoryCity() {
-        SQLiteDatabase db = databaseHelper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("select * from recent_city order by date desc limit 0, 3", null);
-        while (cursor.moveToNext()) {
-            historyCities.add(cursor.getString(1));
-        }
-        cursor.close();
-        db.close();
-    }
-
-    public void addHistoryCity(String name) {
-        SQLiteDatabase db = databaseHelper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("select * from recent_city where name = '" + name + "'", null);
-        if (cursor.getCount() > 0) {
-            db.delete("recent_city", "name = ?", new String[]{name});
-        }
-        db.execSQL("insert into recent_city(name, date) values('" + name + "', " + System.currentTimeMillis() + ")");
-        db.close();
-    }
-
-
-    private ArrayList<City> getCityList() {
-        DBHelper dbHelper = new DBHelper(getContext());
-        ArrayList<City> list = new ArrayList<>();
-        try {
-            dbHelper.createDataBase();
-            SQLiteDatabase db = dbHelper.getWritableDatabase();
-            Cursor cursor = db.rawQuery("select * from city", null);
-            City city;
-            while (cursor.moveToNext()) {
-                city = new City(cursor.getString(1), cursor.getString(2));
-                list.add(city);
-            }
-            cursor.close();
-            db.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Collections.sort(list, comparator);
-        return list;
-    }
-
 
     /**
      * a-z排序
@@ -330,12 +289,6 @@ public class SelectCityListFragment extends DialogFragment implements LetterList
     private void setupView() {
         city_container.setOnScrollListener(this);
         letter_container.setOnTouchingLetterChangedListener(this);
-
-        cityListAdapter = new CityListAdapter(getContext(), allCities, hotCities, historyCities, letterIndex);
-        city_container.setAdapter(cityListAdapter);
-    }
-
-    private void setupActionBar() {
     }
 
 
@@ -370,7 +323,6 @@ public class SelectCityListFragment extends DialogFragment implements LetterList
             case R.id.location_city:
 
 
-
                 break;
             default:
                 break;
@@ -395,6 +347,7 @@ public class SelectCityListFragment extends DialogFragment implements LetterList
             mImmersionBar.destroy();
         }
     }
+
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
         if (scrollState == SCROLL_STATE_TOUCH_SCROLL || scrollState == SCROLL_STATE_FLING) {
@@ -409,9 +362,9 @@ public class SelectCityListFragment extends DialogFragment implements LetterList
         }
         if (isOverlayReady) {
             String text;
-            String name = allCities.get(firstVisibleItem).getName();
-            String pinyin = allCities.get(firstVisibleItem).getPinyin();
-            if (firstVisibleItem < 4) {
+            String name = allCities.get(firstVisibleItem).getRegion_name();
+            String pinyin = allCities.get(firstVisibleItem).getRegion_pinyin();
+            if (firstVisibleItem < 2) {
                 text = name;
             } else {
                 text = PingYinUtil.converterToFirstSpell(pinyin).substring(0, 1).toUpperCase();
@@ -429,6 +382,8 @@ public class SelectCityListFragment extends DialogFragment implements LetterList
             handler.postDelayed(overlayThread, 1000);
         }
     }
+
+    private Handler handler;
 
     @Override
     public void onTouchingLetterChanged(String s) {

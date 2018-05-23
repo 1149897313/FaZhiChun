@@ -12,7 +12,7 @@ public class ReadyOrder {
     private String hairdresser_name;//商品名称
     private BigDecimal favorable_Price;//商品价格
     private String member_level;//用户会员等级-1普通、2vip
-    private String user_commission;//会员折扣比例
+    private BigDecimal user_commission;//会员折扣比例
     private String user_coupon_count;//用户可用代金券数量
 
     public String getHairdresser_name() {
@@ -39,11 +39,11 @@ public class ReadyOrder {
         this.member_level = member_level;
     }
 
-    public String getUser_commission() {
+    public BigDecimal getUser_commission() {
         return user_commission;
     }
 
-    public void setUser_commission(String user_commission) {
+    public void setUser_commission(BigDecimal user_commission) {
         this.user_commission = user_commission;
     }
 

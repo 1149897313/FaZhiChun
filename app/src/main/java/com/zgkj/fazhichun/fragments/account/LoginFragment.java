@@ -15,7 +15,11 @@ import com.zgkj.common.http.AsyncHttpPostFormData;
 import com.zgkj.common.http.AsyncHttpResponse;
 import com.zgkj.common.http.AsyncOkHttpClient;
 import com.zgkj.common.http.AsyncResponseHandler;
+import com.zgkj.common.utils.AccountManagers;
 import com.zgkj.common.utils.MobileUtil;
+import com.zgkj.common.widgets.load.LoadFactory;
+import com.zgkj.common.widgets.load.core.LoadManager;
+import com.zgkj.common.widgets.load.view.AbsView;
 import com.zgkj.common.widgets.text.ClearTextIconEditText;
 import com.zgkj.factory.model.api.RspModel;
 import com.zgkj.fazhichun.App;
@@ -23,6 +27,10 @@ import com.zgkj.fazhichun.R;
 import com.zgkj.fazhichun.activities.MainActivity;
 import com.zgkj.fazhichun.entity.CodeStatus;
 import com.zgkj.fazhichun.entity.user.Account;
+import com.zgkj.fazhichun.view.EmptyView;
+import com.zgkj.fazhichun.view.LoadingView;
+
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -39,6 +47,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
      * UI
      */
     private ImageView mBackView;
+    private TextView title,login_title;
     private TextView mRegisterView;
     private ClearTextIconEditText mPhoneView;
     private ClearTextIconEditText mCodeView;
@@ -46,22 +55,22 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private TextView mLoginView;
     private TextView mWeixinLoginView;
 
-
     /**
      * DATA
      */
     // 定义一个接口对象
     private AccountTrigger mAccountTrigger;
 
+    private boolean binding;
 
     /**
      * 显示登录界面的碎片
      *
      * @return
      */
-    public static LoginFragment newInstance(AccountTrigger accountTrigger) {
+    public static LoginFragment newInstance(AccountTrigger accountTrigger,boolean binding) {
         LoginFragment loginFragment = new LoginFragment();
-        loginFragment.setAccountTrigger(accountTrigger);
+        loginFragment.setAccountTrigger(accountTrigger,binding);
 
         return loginFragment;
     }
@@ -71,8 +80,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
      *
      * @param accountTrigger
      */
-    private void setAccountTrigger(AccountTrigger accountTrigger){
+    private void setAccountTrigger(AccountTrigger accountTrigger,boolean binding) {
         mAccountTrigger = accountTrigger;
+        this.binding=binding;
     }
 
 
@@ -85,6 +95,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     @Override
     protected void initWidgets(View rootView) {
         super.initWidgets(rootView);
+        title=rootView.findViewById(R.id.title);
+        login_title=rootView.findViewById(R.id.login_title);
         mBackView = rootView.findViewById(R.id.back);
         mRegisterView = rootView.findViewById(R.id.register);
         mPhoneView = rootView.findViewById(R.id.phone);
@@ -92,13 +104,15 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         mGetCodeView = rootView.findViewById(R.id.get_code);
         mLoginView = rootView.findViewById(R.id.login);
         mWeixinLoginView = rootView.findViewById(R.id.weixin_login);
-
     }
 
     @Override
     protected void initDatas() {
         super.initDatas();
-
+        if(binding){
+            title.setText("绑定手机号");
+            login_title.setText("为了您的账号安全，请绑定手机号");
+        }
         // 为返回按钮注册监听事件
         mBackView.setOnClickListener(this);
         mRegisterView.setOnClickListener(this);
@@ -110,8 +124,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        String phone=mPhoneView.getText().toString();
-        String code=mCodeView.getText().toString();
+        String phone = mPhoneView.getText().toString();
+        String code = mCodeView.getText().toString();
         switch (v.getId()) {
             case R.id.back:
                 back();
@@ -125,7 +139,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     App.showMessage("请输入正确的手机号！");
                     return;
                 } else {
-                    getCode(phone,"app_login");
+                    if(binding){//绑定手机号
+                        getCode(phone, "bind_mobile");
+                    }else {
+                        getCode(phone, "app_login");
+                    }
                 }
                 break;
             case R.id.login:
@@ -135,7 +153,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     return;
                 } else {
                     if (!"".equals(code) && code.length() >= 4) {
-                        onLogin(phone,code);
+                        if(binding){//绑定手机号
+                            onBinding(phone, code);
+                        }else {
+                            onLogin(phone, code);
+                        }
                     } else {
                         App.showMessage("请输入正确的验证码！");
                     }
@@ -156,7 +178,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
      * @param type
      */
     private void getCode(String mobile, String type) {
-
 
         AsyncOkHttpClient okHttpClient = new AsyncOkHttpClient();
         AsyncHttpPostFormData asyncHttpPostFormData = new AsyncHttpPostFormData();
@@ -197,16 +218,55 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     // 创建短信倒计时计数器的对象
     private SmsCodeCountDownTimer mSmsCodeCountDownTimer;
 
+
     /**
-     * 登录
+     * 绑定手机号
      * @param mobile
      * @param code
      */
-    private void onLogin(String mobile,String code){
-        AsyncOkHttpClient okHttpClient=new AsyncOkHttpClient();
-        AsyncHttpPostFormData AsyncHttpPostFormData=new AsyncHttpPostFormData();
-        AsyncHttpPostFormData.addFormData("mobile",mobile);
-        AsyncHttpPostFormData.addFormData("code",code);
+    private void onBinding(String mobile, String code) {
+
+        AsyncOkHttpClient okHttpClient = new AsyncOkHttpClient();
+        AsyncHttpPostFormData AsyncHttpPostFormData = new AsyncHttpPostFormData();
+        AsyncHttpPostFormData.addFormData("mobile", mobile);
+        AsyncHttpPostFormData.addFormData("code", code);
+        okHttpClient.post("/v1/user/bind-mobile", AsyncHttpPostFormData, new AsyncResponseHandler() {
+            @Override
+            public void onFailure(IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onSuccess(AsyncHttpResponse response) {
+                Log.i(TAG, "onSuccess:onLogin " + response.toString());
+                Type type = new TypeToken<RspModel<Account>>() {
+                }.getType();
+                Account account = getAnalysis(response, type, "绑定手机号");
+                if (account != null) {
+                    if ("T".equals(account.getIs_success())) {
+                        App.showMessage("绑定成功");
+                        MainActivity.show(mContext);
+                        back();
+                    } else {
+                        App.showMessage(account.getErr_msg());
+                    }
+                }
+            }
+        });
+    }
+
+    /**
+     * 登录
+     *
+     * @param mobile
+     * @param code
+     */
+    private void onLogin(String mobile, String code) {
+
+        AsyncOkHttpClient okHttpClient = new AsyncOkHttpClient();
+        AsyncHttpPostFormData AsyncHttpPostFormData = new AsyncHttpPostFormData();
+        AsyncHttpPostFormData.addFormData("mobile", mobile);
+        AsyncHttpPostFormData.addFormData("code", code);
         okHttpClient.post("/v1/login/mobile", AsyncHttpPostFormData, new AsyncResponseHandler() {
             @Override
             public void onFailure(IOException e) {
@@ -216,31 +276,50 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onSuccess(AsyncHttpResponse response) {
                 Log.i(TAG, "onSuccess:onLogin " + response.toString());
-                if (response.getCode() == 200) {
-                    try {
-                        Gson gson = new Gson();
-                        Type type = new TypeToken<RspModel<Account>>() {
-                        }.getType();
-                        Log.i(TAG, "onSuccess:onLogin " + response.getBody());
-                        RspModel<Account> rspModel = gson.fromJson(response.getBody(), type);
-                        Log.i(TAG, "onSuccess:onLogin " + rspModel.toString());
-                        if (rspModel.getCode() == 200) {
-                            if("T".equals(rspModel.getData().getIs_success())){
-                                App.showMessage("登录成功");
-                            }else {
-                                App.showMessage(rspModel.getData().getErr_msg());
-                            }
-                        } else {
-                            App.showMessage(rspModel.getMessage());
-                        }
-
-                    } catch (JsonSyntaxException e) {
-                        e.printStackTrace();
+                Type type = new TypeToken<RspModel<Account>>() {
+                }.getType();
+                Account account = getAnalysis(response, type, "登录");
+                if (account != null) {
+                    if ("T".equals(account.getIs_success())) {
+                        AccountManagers.login(account.getToken(), "");
+                        App.showMessage("登录成功");
+                        MainActivity.show(mContext);
+                        back();
+                    } else {
+                        App.showMessage(account.getErr_msg());
                     }
                 }
             }
         });
     }
+
+    protected <T> T getAnalysis(AsyncHttpResponse response, Type type, String log) {
+        switch (response.getCode()) {
+            case 200:
+                try {
+                    Gson gson = new Gson();
+                    RspModel<T> rspModel = gson.fromJson(response.getBody(), type);
+                    Log.i(TAG, "onSuccess: " + log + rspModel.toString());
+                    switch (rspModel.getCode()) {
+                        case 1:
+                            break;
+                        case 200:
+                            return rspModel.getData();
+                        default:
+                            App.showMessage(rspModel.getMessage());
+                            break;
+                    }
+                } catch (JsonSyntaxException e) {
+                    e.printStackTrace();
+                }
+                break;
+            default:
+                App.showMessage("错误码："+response.getCode());
+                break;
+        }
+        return null;
+    }
+
     /**
      * 实现短信验证码倒计时功能
      */
@@ -261,8 +340,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         public void onTick(long millisUntilFinished) {
             mGetCodeView.setEnabled(false);
             // 短信验证码倒计时
-            mGetCodeView.setText("重新发送（"+millisUntilFinished / 1000L+"s)");
-            mGetCodeView.setTextColor(getResources().getColor(R.color.textColorAccent));
+            mGetCodeView.setText("重新发送（" + millisUntilFinished / 1000L + "s)");
+            mGetCodeView.setTextColor(mContext.getResources().getColor(R.color.textColorAccent));
         }
 
         @Override
@@ -275,13 +354,13 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     private void back() {
 
-        if (getActivity() != null) {
-            getActivity().finish();
-        }
         // 释放倒计时对象
         if (mSmsCodeCountDownTimer != null) {
             mSmsCodeCountDownTimer.cancel();
             mSmsCodeCountDownTimer = null;
+        }
+        if (getActivity() != null) {
+            getActivity().finish();
         }
     }
 
@@ -290,25 +369,17 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
      * 显示注册碎片
      */
     private void register() {
-        if (mAccountTrigger!= null){
+        // 释放倒计时对象
+        if (mSmsCodeCountDownTimer != null) {
+            mSmsCodeCountDownTimer.cancel();
+            mSmsCodeCountDownTimer = null;
+        }
+        if (mAccountTrigger != null) {
             mAccountTrigger.onTriggerView();
         }
-
-
     }
 
-
-    private void login(){
-
-        MainActivity.show(mContext);
-        if (getActivity() != null){
-            getActivity().finish();
-        }
-
-    }
-
-
-    private void weixinLogin(){
+    private void weixinLogin() {
 
     }
 

@@ -2,7 +2,6 @@ package com.zgkj.fazhichun.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,11 +20,13 @@ import com.amap.api.maps2d.model.LatLng;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
+import com.zgkj.common.Common;
 import com.zgkj.common.app.ToolbarActivity;
 import com.zgkj.common.http.AsyncHttpPostFormData;
 import com.zgkj.common.http.AsyncHttpResponse;
 import com.zgkj.common.http.AsyncOkHttpClient;
 import com.zgkj.common.http.AsyncResponseHandler;
+import com.zgkj.common.utils.SPUtil;
 import com.zgkj.common.utils.ToastUtil;
 import com.zgkj.common.widgets.StarBarView;
 import com.zgkj.common.widgets.load.LoadFactory;
@@ -35,6 +36,7 @@ import com.zgkj.common.widgets.recycler.RecyclerViewAdapter;
 import com.zgkj.common.widgets.recycler.decoration.DividerItemDecoration;
 import com.zgkj.common.widgets.recycler.decoration.SpaceItemDecoration;
 import com.zgkj.factory.model.api.RspModel;
+import com.zgkj.fazhichun.App;
 import com.zgkj.fazhichun.R;
 import com.zgkj.fazhichun.adapter.barbershop.ShopBarberAdapter;
 import com.zgkj.fazhichun.adapter.barbershop.ShopCommodityAdapter;
@@ -46,6 +48,8 @@ import com.zgkj.fazhichun.entity.shop.BarberInfo;
 import com.zgkj.fazhichun.entity.shop.Hairdresser;
 import com.zgkj.fazhichun.entity.shop.ShopB;
 import com.zgkj.fazhichun.fragments.dialog.phone.CallPhoneDialogFragment;
+import com.zgkj.fazhichun.view.EmptyView;
+import com.zgkj.fazhichun.view.ErrorView;
 import com.zgkj.fazhichun.view.LoadingView;
 
 import java.io.IOException;
@@ -120,6 +124,7 @@ public class BarberShopActivity extends ToolbarActivity implements View.OnClickL
 
     /**
      * 绑定控件赋值
+     *
      * @param shop
      */
     private void valueShow(ShopB shop) {
@@ -136,9 +141,7 @@ public class BarberShopActivity extends ToolbarActivity implements View.OnClickL
 
         mAddressView.setText(shop.getShop().getAddress());
         phone = String.valueOf(shop.getShop().getShop_telphone());
-        float distance = AMapUtils.calculateLineDistance(new LatLng(shop.getShop().getShop_lat(),shop.getShop().getShop_lng()), new LatLng(shop.getShop().getShop_lat(), shop.getShop().getShop_lng()));
-        mDistanceView.setText(String.valueOf("距您"+distance+"米"));//---距离
-
+        mDistanceView.setText("距您约" + shop.getShop().getDistance() + "米");//距离
         mShopImageAdapter.replace(shop.getShop().getShop_banner());
 
         mShopServiceAdapter.replace(shop.getShop_service());
@@ -146,30 +149,29 @@ public class BarberShopActivity extends ToolbarActivity implements View.OnClickL
         mCommentStarBarView.setStarMark(shop.getShop().getShop_service_score());
         mCommentScoreView.setText(String.valueOf(shop.getShop().getShop_service_score() + "分"));
 
-        mCommentView.setText(shop.getTalk_num()+"条评论");
+        mCommentView.setText(shop.getTalk_num() + "条评论");
 
         mCommentAdapter.replace(shop.getTalk_list());
 
     }
-    private  void valueShowShopService(List<Hairdresser> list){
+
+    private void valueShowShopService(List<Hairdresser> list) {
         mShopCommodityAdapter.replace(list);
-        mCommodityView.setText("店内服务（"+list.size()+")");
-        if(list.size()>2){
+        mCommodityView.setText("店内服务（" + list.size() + ")");
+        if (list.size() > 2) {
             mOtherCommodityLayout.setVisibility(View.VISIBLE);
-            mOtherCommodityView.setText(String.format(getResources().getString(R.string.label_other_service),String.valueOf(list.size()-2)));
-        }else{
+            mOtherCommodityView.setText(String.format(getResources().getString(R.string.label_other_service), String.valueOf(list.size() - 2)));
+        } else {
             mOtherCommodityLayout.setVisibility(View.GONE);
         }
     }
 
-    private  void valueShowBarberService(List<BarberInfo> list){
+    private void valueShowBarberService(List<BarberInfo> list) {
         mShopBarberAdapter.replace(list);
-        mOtherBarberView.setText("其他"+list.size()+"位发型师");
+        mOtherBarberView.setText("其他" + list.size() + "位发型师");
     }
 
 
-    
-    
     private String phone;
 
     @Override
@@ -252,7 +254,7 @@ public class BarberShopActivity extends ToolbarActivity implements View.OnClickL
             public void onItemClick(RecyclerViewAdapter.ViewHolder<BarberInfo> holder, BarberInfo data) {
                 super.onItemClick(holder, data);
                 // 跳转到发型师介绍界面
-                IntroduceActivity.show(mContext,data.getBarber_id());
+                IntroduceActivity.show(mContext, data.getBarber_id());
             }
         });
         mBarberRecyclerView.setAdapter(mShopBarberAdapter);
@@ -260,7 +262,6 @@ public class BarberShopActivity extends ToolbarActivity implements View.OnClickL
 
         // 商家服务
         mServiceRecyclerView.setLayoutManager(new GridLayoutManager(mContext, 4, GridLayoutManager.VERTICAL, false));
-        mServiceRecyclerView.addItemDecoration(new SpaceItemDecoration(mContext, 10));
         mShopServiceAdapter = new ShopServiceAdapter();
         mServiceRecyclerView.setAdapter(mShopServiceAdapter);
 
@@ -274,46 +275,71 @@ public class BarberShopActivity extends ToolbarActivity implements View.OnClickL
 
         // 初始化界面加载管理器
         mLoadManager = LoadFactory.getInstance().register(mNestedScrollView, new AbsView.OnReloadListener() {
-                            @Override
-                            public void onReload(View view) {
-                                // 重新加载
-                                mLoadManager.showStateView(LoadingView.class);
-
-                                // 模拟加载状态
-                                new Handler().postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        mLoadManager.showSuccessView();
-
-                    }
-                }, 500);
+            @Override
+            public void onReload(View view) {
+                // 重新加载
+                mLoadManager.showStateView(LoadingView.class);
             }
         });
 
-
-        // 模拟加载状态
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mLoadManager.showSuccessView();
-
-            }
-        }, 500);
-
-
         mTitleView.setText("理发店详情");
 
-        onGetBaberShop(shopId);
+        onGetCollection(shopId);
 
-        onGetShopService(shopId,"10");
+        onGetBaberShop(shopId,SPUtil.getLatLng());
 
-        onGetBarberList(shopId,"0");
+        onGetShopService(shopId, "10");
+
+        onGetBarberList(shopId, "0");
+
+        mLoadManager.showSuccessView();
 
     }
 
 
+
+    /**
+     * 获取商品是否收藏
+     *
+     * @param id
+     */
+    private void onGetCollection(String id) {
+        AsyncOkHttpClient okHttpClient = new AsyncOkHttpClient();
+        AsyncHttpPostFormData AsyncHttpPostFormData = new AsyncHttpPostFormData();
+        AsyncHttpPostFormData.addFormData("id", id);
+        AsyncHttpPostFormData.addFormData("type", "shop");
+        okHttpClient.post("/v1/collection/user-collection", AsyncHttpPostFormData, new AsyncResponseHandler() {
+            @Override
+            public void onFailure(IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onSuccess(AsyncHttpResponse response) {
+                Log.i(TAG, "onSuccess:onGetCollection " + response.toString());
+                if (response.getCode() == 200) {
+                    try {
+                        Gson gson = new Gson();
+                        Type type = new TypeToken<RspModel<String>>() {
+                        }.getType();
+                        RspModel<String> rspModel = gson.fromJson(response.getBody(), type);
+                        Log.i(TAG, "onGetCollection: " + rspModel.toString());
+                        if ("1".equals(rspModel.getData())) {//1或0---1为收藏和0为没收藏
+                            menuItem.setIcon(R.drawable.ic_menu_collect_pressed);
+                        } else {
+                            menuItem.setIcon(R.drawable.ic_menu_collect_normal);
+                        }
+                    } catch (JsonSyntaxException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
+
     /**
      * 添加收藏
+     *
      * @param id
      */
     private void onAddCollection(String id) {
@@ -330,25 +356,20 @@ public class BarberShopActivity extends ToolbarActivity implements View.OnClickL
             @Override
             public void onSuccess(AsyncHttpResponse response) {
                 Log.i(TAG, "onSuccess:onAddCollection " + response.toString());
-                if (response.getCode() == 200) {
-                    try {
-                        Gson gson = new Gson();
-                        Type type = new TypeToken<RspModel<CollectionBack>>() {
-                        }.getType();
-                        RspModel<CollectionBack> rspModel = gson.fromJson(response.getBody(), type);
-                        Log.i(TAG, "onAddCollection: " + rspModel.toString());
-                        if ("1".equals(rspModel.getData().getIs_walk())) {
-                            menuItem.setIcon(R.drawable.ic_menu_collect_pressed);
-                        } else {
-                            menuItem.setIcon(R.drawable.ic_menu_collect_normal);
-                        }
-                        ToastUtil.getInstance()
-                                .setBackgroundColor(getResources().getColor(R.color.colorAccent))
-                                .setTextColor(getResources().getColor(R.color.textColorLight))
-                                .show(rspModel.getData().getMsg(), Toast.LENGTH_SHORT);
-                    } catch (JsonSyntaxException e) {
-                        e.printStackTrace();
+
+                Type type = new TypeToken<RspModel<CollectionBack>>() {
+                }.getType();
+                CollectionBack list = getAnalysis(response, type, "onAddCollection");
+                if (list != null) {
+                    if ("1".equals(list.getIs_walk())) {
+                        menuItem.setIcon(R.drawable.ic_menu_collect_pressed);
+                    } else {
+                        menuItem.setIcon(R.drawable.ic_menu_collect_normal);
                     }
+                    ToastUtil.getInstance()
+                            .setBackgroundColor(getResources().getColor(R.color.colorAccent))
+                            .setTextColor(getResources().getColor(R.color.textColorLight))
+                            .show(list.getMsg(), Toast.LENGTH_SHORT);
                 }
             }
         });
@@ -359,11 +380,13 @@ public class BarberShopActivity extends ToolbarActivity implements View.OnClickL
      *
      * @param id
      */
-    private void onGetBaberShop(String id) {
+    private void onGetBaberShop(String id,LatLng latLng) {
         AsyncOkHttpClient okHttpClient = new AsyncOkHttpClient();
         AsyncHttpPostFormData AsyncHttpPostFormData = new AsyncHttpPostFormData();
         AsyncHttpPostFormData.addFormData("shop_id", id);
-        okHttpClient.post("/shop/" + id, AsyncHttpPostFormData, new AsyncResponseHandler() {
+        AsyncHttpPostFormData.addFormData("lat", latLng.latitude);
+        AsyncHttpPostFormData.addFormData("lng", latLng.longitude);
+        okHttpClient.post("/v1/shop/shop-info", AsyncHttpPostFormData, new AsyncResponseHandler() {
             @Override
             public void onFailure(IOException e) {
                 e.printStackTrace();
@@ -371,20 +394,12 @@ public class BarberShopActivity extends ToolbarActivity implements View.OnClickL
 
             @Override
             public void onSuccess(AsyncHttpResponse response) {
-                Log.i(TAG, "onSuccess:onGetBaberShop " + response.toString());
-                if (response.getCode() == 200) {
-                    try {
-                        Gson gson = new Gson();
-                        Type type = new TypeToken<RspModel<ShopB>>() {
-                        }.getType();
-                        Log.i(TAG, "onGetBaberShop: " + response.getBody());
-                        RspModel<ShopB> rspModel = gson.fromJson(response.getBody(), type);
-                        Log.i(TAG, "onGetBaberShop: " + rspModel.toString());
-                        valueShow(rspModel.getData());
-
-                    } catch (JsonSyntaxException e) {
-                        e.printStackTrace();
-                    }
+                Log.i(TAG, "onSuccess:商家信息 " + response.toString());
+                Type type = new TypeToken<RspModel<ShopB>>() {
+                }.getType();
+                ShopB list = getAnalysis(response, type, "商家信息");
+                if (list != null) {
+                    valueShow(list);
                 }
             }
         });
@@ -392,9 +407,10 @@ public class BarberShopActivity extends ToolbarActivity implements View.OnClickL
 
     /**
      * 获取店铺商品列表
+     *
      * @param id
      */
-    private void onGetShopService(String id,String number) {
+    private void onGetShopService(String id, String number) {
         AsyncOkHttpClient okHttpClient = new AsyncOkHttpClient();
         AsyncHttpPostFormData AsyncHttpPostFormData = new AsyncHttpPostFormData();
         AsyncHttpPostFormData.addFormData("shop_id", id);
@@ -408,30 +424,23 @@ public class BarberShopActivity extends ToolbarActivity implements View.OnClickL
             @Override
             public void onSuccess(AsyncHttpResponse response) {
                 Log.i(TAG, "onSuccess:onGetShopService " + response.toString());
-                if (response.getCode() == 200) {
-                    try {
-                        Gson gson = new Gson();
-                        Type type = new TypeToken<RspModel<List<Hairdresser>>>() {
-                        }.getType();
-                        Log.i(TAG, "onGetShopService: " + response.getBody());
-                        RspModel<List<Hairdresser>> rspModel = gson.fromJson(response.getBody(), type);
-                        Log.i(TAG, "onGetShopService: " + rspModel.toString());
-                        valueShowShopService(rspModel.getData());
-
-                    } catch (JsonSyntaxException e) {
-                        e.printStackTrace();
-                    }
+                Type type = new TypeToken<RspModel<List<Hairdresser>>>() {
+                }.getType();
+                List<Hairdresser> list = getAnalysis(response, type, "onGetShopService");
+                if (list != null) {
+                    valueShowShopService(list);
                 }
             }
         });
     }
 
     /**
-     *获取发型师列表
+     * 获取发型师列表
+     *
      * @param id
      * @param number
      */
-    private void onGetBarberList(String id,String number) {
+    private void onGetBarberList(String id, String number) {
         AsyncOkHttpClient okHttpClient = new AsyncOkHttpClient();
         AsyncHttpPostFormData AsyncHttpPostFormData = new AsyncHttpPostFormData();
         AsyncHttpPostFormData.addFormData("shop_id", id);
@@ -445,25 +454,55 @@ public class BarberShopActivity extends ToolbarActivity implements View.OnClickL
             @Override
             public void onSuccess(AsyncHttpResponse response) {
                 Log.i(TAG, "onSuccess:onGetBarberList " + response.toString());
-                if (response.getCode() == 200) {
-                    try {
-                        Gson gson = new Gson();
-                        Type type = new TypeToken<RspModel<List<BarberInfo>>>() {
-                        }.getType();
-                        Log.i(TAG, "onGetBarberList: " + response.getBody());
-                        RspModel<List<BarberInfo>> rspModel = gson.fromJson(response.getBody(), type);
-                        Log.i(TAG, "onGetBarberList: " + rspModel.toString());
-                        valueShowBarberService(rspModel.getData());
-
-                    } catch (JsonSyntaxException e) {
-                        e.printStackTrace();
-                    }
+                Type type = new TypeToken<RspModel<List<BarberInfo>>>() {
+                }.getType();
+                List<BarberInfo> list = getAnalysis(response, type, "onGetBarberList");
+                if (list != null) {
+                    valueShowBarberService(list);
                 }
             }
         });
     }
 
+    /**
+     * 数据解析
+     *
+     * @param response
+     * @param type
+     * @param log
+     * @param <T>
+     * @return
+     */
+    private <T> T getAnalysis(AsyncHttpResponse response, Type type, String log) {
+        switch (response.getCode()) {
+            case 200:
+                try {
+                    Gson gson = new Gson();
+                    RspModel<T> rspModel = gson.fromJson(response.getBody(), type);
+                    Log.i(TAG, "onSuccess: " + log + rspModel.toString());
+                    switch (rspModel.getCode()) {
+                        case 1:
+                            mLoadManager.showStateView(EmptyView.class);
+                            break;
+                        case 200:
+                            mLoadManager.showSuccessView();
+                            return rspModel.getData();
+                        default:
+                            App.showMessage("错误码：" + rspModel.getCode());
+                            mLoadManager.showStateView(EmptyView.class);
+                            break;
+                    }
+                } catch (JsonSyntaxException e) {
+                    e.printStackTrace();
+                }
+                break;
+        }
+        mLoadManager.showStateView(ErrorView.class);
+        return null;
+    }
+
     private MenuItem menuItem;
+
     /**
      * 创建菜单
      *
@@ -503,16 +542,16 @@ public class BarberShopActivity extends ToolbarActivity implements View.OnClickL
         switch (v.getId()) {
             case R.id.subscribe:        //立即预约
                 // 跳转到发型师列表界面
-                BarberActivity.show(mContext,shopId);
+                BarberActivity.show(mContext, shopId);
                 break;
             case R.id.phone:
                 showCallPhoneDialogFragment();
                 break;
             case R.id.other_barber:     // 其他发型师
-                BarberActivity.show(mContext,shopId);
+                BarberActivity.show(mContext, shopId);
                 break;
             case R.id.comment_layout:   // 查看所有评论
-                CommentActivity.show(mContext, CommentActivity.TYPE_ENTIRE_COMMENT);
+                CommentActivity.show(mContext, CommentActivity.TYPE_ENTIRE_COMMENT,shopId);
                 break;
             default:
                 break;

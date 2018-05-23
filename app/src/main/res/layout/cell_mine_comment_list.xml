@@ -52,7 +52,17 @@
         app:starFill="@drawable/ic_star_selected"
         app:starSize="@dimen/len_12"
         app:starSpacing="0dp" />
-
+    <TextView
+        android:id="@+id/graded_text"
+        android:layout_width="wrap_content"
+        android:layout_toRightOf="@id/star_bar_view"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/len_6"
+        android:layout_alignBottom="@id/portrait"
+        android:textColor="@color/textColorSecond"
+        android:textSize="@dimen/textSizeCaption"
+        android:singleLine="true"
+        android:ellipsize="end"/>
     <TextView
         android:id="@+id/time"
         android:layout_width="wrap_content"
@@ -89,8 +99,8 @@
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:paddingTop="@dimen/len_10"
-        android:paddingBottom="@dimen/len_10"
         android:layout_below="@id/expand_text_view"
         android:layout_alignLeft="@id/name"/>
 
@@ -99,8 +109,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/len_64"
-        android:layout_below="@id/recycler_view"
         android:layout_marginTop="@dimen/len_10"
+        android:layout_below="@id/recycler_view"
         android:layout_alignLeft="@id/recycler_view"
         android:background="@color/windowsBackground">
 

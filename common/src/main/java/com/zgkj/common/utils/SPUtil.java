@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 
+import com.amap.api.maps2d.model.LatLng;
+import com.zgkj.common.Common;
 import com.zgkj.common.app.Application;
 
 import java.lang.reflect.InvocationTargetException;
@@ -86,6 +88,15 @@ public class SPUtil {
         }
 
         return null;
+    }
+
+    /**
+     * 获取经纬度
+     * @return
+     */
+    public static LatLng getLatLng(){
+        LatLng latLng = new LatLng(Double.parseDouble(String.valueOf(SPUtil.get(Common.Constant.LATITUDE_ID, ""))), Double.parseDouble(String.valueOf(SPUtil.get(Common.Constant.LONGITUDE_ID, ""))));
+        return  latLng;
     }
 
 

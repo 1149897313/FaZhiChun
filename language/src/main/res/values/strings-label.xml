@@ -69,6 +69,7 @@
     <string name="label_mine_wallet_right">参与推广有奖活动</string>
     <string name="label_mine_coupons">我的优惠券</string>
 
+    <string name="label_mine_wallet_rule">推广规则</string>
 
     <!--MerchantActivity商家列表-->
     <string name="label_merchant_provinces">请选择省份</string>
@@ -164,7 +165,7 @@
     <string name="label_voucher_see_history">查看代金券历史</string>
 
 
-
+    <string name="order_detail">订单号\n付款时间\n数量\n总价</string>
 
 
     <!--HistoryActivity历史代金券界面-->

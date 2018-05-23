@@ -62,7 +62,7 @@ public class DiscountsAdapter extends RecyclerViewAdapter<String> {
 
         @SuppressLint("StringFormatMatches")
         @Override
-        protected void onBind(String data) {
+        protected void onBind(String data,int position) {
             mShopImageView.setBackgroundResource(R.color.orange_400);
             mTypeNameView.setText(data);
             mPriceView.setText(mItemView.getContext().getResources().getString(R.string.label_price, 34));

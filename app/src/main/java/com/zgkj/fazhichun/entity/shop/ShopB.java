@@ -13,8 +13,6 @@ import java.util.List;
 public class ShopB {
 
     private Shop shop;
-
-
     private float persin_pay_money;//人均消费
     private int talk_num;//评价数量
     private List<Talk> talk_list;//	array评价列表(2条)

@@ -39,8 +39,8 @@
 
     </android.support.v7.widget.Toolbar>
 
-
-    <android.support.v4.widget.NestedScrollView
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -133,22 +133,11 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/lately_order_recycler_view"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:background="@color/colorLight"
                     android:nestedScrollingEnabled="false"/>
 
-                <!--占位布局-->
-                <android.support.v4.widget.Space
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/len_40" />
-
             </LinearLayout>
-
-
         </LinearLayout>
-
-    </android.support.v4.widget.NestedScrollView>
-
-
-
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </LinearLayout>

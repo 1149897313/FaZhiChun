@@ -94,7 +94,7 @@ public class MemberAdapter extends RecyclerViewAdapter<String> {
                 public void onItemClick(ViewHolder<String> holder, String data) {
                     super.onItemClick(holder, data);
                     // 跳转到显示具体的理发类型项目的详细信息界面
-                    TypeActivity.show(mContext);
+                    TypeActivity.show(mContext,"0",null);
                 }
             });
             mRecyclerView.setAdapter(mAdapter);
@@ -103,7 +103,7 @@ public class MemberAdapter extends RecyclerViewAdapter<String> {
 
         @SuppressLint("StringFormatMatches")
         @Override
-        protected void onBind(String data) {
+        protected void onBind(String data,int position) {
             mShopImageView.setBackgroundResource(R.color.orange_400);
             mDistanceView.setText(itemView.getContext().getResources().getString(R.string.label_distance, 45.3));
 
@@ -178,7 +178,7 @@ public class MemberAdapter extends RecyclerViewAdapter<String> {
 
         @SuppressLint("StringFormatMatches")
         @Override
-        protected void onBind(String data) {
+        protected void onBind(String data,int position) {
 
             mPriceView.setText(mContext.getResources().getString(R.string.label_price, 35));
             mOriginalPriceView.setText(mContext.getResources().getString(R.string.label_original_price, 105));

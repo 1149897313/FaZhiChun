@@ -112,7 +112,7 @@ public class ProductFragment extends Fragment {
 
                 }else {
                     // 用户点击则进入具体的服务详细信息界面
-                    CommodityActivity.show(mContext,null);
+                    CommodityActivity.show(mContext,data.getHairdresser_id());
                 }
             }
         });

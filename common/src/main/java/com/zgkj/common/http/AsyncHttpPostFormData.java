@@ -1,5 +1,7 @@
 package com.zgkj.common.http;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,7 +16,13 @@ public final class AsyncHttpPostFormData {
         if (headerValue == null) {
             headerValue = "";
         }
-        mFormData.put(headerName, String.valueOf(headerValue));
+        String value="";
+        try {
+            value=URLDecoder.decode(String.valueOf(headerValue), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        mFormData.put(headerName, value);
         return this;
     }
 

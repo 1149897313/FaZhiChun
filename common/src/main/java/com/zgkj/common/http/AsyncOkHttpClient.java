@@ -1,7 +1,10 @@
 package com.zgkj.common.http;
 
 
+import android.util.Log;
+
 import com.zgkj.common.Common;
+import com.zgkj.common.utils.AccountManagers;
 import com.zgkj.common.utils.MD5Util;
 import com.zgkj.common.utils.SignUtil;
 
@@ -10,6 +13,7 @@ import java.io.IOException;
 import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.net.HttpCookie;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -78,18 +82,30 @@ public class AsyncOkHttpClient {
     }
 
 
-    public void postFile(String url, AsyncHttpPostFormData formData, final AsyncResponseHandler responseHandler) {
+    public void postFile(String method, AsyncHttpPostFormData formData, final AsyncResponseHandler responseHandler) {
+        String url=Common.Constant.API_URL+method;
         Request.Builder requestBuilder = new Request.Builder();
         requestBuilder.url(url);
-//        requestBuilder.addHeader("","");
         MultipartBody.Builder multipartBody = new MultipartBody.Builder();
         multipartBody.setType(MultipartBody.FORM);
-        String paramString = url;
-        if (url.indexOf("?") > 0) {
-            paramString += "&";
+        if (formData != null) {
+            formData.addFormData("is_from","android");
+            formData.addFormData("request_time",System.currentTimeMillis()/1000);
+            String paramString = url;
+            if (url.indexOf("?") > 0) {
+                paramString += "&";
+            } else {
+                paramString += "?";
+            }
+            Map<String, Object> formDataMap = formData.getFormData();
+            String sign= SignUtil.createSign(formDataMap,"fazhichun");
 
-        } else {
-            paramString += "?";
+            formData.addFormData("sign",sign);
+
+            Set<String> postParamKeys = formDataMap.keySet();
+            for (String key : postParamKeys) {
+                multipartBody.addFormDataPart(key, formDataMap.get(key).toString());
+            }
         }
         Map<String, Object> paramsMap = formData.getFormData();
         for (String key : paramsMap.keySet()) {
@@ -103,10 +119,9 @@ public class AsyncOkHttpClient {
             } else {
                 multipartBody.addFormDataPart(key, object.toString());
             }
-
         }
-
         requestBuilder.post(multipartBody.build());
+        requestBuilder.addHeader("access-token", AccountManagers.getToken());
         Request request = requestBuilder.build();
         executeRequest(mOkHttpClient, request, responseHandler);
 
@@ -128,7 +143,6 @@ public class AsyncOkHttpClient {
             }
             Map<String, Object> formDataMap = formData.getFormData();
             String sign= SignUtil.createSign(formDataMap,"fazhichun");
-
             formData.addFormData("sign",sign);
 
             Set<String> postParamKeys = formDataMap.keySet();
@@ -137,9 +151,10 @@ public class AsyncOkHttpClient {
             }
         }
         requestBuilder.post(formBodyBuilder.build());
-        requestBuilder.addHeader("access-token","0e9dce41_8af7_c1c2_4ddf_8ffff4d99d2b");
+        requestBuilder.addHeader("Connection", "close");
+        requestBuilder.addHeader("access-token", AccountManagers.getToken());
+        Log.i(TAG, "token: "+AccountManagers.getToken());
         Request request = requestBuilder.build();
-        request.headers("");
         executeRequest(mOkHttpClient, request, responseHandler);
     }
 

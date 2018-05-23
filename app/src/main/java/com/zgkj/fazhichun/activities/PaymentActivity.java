@@ -2,9 +2,11 @@ package com.zgkj.fazhichun.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.IdRes;
 import android.support.annotation.IntDef;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -47,17 +49,27 @@ public class PaymentActivity extends ToolbarActivity implements PaymentResultDia
     private LoadManager mLoadManager;
     private boolean mIsWechatPay;
     private boolean mIsAlipayPay;
-
+    private String orderId;
+    private String pay_money;
 
     /**
      * 支付订单显示界面
      *
      * @param context
      */
-    public static void show(Context context) {
-        context.startActivity(new Intent(context, PaymentActivity.class));
+    public static void show(Context context,String orderId,String pay_money) {
+        Intent intent = new Intent(context, PaymentActivity.class);
+        intent.putExtra("ID", orderId);
+        intent.putExtra("MONEY", pay_money);
+        context.startActivity(intent);
     }
 
+    @Override
+    protected boolean initArgs(Bundle bundle) {
+        orderId = bundle.getString("ID");
+        pay_money=bundle.getString("MONEY");
+        return !TextUtils.isEmpty(orderId) && !TextUtils.isEmpty(pay_money);
+    }
 
     @Override
     protected int getLayoutSourceId() {
@@ -82,21 +94,20 @@ public class PaymentActivity extends ToolbarActivity implements PaymentResultDia
         mAlipayLayout.setOnClickListener(this);
         mPaymentView.setOnClickListener(this);
 
+
         mLoadManager = LoadFactory.getInstance().register(mContentLayout, new AbsView.OnReloadListener() {
             @Override
             public void onReload(View view) {
 
             }
         });
+    }
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mLoadManager.showSuccessView();
-            }
-        }, 1000);
-
-
+    @Override
+    protected void initDatas() {
+        super.initDatas();
+        mPriceView.setText("￥"+pay_money);
+        mLoadManager.showSuccessView();
     }
 
     @Override
@@ -109,6 +120,7 @@ public class PaymentActivity extends ToolbarActivity implements PaymentResultDia
                 changeAlipayShowState();        // 支付宝支付
                 break;
             case R.id.payment:      // 支付
+                showPaymentResultDialogFragment();
                 choicePayWay();
                 break;
             default:
@@ -217,6 +229,4 @@ public class PaymentActivity extends ToolbarActivity implements PaymentResultDia
     public void onSeeOrderInfo() {
 
     }
-
-
 }

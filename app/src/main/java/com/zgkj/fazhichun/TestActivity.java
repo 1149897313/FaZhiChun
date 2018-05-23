@@ -8,7 +8,6 @@ import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -16,6 +15,12 @@ import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+
+import com.zgkj.common.utils.DensityUtil;
+import com.zgkj.common.utils.PingYinUtil;
+import com.zgkj.common.widgets.LetterListView;
+import com.zgkj.fazhichun.adapter.city.CityListAdapter;
+import com.zgkj.fazhichun.entity.city.City;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -46,7 +51,6 @@ public class TestActivity extends AppCompatActivity implements LetterListView.On
 
     private TextView letterOverlay; // 对话框首字母textview
     private OverlayThread overlayThread; // 显示首字母对话框
-    private DatabaseHelper databaseHelper;
 
     private boolean isScroll;
     private boolean isOverlayReady;
@@ -59,13 +63,11 @@ public class TestActivity extends AppCompatActivity implements LetterListView.On
         city_container = (ListView) findViewById(R.id.city_container);
         letter_container = (LetterListView) findViewById(R.id.letter_container);
 
-        databaseHelper = new DatabaseHelper(this);
         handler = new Handler();
         setupActionBar();
 
         initCity();
         initHotCity();
-        initHistoryCity();
         setupView();
         initOverlay();
     }
@@ -79,8 +81,6 @@ public class TestActivity extends AppCompatActivity implements LetterListView.On
         allCities.add(city);
         city = new City("全部", "3"); // 全部城市
         allCities.add(city);
-        citiesData = getCityList();
-        allCities.addAll(citiesData);
     }
 
     /**
@@ -111,48 +111,6 @@ public class TestActivity extends AppCompatActivity implements LetterListView.On
         hotCities.add(city);
     }
 
-    private void initHistoryCity() {
-        SQLiteDatabase db = databaseHelper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("select * from recent_city order by date desc limit 0, 3", null);
-        while (cursor.moveToNext()) {
-            historyCities.add(cursor.getString(1));
-        }
-        cursor.close();
-        db.close();
-    }
-
-    public void addHistoryCity(String name) {
-        SQLiteDatabase db = databaseHelper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("select * from recent_city where name = '" + name + "'", null);
-        if (cursor.getCount() > 0) {
-            db.delete("recent_city", "name = ?", new String[]{name});
-        }
-        db.execSQL("insert into recent_city(name, date) values('" + name + "', " + System.currentTimeMillis() + ")");
-        db.close();
-    }
-
-
-    private ArrayList<City> getCityList() {
-        DBHelper dbHelper = new DBHelper(this);
-        ArrayList<City> list = new ArrayList<>();
-        try {
-            dbHelper.createDataBase();
-            SQLiteDatabase db = dbHelper.getWritableDatabase();
-            Cursor cursor = db.rawQuery("select * from city", null);
-            City city;
-            while (cursor.moveToNext()) {
-                city = new City(cursor.getString(1), cursor.getString(2));
-                list.add(city);
-            }
-            cursor.close();
-            db.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Collections.sort(list, comparator);
-        return list;
-    }
-
 
     /**
      * a-z排序
@@ -175,7 +133,7 @@ public class TestActivity extends AppCompatActivity implements LetterListView.On
         city_container.setOnScrollListener(this);
         letter_container.setOnTouchingLetterChangedListener(this);
 
-        cityListAdapter = new CityListAdapter(this, allCities, hotCities, historyCities, letterIndex);
+//        cityListAdapter = new CityListAdapter(this, allCities, hotCities, historyCities, letterIndex);
         city_container.setAdapter(cityListAdapter);
     }
 

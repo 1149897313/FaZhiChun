@@ -61,7 +61,7 @@ public class HistoryAdapter extends RecyclerViewAdapter<String> {
         }
 
         @Override
-        protected void onBind(String data) {
+        protected void onBind(String data,int position) {
 
             mMoneyView.setText("2000.00");
             mStateView.setText("消费");

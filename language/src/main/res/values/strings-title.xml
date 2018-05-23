@@ -34,13 +34,19 @@
     <!--IntroduceActivity发型师介绍-->
     <string name="title_introduce_name">发型师介绍</string>
 
+    <string name="title_validation">消费验证</string>
 
     <string name="title_wallet">推广管理</string>
 
     <string name="title_open_member">开通会员</string>
 
+    <string name="title_coupons_order">优惠券</string>
+
     <string name="title_coupons">我的优惠券</string>
 
+    <string name="title_payment_code">设置支付密码</string>
+
+    <string name="title_withdraw_deposit">提现</string>
 
 
     <!--CommentActivity评论列表-->

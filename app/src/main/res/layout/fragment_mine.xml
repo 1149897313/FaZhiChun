@@ -60,7 +60,7 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="146dp"
+            android:layout_height="186dp"
             android:background="@drawable/ic_mine_bg">
 
             <LinearLayout
@@ -175,8 +175,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/len_54"
                     android:paddingLeft="@dimen/len_10"
-                    android:paddingRight="@dimen/len_10"
-                    android:visibility="gone">
+                    android:paddingRight="@dimen/len_10">
 
                     <TextView
                         android:id="@+id/voucher_label"
@@ -421,10 +420,16 @@
 
             </RelativeLayout>
 
-
         </LinearLayout>
 
-
+        <ImageView
+            android:id="@+id/tzhy_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/font_20"
+            android:layout_centerVertical="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/mine_tzhy" />
     </LinearLayout>
 
 

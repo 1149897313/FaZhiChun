@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/pay_no_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:background="@drawable/icon_djq" />
+
+    <TextView
+        android:id="@+id/pay_no_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/pay_no_icon"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/len_6"
+        android:textSize="@dimen/font_14"
+        android:text="NOMM1" />
+
+    <TextView
+        android:id="@+id/right"
+        android:layout_width="wrap_content"
+        android:text="使用"
+        android:layout_alignParentRight="true"
+        android:textSize="@dimen/font_10"
+        android:textColor="@color/textColorLight"
+        android:paddingTop="@dimen/len_2"
+        android:paddingBottom="@dimen/len_2"
+        android:paddingLeft="@dimen/len_10"
+        android:paddingRight="@dimen/len_10"
+        android:background="@drawable/selector_bg_order_state_btn"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/refund"
+        android:layout_width="wrap_content"
+        android:text="退款"
+        android:textSize="@dimen/font_10"
+        android:textColor="@color/textColorAccent"
+        android:layout_marginRight="@dimen/len_10"
+        android:visibility="gone"
+        android:paddingTop="@dimen/len_2"
+        android:paddingBottom="@dimen/len_2"
+        android:paddingLeft="@dimen/len_10"
+        android:paddingRight="@dimen/len_10"
+        android:layout_toLeftOf="@id/right"
+        android:background="@drawable/shape_bg_introduce_label"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

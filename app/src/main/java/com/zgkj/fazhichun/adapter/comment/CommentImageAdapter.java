@@ -43,7 +43,7 @@ public class CommentImageAdapter extends RecyclerViewAdapter<String> {
         }
 
         @Override
-        protected void onBind(String data) {
+        protected void onBind(String data,int position) {
             Picasso.get().load(data).placeholder(R.drawable.none_img)
                     .into(mCommentImageView);
         }

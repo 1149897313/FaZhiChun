@@ -21,12 +21,12 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     api project(':factory')
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
-    implementation files('libs/pinyin4android1.0.jar')
-    implementation files('libs/pinyin4j-2.5.0.jar')
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.bigkoo:convenientbanner:2.0.5'
+    implementation project(path: ':lib-zxing')
 }

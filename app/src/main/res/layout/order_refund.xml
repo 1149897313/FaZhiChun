@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--标题栏-->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/ToolbarStyle">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="申请退款"
+            android:textColor="@color/textColorFirst"
+            android:textSize="@dimen/textSizeSubhead" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <FrameLayout
+        android:id="@+id/content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/nested_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/len_4"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:text="退款原因（请至少选择一项）"
+                    android:padding="@dimen/len_16"
+                    android:textSize="@dimen/font_14"
+                    android:layout_height="wrap_content" />
+
+                <RadioGroup
+                    android:id="@+id/radio_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorLight"
+                    android:orientation="vertical"
+                    android:textSize="@dimen/font_14"
+                    android:paddingBottom="@dimen/len_20"
+                    android:paddingLeft="@dimen/len_16"
+                    android:paddingRight="@dimen/len_16"
+                    android:paddingTop="@dimen/font_20">
+
+                    <RadioButton
+                        android:id="@+id/refund_one"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:button="@null"
+                        android:drawableRight="@drawable/rb_nobtn_selector"
+                        android:drawablePadding="@dimen/len_12"
+                        android:text="门店无法（或拒绝）提供服务"
+                        android:textColor="@drawable/tag_textcolor" />
+                    <RadioButton
+                        android:id="@+id/refund_two"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/len_10"
+                        android:button="@null"
+                        android:drawableRight="@drawable/rb_nobtn_selector"
+                        android:drawablePadding="@dimen/len_12"
+                        android:text="门店服务态度恶劣"
+                        android:textColor="@drawable/tag_textcolor" />
+                    <RadioButton
+                        android:id="@+id/refund_three"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/len_10"
+                        android:button="@null"
+                        android:drawableRight="@drawable/rb_nobtn_selector"
+                        android:drawablePadding="@dimen/len_12"
+                        android:text="信息与宣传有误"
+                        android:textColor="@drawable/tag_textcolor" />
+                    <RadioButton
+                        android:id="@+id/refund_four"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/len_10"
+                        android:button="@null"
+                        android:drawableRight="@drawable/rb_nobtn_selector"
+                        android:drawablePadding="@dimen/len_12"
+                        android:text="计划有变，没时间消费"
+                        android:textColor="@drawable/tag_textcolor" />
+                    <RadioButton
+                        android:id="@+id/refund_six"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/len_10"
+                        android:button="@null"
+                        android:drawableRight="@drawable/rb_nobtn_selector"
+                        android:drawablePadding="@dimen/len_12"
+                        android:text="买错了，重新下单"
+                        android:textColor="@drawable/tag_textcolor" />
+                </RadioGroup>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/len_10"
+                    android:background="@color/colorLight"
+                    android:orientation="vertical"
+                    android:padding="@dimen/len_12">
+
+                    <EditText
+                        android:id="@+id/text_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="140dp"
+                        android:background="@drawable/shape_bg_editl"
+                        android:gravity="top"
+                        android:hint="其他原因"
+                        android:padding="@dimen/len_6"
+                        android:textSize="@dimen/font_12" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </android.support.v4.widget.NestedScrollView>
+
+        <!--底部按钮模块-->
+        <TextView
+            android:id="@+id/refund_order"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/len_44"
+            android:layout_gravity="bottom|center_vertical"
+            android:background="@drawable/selector_bg_commodity_buy_btn"
+            android:gravity="center"
+            android:text="确认退款"
+            android:textColor="@color/textColorLight"
+            android:textSize="@dimen/textSizeBody" />
+    </FrameLayout>
+
+</LinearLayout>

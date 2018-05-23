@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -13,8 +14,11 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.gyf.barlibrary.ImmersionBar;
+import com.zgkj.common.Common;
 import com.zgkj.common.app.Activity;
 import com.zgkj.common.app.Fragment;
+import com.zgkj.common.utils.AppUtil;
+import com.zgkj.common.utils.SPUtil;
 import com.zgkj.fazhichun.R;
 import com.zgkj.fazhichun.fragments.main.HomeFragment;
 import com.zgkj.fazhichun.fragments.main.MineFragment;
@@ -134,12 +138,6 @@ public class MainActivity extends Activity implements
         mAMapLocationClient.setLocationListener(mAMapLocationListener);
         // 启动定位
         mAMapLocationClient.startLocation();
-        // 延迟两秒开启定位
-        new android.os.Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-            }
-        }, 2000);
     }
 
 
@@ -157,6 +155,38 @@ public class MainActivity extends Activity implements
         }
     }
 
+
+    //声明一个long类型变量：用于存放上一点击“返回键”的时刻
+    private long mExitTime;
+    /**
+     * 重写返回按钮的响应事件
+     *
+     * @param keyCode
+     * @param event
+     * @return
+     */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        // 用户按下返回按键
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (System.currentTimeMillis() - mExitTime > 2000L) {
+                mExitTime = System.currentTimeMillis();
+            } else {
+                // 否则退出程序
+                AppUtil.finishAll();
+            }
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        // 停止服务
+        onStopLocation();
+    }
 
     /**
      * 默认的定位参数
@@ -186,12 +216,18 @@ public class MainActivity extends Activity implements
     AMapLocationListener mAMapLocationListener = new AMapLocationListener() {
         @Override
         public void onLocationChanged(AMapLocation aMapLocation) {
-            if (aMapLocation != null) {
-                String address = aMapLocation.getAddress();
 
+            if (null != aMapLocation) {
                 String city = aMapLocation.getCity();
-                if (!TextUtils.isEmpty(address)) {
-                    Toast.makeText(mContext, "定位成功！当前地址为: " + address, Toast.LENGTH_SHORT).show();
+                System.out.println("经度："+aMapLocation.getLongitude()+":纬度"+aMapLocation.getLatitude());
+                String longitude = String.valueOf(aMapLocation.getLongitude());
+                String latitude = String.valueOf(aMapLocation.getLatitude());
+
+                if (!TextUtils.isEmpty(city) && !TextUtils.isEmpty(longitude) && !TextUtils.isEmpty(latitude)) {
+                    // 将城市名和经纬度保存到本地数据库
+                    SPUtil.put(Common.Constant.CITY_NAME, city);
+                    SPUtil.put(Common.Constant.LONGITUDE_ID, longitude);
+                    SPUtil.put(Common.Constant.LATITUDE_ID, latitude);
                     // 通知定位成功
                     LocationStateObserver.getInstance().notifyObserverLocationSuccess();
                 } else {
@@ -200,12 +236,10 @@ public class MainActivity extends Activity implements
 
                     Toast.makeText(mContext, "错误码：" + aMapLocation.getErrorCode() + "   " + aMapLocation.getLocationDetail(), Toast.LENGTH_LONG).show();
                 }
-            } else {
+            }else{
                 // 通知定位失败
                 LocationStateObserver.getInstance().notifyObserverLocationFailure();
             }
-
-
         }
     };
 }

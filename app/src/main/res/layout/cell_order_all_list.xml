@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/len_16"
+    android:paddingRight="@dimen/len_16"
+    android:paddingTop="@dimen/len_10"
+    android:paddingBottom="@dimen/len_10"
+    android:background="@drawable/selector_bg_white_item">
+
+    <ImageView
+        android:id="@+id/shop_image"
+        android:layout_width="@dimen/len_78"
+        android:layout_height="@dimen/len_70"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_barbershop_bg"/>
+
+
+    <TextView
+        android:id="@+id/shop_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/shop_image"
+        android:layout_toRightOf="@id/shop_image"
+        android:layout_marginLeft="@dimen/len_10"
+        android:layout_toLeftOf="@id/info"
+        android:layout_marginRight="@dimen/len_4"
+        android:text="宝莱私人订制"
+        android:textColor="@color/textColorFirst"
+        android:textSize="@dimen/textSizeBody"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:gravity="left|center_vertical"/>
+
+    <TextView
+        android:id="@+id/type_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/shop_name"
+        android:layout_alignLeft="@id/shop_name"
+        android:layout_centerVertical="true"
+        android:text="[专业设计]"
+        android:textSize="@dimen/textSizeCaption"
+        android:textColor="@color/textColorOrange"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:gravity="left|center_vertical"/>
+
+    <TextView
+        android:id="@+id/goods_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/type_name"
+        android:layout_marginLeft="@dimen/len_6"
+        android:layout_centerVertical="true"
+        android:textColor="@color/textColorSecond"
+        android:layout_alignBaseline="@id/type_name"
+        android:textSize="@dimen/textSizeCaption"
+        android:gravity="left|center_vertical"
+        android:singleLine="true"
+        android:ellipsize="end"/>
+
+    <TextView
+        android:id="@+id/info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/shop_image"
+        android:text="待使用"
+        android:textSize="@dimen/textSizeCaption"
+        android:textColor="@color/textColorThird"
+        android:gravity="right|center_vertical"
+        android:singleLine="true"
+        android:ellipsize="end"/>
+
+    <TextView
+        android:id="@+id/amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/shop_image"
+        android:layout_alignLeft="@id/shop_name"
+        android:layout_alignBottom="@id/shop_image"
+        android:text="数量:1000"
+        android:textColor="@color/textColorSecond"
+        android:textSize="@dimen/textSizeCaption"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:gravity="left|center_vertical"/>
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/amount"
+        android:layout_alignBottom="@id/shop_image"
+        android:layout_marginLeft="@dimen/len_10"
+        android:layout_toLeftOf="@id/state"
+        android:layout_marginRight="@dimen/len_4"
+        android:text="价格:19980.00"
+        android:textColor="@color/textColorSecond"
+        android:textSize="@dimen/textSizeCaption"
+        android:gravity="left|center_vertical"
+        android:singleLine="true"
+        android:ellipsize="end"/>
+
+    <TextView
+        android:id="@+id/state"
+        android:layout_width="@dimen/len_50"
+        android:layout_height="@dimen/len_24"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@id/shop_image"
+        android:text="@string/label_main_order_payment_button"
+        android:textSize="@dimen/textSizeCaption"
+        android:textColor="@color/textColorLight"
+        android:gravity="center"
+        android:background="@drawable/selector_bg_order_state_btn"/>
+
+
+</RelativeLayout>

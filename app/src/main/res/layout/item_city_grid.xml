@@ -17,7 +17,7 @@
         android:textColor="@color/colorPrimaryDark"
         android:textSize="14sp" />
 
-    <com.zgkj.fazhichun.NoScrollGridView
+    <com.zgkj.common.widgets.NoScrollGridView
         android:id="@+id/grid_city"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -1,11 +1,12 @@
 package com.zgkj.fazhichun.adapter.barbershop;
 
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+import com.zgkj.common.widgets.CircleImageView;
 import com.zgkj.common.widgets.recycler.RecyclerViewAdapter;
+import com.zgkj.fazhichun.CropSquareTransformation;
 import com.zgkj.fazhichun.R;
 import com.zgkj.fazhichun.entity.shop_service.ShopService;
 
@@ -34,7 +35,7 @@ public class ShopServiceAdapter extends RecyclerViewAdapter<ShopService> {
         /**
          * UI
          */
-        private ImageView mServiceImageView;
+        private CircleImageView mServiceImageView;
         private TextView mServiceNameView;
 
 
@@ -45,13 +46,13 @@ public class ShopServiceAdapter extends RecyclerViewAdapter<ShopService> {
          */
         public ShopServiceViewHolder(View itemView) {
             super(itemView);
-            mServiceImageView = itemView.findViewById(R.id.service_image);
+            mServiceImageView = itemView.findViewById(R.id.service_climage);
             mServiceNameView = itemView.findViewById(R.id.service_name);
         }
 
         @Override
-        protected void onBind(ShopService data) {
-            Picasso.get().load(data.getService_url()).placeholder(R.drawable.none_img)
+        protected void onBind(ShopService data,int position) {
+            Picasso.get().load("".equals(data.getService_url()) ? mContext.getResources().getString(R.string.none_image_url) : data.getService_url()).placeholder(R.drawable.none_img)
                     .into(mServiceImageView);
             mServiceNameView.setText(data.getService_name());
         }

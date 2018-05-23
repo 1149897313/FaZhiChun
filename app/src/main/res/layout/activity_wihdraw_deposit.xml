@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <!--标题栏-->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/ToolbarStyle">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/title_withdraw_deposit"
+            android:textColor="@color/textColorFirst"
+            android:textSize="@dimen/textSizeSubhead" />
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:text="提现到支付宝"
+        android:padding="@dimen/len_14"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="@dimen/len_8">
+
+        <TextView
+            android:id="@+id/text_pay"
+            android:layout_width="@dimen/len_0"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:layout_marginLeft="@dimen/len_6"
+            android:text="支付宝账户"
+            android:textColor="@color/textColorFirst"
+            android:textSize="@dimen/textSizeBody" />
+
+        <com.zgkj.common.widgets.text.ClearTextIconEditText
+            android:id="@+id/account_number"
+            android:layout_width="@dimen/len_0"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/len_10"
+            android:layout_weight="7"
+            android:background="@null"
+            android:hint="请输入支付宝账户名"
+            android:paddingBottom="@dimen/len_4"
+            android:paddingTop="@dimen/len_4"
+            android:singleLine="true"
+            android:textColor="@color/textColorSecond"
+            android:textSize="@dimen/textSizeBody"
+            app:clearIconDrawable="@drawable/ic_clear_text" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:layout_marginTop="@dimen/len_1"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="@dimen/len_8">
+
+        <TextView
+            android:layout_width="@dimen/len_0"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:layout_marginLeft="@dimen/len_6"
+            android:text="用户名"
+            android:textColor="@color/textColorFirst"
+            android:textSize="@dimen/textSizeBody" />
+
+        <com.zgkj.common.widgets.text.ClearTextIconEditText
+            android:id="@+id/name"
+            android:layout_width="@dimen/len_0"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/len_10"
+            android:layout_weight="7"
+            android:background="@null"
+            android:hint="请输入用户姓名全称"
+            android:paddingBottom="@dimen/len_4"
+            android:paddingTop="@dimen/len_4"
+            android:singleLine="true"
+            android:textColor="@color/textColorSecond"
+            android:textSize="@dimen/textSizeBody"
+            app:clearIconDrawable="@drawable/ic_clear_text" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:layout_marginTop="@dimen/len_1"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="@dimen/len_8">
+
+        <TextView
+            android:layout_width="@dimen/len_0"
+            android:layout_height="wrap_content"
+            android:layout_weight="3.2"
+            android:layout_marginLeft="@dimen/len_6"
+            android:text="本次提现金额  ￥"
+            android:textColor="@color/textColorFirst"
+            android:textSize="@dimen/textSizeBody" />
+
+        <com.zgkj.common.widgets.text.ClearTextIconEditText
+            android:id="@+id/tx_balance"
+            android:layout_width="@dimen/len_0"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/len_10"
+            android:layout_weight="7"
+            android:background="@null"
+            android:inputType="numberDecimal"
+            android:digits="1234567890."
+            android:paddingBottom="@dimen/len_4"
+            android:paddingTop="@dimen/len_4"
+            android:singleLine="true"
+            android:textColor="@color/textColorSecond"
+            android:textSize="@dimen/textSizeBody"
+            app:clearIconDrawable="@drawable/ic_clear_text" />
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:layout_marginTop="@dimen/len_1"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="@dimen/len_8">
+        <TextView
+            android:id="@+id/balance"
+            android:layout_width="wrap_content"
+            android:text="当前奖励金余额￥"
+            android:textSize="@dimen/font_12"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/all_withdraw_deposit"
+            android:layout_width="wrap_content"
+            android:text="全部提现"
+            android:paddingLeft="@dimen/len_10"
+            android:onClick="onAction"
+            android:paddingRight="@dimen/len_6"
+            android:layout_alignParentRight="true"
+            android:textSize="@dimen/font_12"
+            android:textColor="@color/textColorBlue"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/sumbit_button"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/font_16"
+        android:layout_marginRight="@dimen/font_16"
+        android:background="@drawable/selector_bg_btn"
+        android:textColor="@color/textColorPrimary"
+        android:layout_marginTop="180dp"
+        android:onClick="@string/on_action"
+        android:text="确认提现"
+        android:layout_height="@dimen/len_44" />
+
+</LinearLayout>

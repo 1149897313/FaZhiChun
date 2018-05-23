@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -70,7 +71,7 @@ public class BarberActivity extends ToolbarActivity{
     @Override
     protected boolean initArgs(Bundle bundle) {
         hairdresserId=bundle.getString("ID");
-        return "".equals(hairdresserId) || hairdresserId==null?false:true;
+        return !TextUtils.isEmpty(hairdresserId);
     }
 
     @Override

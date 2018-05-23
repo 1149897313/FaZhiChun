@@ -55,7 +55,7 @@ public class BarberAdapter extends RecyclerViewAdapter<BarberInfo> {
         }
 
         @Override
-        protected void onBind(BarberInfo data) {
+        protected void onBind(BarberInfo data,int p) {
             Picasso.get().load("".equals(data.getPic_url())?mContext.getResources().getString(R.string.none_image_url):data.getPic_url()).placeholder(R.drawable.none_img)
                     .into(barber_image);
             barber_name.setText(data.getBarber_name());

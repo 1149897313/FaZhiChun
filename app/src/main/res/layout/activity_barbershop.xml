@@ -39,7 +39,6 @@
                 android:gravity="left|center_vertical"
                 android:padding="@dimen/len_16"
                 android:singleLine="true"
-                android:text="木一.时尚造型"
                 android:textColor="@color/textColorFirst"
                 android:textSize="@dimen/textSizeMiddle" />
 
@@ -110,7 +109,6 @@
                         android:layout_alignLeft="@id/star_bar_layout"
                         android:layout_below="@id/star_bar_layout"
                         android:layout_marginTop="@dimen/len_10"
-                        android:text="营业至22:00"
                         android:textColor="@color/textColorSecond" />
 
                     <!--立即预约按钮-->
@@ -167,7 +165,6 @@
                             android:ellipsize="end"
                             android:gravity="left|center_vertical"
                             android:maxLines="1"
-                            android:text="渝北区嘉州路中渝恒大广场"
                             android:textColor="@color/textColorFirst"
                             android:textSize="@dimen/textSizeBody" />
 

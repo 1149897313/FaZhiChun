@@ -1,46 +1,56 @@
 package com.zgkj.fazhichun.activities;
 
 import android.Manifest;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.Handler;
-import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.content.FileProvider;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 import com.yalantis.ucrop.UCrop;
-import com.zgkj.common.app.Application;
 import com.zgkj.common.app.ToolbarActivity;
 import com.zgkj.common.glide.GlideApp;
+import com.zgkj.common.http.AsyncHttpPostFormData;
+import com.zgkj.common.http.AsyncHttpResponse;
+import com.zgkj.common.http.AsyncOkHttpClient;
+import com.zgkj.common.http.AsyncResponseHandler;
+import com.zgkj.common.utils.Base64Coder;
 import com.zgkj.common.utils.FileUtil;
-import com.zgkj.common.utils.PhotoUtil;
 import com.zgkj.common.widgets.CircleImageView;
 import com.zgkj.common.widgets.load.LoadFactory;
 import com.zgkj.common.widgets.load.core.LoadManager;
 import com.zgkj.common.widgets.load.view.AbsView;
+import com.zgkj.factory.model.api.RspModel;
+import com.zgkj.fazhichun.App;
 import com.zgkj.fazhichun.R;
+import com.zgkj.fazhichun.entity.user.HeardImgUp;
 import com.zgkj.fazhichun.fragments.dialog.portrait.UpdatePortraitDialogFragment;
+import com.zgkj.fazhichun.view.EmptyView;
+import com.zgkj.fazhichun.view.NetErrorView;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -65,7 +75,6 @@ public class PersonalActivity extends ToolbarActivity implements View.OnClickLis
     private TextView mNicknameView;
     private RelativeLayout mPhoneLayout;
     private TextView mPhoneView;
-
 
 
     /**
@@ -144,7 +153,6 @@ public class PersonalActivity extends ToolbarActivity implements View.OnClickLis
     @Override
     protected void initDatas() {
         super.initDatas();
-
 
 
     }
@@ -242,7 +250,6 @@ public class PersonalActivity extends ToolbarActivity implements View.OnClickLis
     }
 
 
-
     /**
      * 跳转到相册
      */
@@ -251,11 +258,10 @@ public class PersonalActivity extends ToolbarActivity implements View.OnClickLis
         Intent intent = new Intent(Intent.ACTION_PICK,
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
-        intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,"image/*");
+        intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
 
         startActivityForResult(intent, GALLERY_REQUEST_CODE);
     }
-
 
 
     /**
@@ -267,9 +273,9 @@ public class PersonalActivity extends ToolbarActivity implements View.OnClickLis
         // 配置裁剪的相关属性
         UCrop.Options options = new UCrop.Options();
         // 修改标题栏颜色
-//        options.setToolbarColor(getResources().getColor(R.color.orange_400));
+        //        options.setToolbarColor(getResources().getColor(R.color.orange_400));
         // 设置状态栏颜色
-//        options.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
+        //        options.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
         // 设置标题文字
         options.setToolbarTitle("裁剪头像");
         // 隐藏底部工具
@@ -288,9 +294,9 @@ public class PersonalActivity extends ToolbarActivity implements View.OnClickLis
         //设置是否展示矩形裁剪框
         options.setShowCropFrame(true);
         //设置裁剪框横竖线的宽度
-//        options.setCropGridStrokeWidth(4);
+        //        options.setCropGridStrokeWidth(4);
         //设置裁剪框横竖线的颜色
-//        options.setCropGridColor(Color.YELLOW);
+        //        options.setCropGridColor(Color.YELLOW);
         //设置竖线的数量
         options.setCropGridColumnCount(2);
         //设置横线的数量
@@ -314,6 +320,109 @@ public class PersonalActivity extends ToolbarActivity implements View.OnClickLis
                 // 加载配置属性
                 .withOptions(options)
                 .start(this, CROP_REQUEST_CODE);
+    }
+
+    private void encode(String path) {
+        //decode to bitmap
+        Bitmap bitmap = BitmapFactory.decodeFile(path);
+        Log.d(TAG, "bitmap width: " + bitmap.getWidth() + " height: " + bitmap.getHeight());
+        //convert to byte array
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] bytes = baos.toByteArray();
+
+        //base64 encode
+        byte[] encode = Base64.encode(bytes, Base64.DEFAULT);
+        String encodeString = new String(encode);
+    }
+
+    /**
+     * 头像上传
+     *
+     * @param bitmap
+     */
+    private void upHeardImage(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] b = stream.toByteArray();
+        // 将图片流以字符串形式存储下来
+        String file = new String(Base64Coder.encodeLines(b));
+//
+//        long length = file.length();
+//        long segmentSize=3000;
+//        if (length <= segmentSize ) {// 长度小于等于限制直接打印
+//            Log.e("xx", file);
+//        }else {
+//            String msg=null;
+//            while (file.length() > segmentSize ) {// 循环分段打印日志
+//                String logContent = file.substring(0, 3000 );
+//                msg = file.replace(logContent, "");
+//                Log.e("xx", logContent);
+//            }
+//            Log.e("xx", msg);// 打印剩余日志
+//        }
+//        String file = "iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OTM5OUVCQTEzMTA2MTFFOEFERURCOTAwRERDNkQxRTciIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OTM5OUVCQTIzMTA2MTFFOEFERURCOTAwRERDNkQxRTciPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5Mzk5RUI5RjMxMDYxMUU4QURFREI5MDBEREM2RDFFNyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5Mzk5RUJBMDMxMDYxMUU4QURFREI5MDBEREM2RDFFNyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pu0tsl0AAAH4SURBVHjatJbLSwJRFMaPk4QJIeVGl0H0cNNSJSsKMqJF4TZaCeW2dbbKNu3aFRFBtC1qE/RAC0Oaf8DURUGrJIpW9hLsHOeMqc3D0enAJ8N9nJ937tzvXOv8bgl0og81hwqiPCgnt7+g0qhz1DEqp5XEogEaQ62hRqCxSKJWUddKnYJCmw21hUoYgACPTfBcmx6oGxVHLdFqwXhYeG6ccymC7KhTlB9aDz/nsiuBNlFeMC+8nLMGRBsfBvMjzLkroFiTe9LInsVk0BAq0Eq2QC+Ar0e9mxhW/Am1ClnkQ0AnUnxQHBYS9M5Ke5s+RMAX9FUEeCuoDh0l0IBabxANZx3Np8uuDfn4BthAI8rmVUH9QpV31cSgC2DBB+B2AKxM18KUILm85ht2Cmo9mSeAy7T07KqCNQEph5Vd2F3fQRu7fys9T3okWGwWoNNmHEIMWlFGrVeGXfDKHB0S5LNoCEKRFdjeQQ/2+PrbdiAagpRLCIGO9EYRLIql7f4ZYC+FtSBr+LgdyoUv2ao7aMQNnVX5q4vyHzc7Slx1K6ZK5XfnH0CU86q+Hi2TVZkIETnnn8JHTjVjEkzkXAW1OwMd3nHUdpN7VuK5E5xL8xb0joowMGUAkmJApHol1RakFvSBDLO7o/nAFHlt3QXyDnWGOtFyGIofAQYAT8iEQ1ZXA3gAAAAASUVORK5CYII=";
+
+        System.out.println("----:file:"+file);
+        AsyncOkHttpClient okHttpClient = new AsyncOkHttpClient();
+        AsyncHttpPostFormData AsyncHttpPostFormData = new AsyncHttpPostFormData();
+        AsyncHttpPostFormData.addFormData("image_path", file);
+        okHttpClient.post("/v1/user/save-heard-img", AsyncHttpPostFormData, new AsyncResponseHandler() {
+            @Override
+            public void onFailure(IOException e) {
+                mLoadManager.showStateView(NetErrorView.class);
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onSuccess(AsyncHttpResponse response) {
+                Log.i(TAG, "onSuccess:upHeardImage" + response.toString());
+                Type type = new TypeToken<RspModel<HeardImgUp>>() {
+                }.getType();
+                HeardImgUp order = getAnalysis(response, type, "upHeardImage");
+                if (order != null) {
+
+                } else {
+                    mLoadManager.showStateView(EmptyView.class);
+                }
+            }
+        });
+    }
+
+    /**
+     * 数据解析
+     *
+     * @param response
+     */
+    private <T> T getAnalysis(AsyncHttpResponse response, Type type, String log) {
+        switch (response.getCode()) {
+            case 200:
+                try {
+                    Gson gson = new Gson();
+                    RspModel<T> rspModel = gson.fromJson(response.getBody(), type);
+                    Log.i(TAG, "onSuccess: " + log + rspModel.toString());
+                    switch (rspModel.getCode()) {
+                        case 1:
+                            mLoadManager.showStateView(EmptyView.class);
+                            break;
+                        case 200:
+                            mLoadManager.showSuccessView();
+                            Log.i(TAG, log + ": " + rspModel.getData());
+                            return rspModel.getData();
+                        default:
+                            App.showMessage("data:code" + rspModel.getCode());
+                            mLoadManager.showStateView(EmptyView.class);
+                            break;
+                    }
+                } catch (JsonSyntaxException e) {
+                    e.printStackTrace();
+                }
+                break;
+            default:
+                mLoadManager.showStateView(EmptyView.class);
+                break;
+        }
+        return null;
     }
 
 
@@ -342,17 +451,24 @@ public class PersonalActivity extends ToolbarActivity implements View.OnClickLis
                     GlideApp.with(this)
                             .load(uri)
                             .into(mPortraitView);
+                    Bitmap bitmap = BitmapFactory.decodeFile(uri.getPath());
+
+                    upHeardImage(bitmap);
+
+
                     break;
                 default:
                     break;
             }
 
-        }else if (resultCode == UCrop.RESULT_ERROR){
+        } else if (resultCode == UCrop.RESULT_ERROR) {
             // 裁剪图片时出现位置的错误
             // TODO .....
         }
 
     }
+
+
 
 
     private void checkAndRequestPermission() {

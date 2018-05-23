@@ -3,12 +3,17 @@ package com.zgkj.common.app;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.gyf.barlibrary.ImmersionBar;
-import com.zgkj.common.R;
+import com.zgkj.common.http.AsyncHttpResponse;
+
+import java.lang.reflect.Type;
 
 /**
  * Descr:   Fragment碎片的基类
@@ -158,6 +163,7 @@ public abstract class Fragment extends android.support.v4.app.Fragment {
         return false;
     }
 
-
-
+    private <T> T getAnalysis(AsyncHttpResponse response, Type type, String log) {
+        return null;
+    }
 }

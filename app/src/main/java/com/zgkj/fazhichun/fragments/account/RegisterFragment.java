@@ -15,13 +15,16 @@ import com.zgkj.common.http.AsyncHttpPostFormData;
 import com.zgkj.common.http.AsyncHttpResponse;
 import com.zgkj.common.http.AsyncOkHttpClient;
 import com.zgkj.common.http.AsyncResponseHandler;
+import com.zgkj.common.utils.AccountManagers;
 import com.zgkj.common.utils.MobileUtil;
 import com.zgkj.common.widgets.text.ClearTextIconEditText;
 import com.zgkj.factory.model.api.RspModel;
 import com.zgkj.fazhichun.App;
 import com.zgkj.fazhichun.R;
+import com.zgkj.fazhichun.activities.MainActivity;
 import com.zgkj.fazhichun.entity.CodeStatus;
 import com.zgkj.fazhichun.entity.user.Account;
+import com.zgkj.fazhichun.view.EmptyView;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -208,31 +211,50 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onSuccess(AsyncHttpResponse response) {
                 Log.i(TAG, "onSuccess:onRegister " + response.toString());
-                if (response.getCode() == 200) {
-                    try {
-                        Gson gson = new Gson();
-                        Type type = new TypeToken<RspModel<Account>>() {
-                        }.getType();
-                        Log.i(TAG, "onSuccess:onRegister " + response.getBody());
-                        RspModel<Account> rspModel = gson.fromJson(response.getBody(), type);
-                        Log.i(TAG, "onSuccess:onRegister " + rspModel.toString());
-                        if (rspModel.getCode() == 200) {
-                            if ("T".equals(rspModel.getData().getIs_success())) {
-                                App.showMessage("注册成功");
-                            } else {
-                                App.showMessage(rspModel.getData().getErr_msg());
-                            }
-                        } else {
-                            App.showMessage(rspModel.getMessage());
-                        }
-
-                    } catch (JsonSyntaxException e) {
-                        e.printStackTrace();
+                Type type = new TypeToken<RspModel<Account>>() {
+                }.getType();
+                Account account = getAnalysis(response, type, "onRegister");
+                if (account != null) {
+                    if ("T".equals(account.getIs_success())) {
+                        AccountManagers.login(account.getToken(), "");
+                        App.showMessage("登录成功");
+                        MainActivity.show(mContext);
+                       back();
+                    } else {
+                        App.showMessage(account.getErr_msg());
                     }
                 }
             }
         });
     }
+
+    protected <T> T getAnalysis(AsyncHttpResponse response, Type type, String log) {
+        switch (response.getCode()) {
+            case 200:
+                try {
+                    Gson gson = new Gson();
+                    RspModel<T> rspModel = gson.fromJson(response.getBody(), type);
+                    Log.i(TAG, "onSuccess: " + log + rspModel.toString());
+                    switch (rspModel.getCode()) {
+                        case 1:
+                            break;
+                        case 200:
+                            return rspModel.getData();
+                        default:
+                            App.showMessage(rspModel.getMessage());
+                            break;
+                    }
+                } catch (JsonSyntaxException e) {
+                    e.printStackTrace();
+                }
+                break;
+            default:
+                App.showMessage("错误码："+response.getCode());
+                break;
+        }
+        return null;
+    }
+
 
 
     /**
@@ -277,6 +299,10 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         if (mSmsCodeCountDownTimer != null) {
             mSmsCodeCountDownTimer.cancel();
             mSmsCodeCountDownTimer = null;
+        }
+
+        if (getActivity() != null) {
+            getActivity().finish();
         }
     }
 

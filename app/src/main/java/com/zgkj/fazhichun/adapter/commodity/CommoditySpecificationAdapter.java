@@ -43,7 +43,7 @@ public class CommoditySpecificationAdapter extends RecyclerViewAdapter<String> {
 
 
         @Override
-        protected void onBind(String data) {
+        protected void onBind(String data,int position) {
 
 //            mSpecificationView.setText(data);
 

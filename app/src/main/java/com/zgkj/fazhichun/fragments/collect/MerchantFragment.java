@@ -109,7 +109,7 @@ public class MerchantFragment extends Fragment {
 
                 }else {
                     // 跳转到理发店详情界面
-                    BarberShopActivity.show(mContext,null);
+                    BarberShopActivity.show(mContext,data.getShop_id());
                 }
 
             }

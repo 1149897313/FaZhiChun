@@ -53,7 +53,7 @@ public class ShopImageAdapter extends RecyclerViewAdapter<String> {
          * @param data 被绑定的数据对象
          */
         @Override
-        protected void onBind(String data) {
+        protected void onBind(String data,int position) {
             Picasso.get().load(data).placeholder(R.drawable.none_img)
                     .into(mShopImageView);
         }

@@ -15,6 +15,15 @@ public class Coupon {
     private String  coupon_money;//优惠券面额
     private String end_time;//结束时间(时间戳)
     private String use_range;//json使用范围，hairdresser_name
+    private boolean selected;//状态
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
 
     public String getCoupon_id() {
         return coupon_id;
@@ -63,7 +72,8 @@ public class Coupon {
                 ", is_used='" + is_used + '\'' +
                 ", coupon_money='" + coupon_money + '\'' +
                 ", end_time='" + end_time + '\'' +
-                ", use_range=" + use_range +
+                ", use_range='" + use_range + '\'' +
+                ", selected=" + selected +
                 '}';
     }
 }

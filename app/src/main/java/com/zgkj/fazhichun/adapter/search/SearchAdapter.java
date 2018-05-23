@@ -103,7 +103,7 @@ public class SearchAdapter extends RecyclerViewAdapter<StoreListAndProductList> 
         }
 
         @Override
-        protected void onBind(StoreListAndProductList data) {
+        protected void onBind(StoreListAndProductList data,int position) {
             mShopNameView.setText(data.getShop_name());
             mScoreView.setText(String.valueOf(data.getShop_service_score()) + "分");
             mDistanceView.setText(String.valueOf(data.getDistance()));
@@ -187,7 +187,7 @@ public class SearchAdapter extends RecyclerViewAdapter<StoreListAndProductList> 
 
         @SuppressLint("StringFormatMatches")
         @Override
-        protected void onBind(Hairdresser data) {
+        protected void onBind(Hairdresser data,int position) {
             mPriceView.setText(mContext.getResources().getString(R.string.label_price, 35));
             mOriginalPriceView.setText(mContext.getResources().getString(R.string.label_original_price, 105));
             mSellNumberView.setText(mContext.getResources().getString(R.string.label_sell_number, 12));

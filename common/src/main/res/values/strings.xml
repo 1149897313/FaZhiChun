@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">common</string>
-    
+
+    <string name="on_action">onAction</string>
     
     <string name="prompt_quantity_view_illegal">你输入的购买数量不合法</string>
 

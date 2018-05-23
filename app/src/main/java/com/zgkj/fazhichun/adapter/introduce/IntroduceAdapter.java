@@ -48,7 +48,7 @@ public class IntroduceAdapter extends RecyclerViewAdapter<BarberService> {
         }
 
         @Override
-        protected void onBind(BarberService data) {
+        protected void onBind(BarberService data,int position) {
             Picasso.get().load("".equals(data.getPic_url())?mContext.getResources().getString(R.string.none_image_url):data.getPic_url()).placeholder(R.drawable.none_img)
                     .into(type_image);
             serviceName.setText(data.getHairdresser_name());

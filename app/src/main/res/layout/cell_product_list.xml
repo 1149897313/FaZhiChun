@@ -59,6 +59,19 @@
             android:layout_alignLeft="@id/shop_name"
             android:layout_centerVertical="true"
             android:text="美发造型"
+            android:textColor="@color/textColorOrange"
+            android:textSize="@dimen/textSizeCaption"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/goods_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="美发造型"
+            android:layout_toRightOf="@id/type_name"
             android:textColor="@color/textColorSecond"
             android:textSize="@dimen/textSizeCaption"
             android:singleLine="true"

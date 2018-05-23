@@ -2,7 +2,6 @@ package com.zgkj.fazhichun.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,8 +25,7 @@ import com.zgkj.common.widgets.recycler.decoration.DividerItemDecoration;
 import com.zgkj.common.widgets.recycler.decoration.SpaceItemDecoration;
 import com.zgkj.factory.model.api.RspModel;
 import com.zgkj.fazhichun.R;
-import com.zgkj.fazhichun.adapter.type.CouponsAdapter;
-import com.zgkj.fazhichun.entity.ShopList;
+import com.zgkj.fazhichun.adapter.coupons.CouponsAdapter;
 import com.zgkj.fazhichun.entity.coupon.Coupon;
 import com.zgkj.fazhichun.view.EmptyView;
 import com.zgkj.fazhichun.view.LoadingView;
@@ -35,7 +33,6 @@ import com.zgkj.fazhichun.view.NetErrorView;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

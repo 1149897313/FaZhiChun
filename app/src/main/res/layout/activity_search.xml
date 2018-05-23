@@ -10,22 +10,32 @@
         android:id="@+id/toolbar"
         style="@style/ToolbarStyle">
 
-        <com.zgkj.common.widgets.text.ClearTextIconEditText
-            android:id="@+id/search"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/len_32"
-            android:layout_marginRight="@dimen/len_16"
-            android:paddingLeft="@dimen/len_8"
-            android:drawableLeft="@drawable/ic_home_search"
-            android:drawablePadding="@dimen/len_10"
-            android:textColor="@color/textColorFirst"
-            android:textSize="@dimen/textSizeBody"
-            android:gravity="left|center_vertical"
-            android:layout_gravity="center_vertical"
-            android:hint="@string/label_search_find_stores_hint"
-            android:textColorHint="@color/textColorThird"
-            app:clearIconDrawable="@drawable/ic_clear_text"
-            android:background="@drawable/shape_bg_search_title"/>
+            android:background="@drawable/shape_bg_search_title"
+            android:layout_marginLeft="@dimen/len_6"
+            android:layout_marginRight="@dimen/len_20"
+            android:paddingLeft="@dimen/len_16"
+            android:layout_height="@dimen/len_32">
+            <EditText
+                android:id="@+id/search_edit"
+                android:layout_width="match_parent"
+                android:background="@null"
+                android:textSize="@dimen/textSizeBody"
+                android:layout_marginRight="@dimen/len_46"
+                android:maxLines="1"
+                android:hint="@string/label_search_find_stores_hint"
+                android:layout_height="match_parent" />
+            <ImageView
+                android:id="@+id/search_button"
+                android:layout_width="wrap_content"
+                android:src="@drawable/ic_home_search"
+                android:layout_alignParentRight="true"
+                android:paddingRight="@dimen/len_12"
+                android:clickable="true"
+                android:paddingLeft="@dimen/len_12"
+                android:layout_height="match_parent" />
+        </RelativeLayout>
 
     </android.support.v7.widget.Toolbar>
 

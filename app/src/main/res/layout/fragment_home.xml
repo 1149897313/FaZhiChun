@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:orientation="vertical">
@@ -19,31 +19,32 @@
                 android:id="@+id/city_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/len_40"
-                android:layout_margin="@dimen/len_4"
-                android:paddingLeft="@dimen/len_12"
-                android:paddingRight="@dimen/len_12"
-                android:gravity="left|center_vertical"
                 android:layout_gravity="left|center_vertical"
+                android:layout_margin="@dimen/len_4"
+                android:background="@drawable/selector_bg_toolbar_rect_btn"
+                android:gravity="left|center_vertical"
                 android:orientation="horizontal"
-                android:background="@drawable/selector_bg_toolbar_rect_btn">
+                android:paddingLeft="@dimen/len_12"
+                android:paddingRight="@dimen/len_12">
+
                 <TextView
                     android:id="@+id/city"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:ellipsize="end"
                     android:gravity="left|center_vertical"
+                    android:singleLine="true"
                     android:text="@string/label_home_is_located"
                     android:textColor="@color/textColorFirst"
-                    android:textSize="@dimen/textSizeBody"
-                    android:singleLine="true"
-                    android:ellipsize="end" />
+                    android:textSize="@dimen/textSizeBody" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/len_2"
+                    android:scaleType="centerInside"
                     android:src="@drawable/ic_location_expand"
-                    android:tint="@color/textColorFirst"
-                    android:scaleType="centerInside"/>
+                    android:tint="@color/textColorFirst" />
 
             </LinearLayout>
 
@@ -52,218 +53,153 @@
                 android:id="@+id/search"
                 android:layout_width="@dimen/len_0"
                 android:layout_height="@dimen/len_32"
-                android:layout_weight="1"
                 android:layout_gravity="right|center_vertical"
-                android:layout_marginRight="@dimen/len_16"
                 android:layout_marginLeft="@dimen/len_10"
-                app:drawableLeftIcon="@drawable/ic_home_search"
+                android:layout_marginRight="@dimen/len_16"
+                android:layout_weight="1"
+                android:background="@drawable/selector_bg_home_title_search"
                 android:drawablePadding="@dimen/len_10"
-                android:text="@string/label_home_title_search"
-                android:textSize="@dimen/textSizeBody"
-                android:textColor="@color/textColorThird"
                 android:gravity="center"
-                android:background="@drawable/selector_bg_home_title_search"/>
+                android:text="@string/label_home_title_search"
+                android:textColor="@color/textColorThird"
+                android:textSize="@dimen/textSizeBody"
+                app:drawableLeftIcon="@drawable/ic_home_search" />
 
         </LinearLayout>
 
     </android.support.v7.widget.Toolbar>
 
 
-
-
-    <!--内容-->
-    <android.support.v4.widget.NestedScrollView
-        android:id="@+id/nested_scroll_view"
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <!--内容-->
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/nested_scroll_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-
-            <com.bigkoo.convenientbanner.ConvenientBanner
-                android:id="@+id/comvenientbanner"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/len_172"
-                android:src="@drawable/ic_home_banner"
-                android:scaleType="centerCrop"
-                />
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/len_150"
-                android:layout_marginTop="-16dp"
-                android:layout_marginLeft="@dimen/len_10"
-                android:layout_marginRight="@dimen/len_10"
-                app:cardBackgroundColor="@color/colorPrimary"
-                app:cardCornerRadius="@dimen/len_6"
-                android:elevation="@dimen/len_4"
-                android:outlineProvider="background"
-                app:cardPreventCornerOverlap="true"
-                app:cardUseCompatPadding="true">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-                <LinearLayout
+
+                <com.bigkoo.convenientbanner.ConvenientBanner
+                    android:id="@+id/comvenientbanner"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center">
+                    android:layout_height="@dimen/len_172"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_home_banner" />
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/len_6"
+                    android:layout_marginRight="@dimen/len_6"
+                    android:layout_marginTop="-16dp"
+                    android:elevation="@dimen/len_4"
+                    android:outlineProvider="background"
+                    app:cardBackgroundColor="@color/colorPrimary"
+                    app:cardCornerRadius="@dimen/len_6"
+                    app:cardPreventCornerOverlap="true"
+                    app:cardUseCompatPadding="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/len_4"
-                        android:orientation="horizontal"
-                        android:gravity="center">
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                        <!--剪发-->
-                        <com.zgkj.common.widgets.text.TextDrawable
-                            android:id="@+id/haircut"
-                            android:layout_width="@dimen/len_0"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:paddingTop="@dimen/len_4"
-                            android:paddingBottom="@dimen/len_4"
-                            app:topDrawable="@drawable/ic_home_haircut"
-                            app:topDrawableWidth="@dimen/len_44"
-                            app:topDrawableHeight="@dimen/len_44"
-                            android:drawablePadding="@dimen/len_4"
-                            android:text="@string/label_home_type_haircut"
-                            android:textColor="@color/textColorFirst"
-                            android:textSize="@dimen/textSizeCaption"
                             android:gravity="center"
-                            android:background="@drawable/selector_bg_white_item"/>
+                            android:orientation="horizontal"
+                            android:padding="@dimen/len_14">
 
-                        <!--洗吹-->
-                        <com.zgkj.common.widgets.text.TextDrawable
-                            android:id="@+id/blow"
-                            android:layout_width="@dimen/len_0"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:paddingTop="@dimen/len_4"
-                            android:paddingBottom="@dimen/len_4"
-                            app:topDrawable="@drawable/ic_home_blow"
-                            app:topDrawableWidth="@dimen/len_44"
-                            app:topDrawableHeight="@dimen/len_44"
-                            android:drawablePadding="@dimen/len_4"
-                            android:text="@string/label_home_type_blow"
-                            android:textColor="@color/textColorFirst"
-                            android:textSize="@dimen/textSizeCaption"
-                            android:gravity="center"
-                            android:background="@drawable/selector_bg_white_item"/>
+                            <android.support.v7.widget.RecyclerView
+                                android:id="@+id/type_recycler_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/colorLight"
+                                android:nestedScrollingEnabled="false" />
 
-                        <!--染发-->
-                        <com.zgkj.common.widgets.text.TextDrawable
-                            android:id="@+id/hair_dye"
-                            android:layout_width="@dimen/len_0"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:paddingTop="@dimen/len_4"
-                            android:paddingBottom="@dimen/len_4"
-                            app:topDrawable="@drawable/ic_home_hair_dye"
-                            app:topDrawableWidth="@dimen/len_44"
-                            app:topDrawableHeight="@dimen/len_44"
-                            android:drawablePadding="@dimen/len_4"
-                            android:text="@string/label_home_type_hair_dye"
-                            android:textColor="@color/textColorFirst"
-                            android:textSize="@dimen/textSizeCaption"
-                            android:gravity="center"
-                            android:background="@drawable/selector_bg_white_item"/>
-
-                        <!--烫发-->
-                        <com.zgkj.common.widgets.text.TextDrawable
-                            android:id="@+id/perm"
-                            android:layout_width="@dimen/len_0"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:paddingTop="@dimen/len_4"
-                            android:paddingBottom="@dimen/len_4"
-                            app:topDrawable="@drawable/ic_home_perm"
-                            app:topDrawableWidth="@dimen/len_44"
-                            app:topDrawableHeight="@dimen/len_44"
-                            android:drawablePadding="@dimen/len_4"
-                            android:text="@string/label_home_type_perm"
-                            android:textColor="@color/textColorFirst"
-                            android:textSize="@dimen/textSizeCaption"
-                            android:gravity="center"
-                            android:background="@drawable/selector_bg_white_item"/>
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/len_0.5"
-                        android:layout_marginLeft="@dimen/len_10"
-                        android:layout_marginRight="@dimen/len_10"
-                        android:background="@color/dividerLineColor"/>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="@dimen/len_20"
-                        android:paddingBottom="@dimen/len_20"
-                        android:paddingLeft="@dimen/len_10"
-                        android:paddingRight="@dimen/len_10"
-                        android:orientation="horizontal"
-                        android:gravity="center">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_home_headlines"
-                            android:scaleType="centerInside"/>
+                        </LinearLayout>
 
                         <View
-                            android:layout_width="@dimen/len_0.5"
-                            android:layout_height="@dimen/len_20"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/len_0.5"
                             android:layout_marginLeft="@dimen/len_10"
                             android:layout_marginRight="@dimen/len_10"
-                            android:background="@color/dividerLineColor"/>
+                            android:background="@color/dividerLineColor" />
 
-                        <TextView
-                            android:layout_width="0dp"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:drawableLeft="@drawable/ic_home_newest"
-                            android:drawableRight="@drawable/ic_order_whole_expand"
-                            android:drawablePadding="@dimen/len_4"
-                            android:text="@string/label_home_register_vip_promat"
-                            android:singleLine="true"
-                            android:ellipsize="end"
-                            android:textColor="@color/textColorSecond"
-                            android:textSize="@dimen/textSizeCaption"/>
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:paddingBottom="@dimen/len_20"
+                            android:paddingLeft="@dimen/len_10"
+                            android:paddingRight="@dimen/len_10"
+                            android:paddingTop="@dimen/len_20">
 
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:scaleType="centerInside"
+                                android:src="@drawable/ic_home_headlines" />
+
+                            <View
+                                android:layout_width="@dimen/len_0.5"
+                                android:layout_height="@dimen/len_20"
+                                android:layout_marginLeft="@dimen/len_10"
+                                android:layout_marginRight="@dimen/len_10"
+                                android:background="@color/dividerLineColor" />
+
+                            <TextView
+                                android:id="@+id/headline"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:drawableLeft="@drawable/ic_home_newest"
+                                android:drawablePadding="@dimen/len_4"
+                                android:drawableRight="@drawable/ic_order_whole_expand"
+                                android:ellipsize="end"
+                                android:singleLine="true"
+                                android:text="@string/label_home_register_vip_promat"
+                                android:textColor="@color/textColorSecond"
+                                android:textSize="@dimen/textSizeCaption" />
+
+                        </LinearLayout>
                     </LinearLayout>
-                </LinearLayout>
 
-            </android.support.v7.widget.CardView>
+                </android.support.v7.widget.CardView>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/len_16"
-                android:paddingTop="@dimen/len_20"
-                android:paddingBottom="@dimen/len_20"
-                android:drawableLeft="@drawable/ic_home_hot"
-                android:drawablePadding="@dimen/len_10"
-                android:text="@string/label_home_nearby_hot"
-                android:textSize="@dimen/textSizeSubhead"
-                android:textColor="@color/textColorFirst"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/len_16"
+                    android:drawableLeft="@drawable/ic_home_hot"
+                    android:drawablePadding="@dimen/len_10"
+                    android:paddingBottom="@dimen/len_20"
+                    android:paddingTop="@dimen/len_20"
+                    android:text="@string/label_home_nearby_hot"
+                    android:textColor="@color/textColorFirst"
+                    android:textSize="@dimen/textSizeSubhead" />
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false" />
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false" />
 
-            <!--占位布局-->
-            <android.support.v4.widget.Space
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/len_40" />
+            </LinearLayout>
 
-        </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
 
-    </android.support.v4.widget.NestedScrollView>
-
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 </LinearLayout>

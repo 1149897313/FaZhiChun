@@ -152,16 +152,18 @@
                     android:textSize="@dimen/textSizeBody" />
 
             </RelativeLayout>
-            <!--分割线-->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/len_0.5"
-                android:background="@color/dividerLineColor" />
 
             <RelativeLayout
+                android:id="@+id/vip_show"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/len_48"
                 android:background="@color/colorLight">
+
+                <!--分割线-->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/len_0.5"
+                    android:background="@color/dividerLineColor" />
 
                 <TextView
                     android:id="@+id/vip_user"
@@ -214,7 +216,7 @@
 
                 <TextView
                     android:id="@+id/coupon_number"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"

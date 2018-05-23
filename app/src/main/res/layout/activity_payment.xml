@@ -103,7 +103,7 @@
                 android:layout_height="@dimen/len_20"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_payment_unchecked"
+                android:src="@drawable/ic_payment_checked"
                 android:scaleType="centerInside"/>
 
         </RelativeLayout>

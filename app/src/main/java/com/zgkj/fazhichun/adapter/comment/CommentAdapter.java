@@ -74,7 +74,7 @@ public class CommentAdapter extends RecyclerViewAdapter<Talk> {
 
 
         @Override
-        protected void onBind(Talk data) {
+        protected void onBind(Talk data,int position) {
             Picasso.get().load(data.getImage_path()).placeholder(R.drawable.none_img)
                     .into(mPortraitView);
             mNameView.setText(data.getNickname());
